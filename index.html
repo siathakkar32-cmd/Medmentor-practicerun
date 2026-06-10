@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>MedMentor Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
@@ -20,6 +21,7 @@
       border-right: 1px solid #1d2230;
       padding: 20px 14px;
       box-sizing: border-box;
+      overflow-y: auto;
     }
 
     .logo {
@@ -53,16 +55,16 @@
       color: #22d3ee;
     }
 
-   .menu-item {
-  padding: 14px 16px;
-  margin-bottom: 8px;
-  border-radius: 12px;
-  color: #8d96aa;
-  font-size: 15px;
-  cursor: pointer;
-  text-decoration: none;
-  display: block;
-}
+    .menu-item {
+      display: block;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      color: #8d96aa;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+    }
 
     .menu-item.active {
       background: linear-gradient(90deg, #6d4aff, #8b5cf6);
@@ -115,7 +117,6 @@
       padding: 16px 28px;
       font-weight: bold;
       letter-spacing: 1px;
-      border-radius: 0;
       cursor: pointer;
     }
 
@@ -290,6 +291,90 @@
       letter-spacing: 2px;
       margin-top: 35px;
     }
+
+    /* TABLET + MOBILE */
+    @media screen and (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #1d2230;
+        overflow-y: visible;
+      }
+
+      .main {
+        padding: 24px;
+      }
+
+      .top-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .title {
+        font-size: 38px;
+        letter-spacing: 2px;
+      }
+
+      .mentor-button {
+        width: 100%;
+        margin-bottom: 25px;
+      }
+
+      .grid,
+      .grid-bottom {
+        grid-template-columns: 1fr;
+      }
+
+      .quick-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-item {
+        text-align: center;
+      }
+
+      .bar-row {
+        grid-template-columns: 100px 1fr 35px;
+      }
+    }
+
+    /* SMALL PHONES */
+    @media screen and (max-width: 480px) {
+      .main {
+        padding: 16px;
+      }
+
+      .title {
+        font-size: 32px;
+      }
+
+      .card {
+        padding: 16px;
+      }
+
+      .circle {
+        width: 110px;
+        height: 110px;
+      }
+
+      .score {
+        font-size: 36px;
+      }
+
+      .bar-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+      }
+
+      .num {
+        text-align: left;
+      }
+    }
   </style>
 </head>
 
@@ -304,19 +389,19 @@
       </div>
     </div>
 
-    <div class="menu-item active">Dashboard</div>
-<a href="profile.html" class="menu-item">My Profile</a>
-    <div class="menu-item">AI Mentor</div>
-    <div class="menu-item">Career Explorer</div>
-    <div class="menu-item">Opportunities</div>
-    <div class="menu-item">Clinic Finder</div>
-    <div class="menu-item">Mentor Directory</div>
-    <div class="menu-item">Colleges</div>
-    <div class="menu-item">Extracurriculars</div>
-    <div class="menu-item">My Activities</div>
-    <div class="menu-item">Course Planner</div>
-    <div class="menu-item">Resume Builder</div>
-    <div class="menu-item">Resources</div>
+    <a href="index.html" class="menu-item active">Dashboard</a>
+    <a href="profile.html" class="menu-item">My Profile</a>
+    <a href="#" class="menu-item">AI Mentor</a>
+    <a href="#" class="menu-item">Career Explorer</a>
+    <a href="#" class="menu-item">Opportunities</a>
+    <a href="#" class="menu-item">Clinic Finder</a>
+    <a href="#" class="menu-item">Mentor Directory</a>
+    <a href="#" class="menu-item">Colleges</a>
+    <a href="#" class="menu-item">Extracurriculars</a>
+    <a href="#" class="menu-item">My Activities</a>
+    <a href="#" class="menu-item">Course Planner</a>
+    <a href="#" class="menu-item">Resume Builder</a>
+    <a href="#" class="menu-item">Resources</a>
   </div>
 
   <div class="main">
