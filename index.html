@@ -2,64 +2,299 @@
 <html>
 <head>
   <title>MedMentor Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {margin:0;font-family:Arial,sans-serif; background:#070910;color:white; display:flex; flex-direction:row;}
-    .sidebar {width:240px; height:100vh; background:#0d1018; border-right:1px solid #1d2230; padding:20px; box-sizing:border-box;}
-    .logo {display:flex; align-items:center; gap:10px; margin-bottom:35px;}
-    .logo-icon {width:38px; height:38px; border-radius:12px; background:linear-gradient(135deg,#7c4dff,#28d9ff); display:flex; justify-content:center; align-items:center; font-weight:bold; font-size:20px;}
-    .logo-text h2 {margin:0;font-size:20px;} .logo-text p {margin:0;font-size:10px;letter-spacing:2px;color:#22d3ee;}
-    .menu-item {display:block;padding:14px 16px;margin-bottom:8px;border-radius:12px;color:#8d96aa;font-size:15px;cursor:pointer;text-decoration:none;}
-    .menu-item.active{background:linear-gradient(90deg,#6d4aff,#8b5cf6); color:white; font-weight:bold;}
-    .menu-item:hover{background:#171b26;color:white;}
-    .main {flex:1;padding:38px 60px; box-sizing:border-box;background:radial-gradient(circle at top right, rgba(124,77,255,0.18),transparent 25%), #070910;}
-    .top-row{display:flex; justify-content:space-between; align-items:center;}
-    .small-label{color:#8b5cf6;font-size:11px;letter-spacing:4px;font-weight:bold;}
-    .title{font-size:58px;margin:12px 0 30px;letter-spacing:4px;font-weight:900;background:linear-gradient(90deg,#fff,#8b5cf6,#22d3ee);-webkit-background-clip:text;color:transparent;}
-    .mentor-button{background:linear-gradient(90deg,#7c4dff,#9b5cff);border:none;color:white;padding:16px 28px;font-weight:bold;letter-spacing:1px;border-radius:0;cursor:pointer;}
-    .grid{display:grid; grid-template-columns:1fr 2fr; gap:22px;margin-bottom:22px;}
-    .grid-bottom{display:grid; grid-template-columns:1.35fr 1fr; gap:22px;}
-    .card{background:#10131c;border:1px solid #222838;border-radius:10px;padding:24px;box-shadow:0 0 25px rgba(0,0,0,0.35);}
-    .card h2{margin-top:0;font-size:20px;letter-spacing:2px;}
-    .score-card{display:flex; flex-direction:column;align-items:center;justify-content:center;min-height:280px;}
-    .circle{width:135px;height:135px;border-radius:50%;border:6px solid #202536;border-top-color:#22d3ee;border-right-color:#60a5fa;display:flex;align-items:center;justify-content:center;margin:18px 0;}
-    .score{font-size:46px;color:#ffbd22;font-weight:900;}
-    .status{color:#ffbd22;font-weight:bold;letter-spacing:1px;margin-top:8px;}
-    .tiny{font-size:10px;color:#536078;letter-spacing:2px;}
-    .bar-row{display:grid; grid-template-columns:120px 1fr 35px; align-items:center; gap:12px;margin:15px 0;font-size:12px;color:#7b849a;}
-    .bar-bg{height:4px;background:#1d2230;border-radius:5px;overflow:hidden;}
-    .bar-fill{height:100%;background:linear-gradient(90deg,#8b5cf6,#22d3ee);}
-    .num{color:#8b5cf6;font-weight:bold;text-align:right;}
-    .num.good{color:#22d3ee;}
-    .num.bad{color:#ff4d6d;}
-    .num.warn{color:#ffbd22;}
-    .quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-    .quick-box{border:1px solid #202638;padding:16px;color:#8da2c0;font-size:14px;background:#0d1018;}
-    .quick-box span{display:block;color:#38435a;font-size:10px;margin-bottom:8px;}
-    .activity-item{margin-top:28px;display:flex;gap:14px;align-items:flex-start;}
-    .dot{width:8px;height:8px;background:#8b5cf6;margin-top:6px;}
-    .activity-title{font-weight:bold;font-size:14px;}
-    .activity-sub{color:#6d768a;font-size:12px;}
-    .hours{margin-left:auto;color:#22d3ee;font-size:12px;font-weight:bold;}
-    .footer{text-align:center;color:#283246;font-size:9px;letter-spacing:2px;margin-top:35px;}
 
-    /* Responsive adjustments */
-    @media screen and (max-width: 768px){
-      body{flex-direction:column;}
-      .sidebar{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid #1d2230;}
-      .main{margin-left:0;padding:20px;}
-      .grid, .grid-bottom{grid-template-columns:1fr !important;}
-      .mentor-button{width:100%;margin-top:12px;}
-      .menu-item{text-align:center;padding:12px 0;}
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070910;
+      color: white;
+      display: flex;
     }
-    @media screen and (max-width: 480px){
-      .title{font-size:36px;}
-      .card{padding:16px;}
-      .mentor-button{padding:12px 18px;}
+
+    /* LEFT SIDEBAR */
+    .sidebar {
+      width: 240px;
+      height: 100vh;
+      background: #0d1018;
+      border-right: 1px solid #1d2230;
+      padding: 20px 14px;
+      box-sizing: border-box;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 35px;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7c4dff, #28d9ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .logo-text h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .logo-text p {
+      margin: 0;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #22d3ee;
+    }
+
+   .menu-item {
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  border-radius: 12px;
+  color: #8d96aa;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+}
+
+    .menu-item.active {
+      background: linear-gradient(90deg, #6d4aff, #8b5cf6);
+      color: white;
+      font-weight: bold;
+    }
+
+    .menu-item:hover {
+      background: #171b26;
+      color: white;
+    }
+
+    /* MAIN AREA */
+    .main {
+      flex: 1;
+      padding: 38px 60px;
+      box-sizing: border-box;
+      background:
+        radial-gradient(circle at top right, rgba(124, 77, 255, 0.18), transparent 25%),
+        #070910;
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .small-label {
+      color: #8b5cf6;
+      font-size: 11px;
+      letter-spacing: 4px;
+      font-weight: bold;
+    }
+
+    .title {
+      font-size: 58px;
+      margin: 12px 0 30px;
+      letter-spacing: 4px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ffffff, #8b5cf6, #22d3ee);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .mentor-button {
+      background: linear-gradient(90deg, #7c4dff, #9b5cff);
+      border: none;
+      color: white;
+      padding: 16px 28px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      border-radius: 0;
+      cursor: pointer;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 22px;
+      margin-bottom: 22px;
+    }
+
+    .grid-bottom {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 22px;
+    }
+
+    .card {
+      background: #10131c;
+      border: 1px solid #222838;
+      border-radius: 10px;
+      padding: 24px;
+      box-sizing: border-box;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+    }
+
+    .card h2 {
+      margin-top: 0;
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+
+    /* READINESS CIRCLE */
+    .score-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 280px;
+    }
+
+    .circle {
+      width: 135px;
+      height: 135px;
+      border-radius: 50%;
+      border: 6px solid #202536;
+      border-top-color: #22d3ee;
+      border-right-color: #60a5fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 18px 0;
+    }
+
+    .score {
+      font-size: 46px;
+      color: #ffbd22;
+      font-weight: 900;
+    }
+
+    .status {
+      color: #ffbd22;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-top: 8px;
+    }
+
+    .tiny {
+      font-size: 10px;
+      color: #536078;
+      letter-spacing: 2px;
+    }
+
+    /* BREAKDOWN */
+    .bar-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 35px;
+      align-items: center;
+      gap: 12px;
+      margin: 15px 0;
+      font-size: 12px;
+      color: #7b849a;
+    }
+
+    .bar-bg {
+      height: 4px;
+      background: #1d2230;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #8b5cf6, #22d3ee);
+    }
+
+    .num {
+      color: #8b5cf6;
+      font-weight: bold;
+      text-align: right;
+    }
+
+    .num.good {
+      color: #22d3ee;
+    }
+
+    .num.bad {
+      color: #ff4d6d;
+    }
+
+    .num.warn {
+      color: #ffbd22;
+    }
+
+    /* QUICK ACCESS */
+    .quick-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .quick-box {
+      border: 1px solid #202638;
+      padding: 16px;
+      color: #8da2c0;
+      font-size: 14px;
+      background: #0d1018;
+    }
+
+    .quick-box span {
+      display: block;
+      color: #38435a;
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+
+    /* ACTIVITY */
+    .activity-item {
+      margin-top: 28px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: #8b5cf6;
+      margin-top: 6px;
+    }
+
+    .activity-title {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .activity-sub {
+      color: #6d768a;
+      font-size: 12px;
+    }
+
+    .hours {
+      margin-left: auto;
+      color: #22d3ee;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .footer {
+      text-align: center;
+      color: #283246;
+      font-size: 9px;
+      letter-spacing: 2px;
+      margin-top: 35px;
     }
   </style>
 </head>
+
 <body>
+
   <div class="sidebar">
     <div class="logo">
       <div class="logo-icon">⚕</div>
@@ -68,47 +303,141 @@
         <p>AI PLATFORM</p>
       </div>
     </div>
-    <a href="index.html" class="menu-item active">Dashboard</a>
-    <a href="profile.html" class="menu-item">My Profile</a>
-    <a href="#" class="menu-item">AI Mentor</a>
-    <a href="#" class="menu-item">Career Explorer</a>
-    <a href="#" class="menu-item">Opportunities</a>
-    <a href="#" class="menu-item">Clinic Finder</a>
+
+    <div class="menu-item active">Dashboard</div>
+<a href="profile.html" class="menu-item">My Profile</a>
+    <div class="menu-item">AI Mentor</div>
+    <div class="menu-item">Career Explorer</div>
+    <div class="menu-item">Opportunities</div>
+    <div class="menu-item">Clinic Finder</div>
+    <div class="menu-item">Mentor Directory</div>
+    <div class="menu-item">Colleges</div>
+    <div class="menu-item">Extracurriculars</div>
+    <div class="menu-item">My Activities</div>
+    <div class="menu-item">Course Planner</div>
+    <div class="menu-item">Resume Builder</div>
+    <div class="menu-item">Resources</div>
   </div>
 
   <div class="main">
+
     <div class="top-row">
-      <div><div class="small-label">// GRADE 11TH • SURGEON TRACK</div><h1 class="title">HEY, JENNA_</h1></div>
+      <div>
+        <div class="small-label">// GRADE 11TH • SURGEON TRACK</div>
+        <h1 class="title">HEY, JENNA_</h1>
+      </div>
+
       <button class="mentor-button">ASK AI MENTOR ↗</button>
     </div>
+
     <div class="grid">
+
       <div class="card score-card">
         <div class="tiny">// READINESS</div>
-        <div class="circle"><div class="score">44</div></div>
+
+        <div class="circle">
+          <div class="score">44</div>
+        </div>
+
         <div class="status">BUILDING</div>
         <div class="tiny">OVERALL SCORE</div>
       </div>
+
       <div class="card">
         <h2>BREAKDOWN</h2>
-        <div class="bar-row"><div>ACADEMICS</div><div class="bar-bg"><div class="bar-fill" style="width:68%"></div></div><div class="num">68</div></div>
-        <div class="bar-row"><div>COURSE RIGOR</div><div class="bar-bg"><div class="bar-fill" style="width:76%"></div></div><div class="num">76</div></div>
-        <div class="bar-row"><div>LEADERSHIP</div><div class="bar-bg"><div class="bar-fill" style="width:20%"></div></div><div class="num bad">20</div></div>
+
+        <div class="bar-row">
+          <div>ACADEMICS</div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 68%;"></div></div>
+          <div class="num">68</div>
+        </div>
+
+        <div class="bar-row">
+          <div>COURSE RIGOR</div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 76%;"></div></div>
+          <div class="num">76</div>
+        </div>
+
+        <div class="bar-row">
+          <div>LEADERSHIP</div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 20%;"></div></div>
+          <div class="num bad">20</div>
+        </div>
+
+        <div class="bar-row">
+          <div>VOLUNTEERING</div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 100%;"></div></div>
+          <div class="num good">100</div>
+        </div>
+
+        <div class="bar-row">
+          <div>CLINICAL</div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 35%;"></div></div>
+          <div class="num bad">35</div>
+        </div>
+
+        <div class="bar-row">
+          <div>RESEARCH</div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 0%;"></div></div>
+          <div class="num bad">0</div>
+        </div>
+
+        <div class="bar-row">
+          <div>AWARDS</div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 0%;"></div></div>
+          <div class="num bad">0</div>
+        </div>
+
+        <div class="bar-row">
+          <div>PROJECTS</div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 25%;"></div></div>
+          <div class="num bad">25</div>
+        </div>
+
+        <div class="bar-row">
+          <div>COLLEGE</div>
+          <div class="bar-bg"><div class="bar-fill" style="width: 41%;"></div></div>
+          <div class="num warn">41</div>
+        </div>
       </div>
+
     </div>
+
     <div class="grid-bottom">
-      <div class="card"><h2>QUICK ACCESS</h2>
+
+      <div class="card">
+        <h2>QUICK ACCESS</h2>
+
         <div class="quick-grid">
           <div class="quick-box"><span>01</span>AI Mentor</div>
           <div class="quick-box"><span>02</span>Career Explorer</div>
           <div class="quick-box"><span>03</span>Clinic Finder</div>
           <div class="quick-box"><span>04</span>Colleges</div>
+          <div class="quick-box"><span>05</span>Course Planner</div>
+          <div class="quick-box"><span>06</span>Resume Builder</div>
         </div>
       </div>
-      <div class="card"><h2>ACTIVITY LOG</h2>
-        <div class="activity-item"><div class="dot"></div><div><div class="activity-title">Volunteer AT Temple</div><div class="activity-sub">Volunteer</div></div><div class="hours">100h</div></div>
+
+      <div class="card">
+        <h2>ACTIVITY LOG</h2>
+
+        <div class="activity-item">
+          <div class="dot"></div>
+          <div>
+            <div class="activity-title">Volunteer AT Temple</div>
+            <div class="activity-sub">Volunteer</div>
+          </div>
+          <div class="hours">100h</div>
+        </div>
       </div>
+
     </div>
-    <div class="footer">MEDMENTOR DOES NOT PROVIDE MEDICAL ADVICE // EDUCATION & CAREER GUIDANCE ONLY</div>
+
+    <div class="footer">
+      MEDMENTOR DOES NOT PROVIDE MEDICAL ADVICE // EDUCATION & CAREER GUIDANCE ONLY
+    </div>
+
   </div>
+
 </body>
 </html>
