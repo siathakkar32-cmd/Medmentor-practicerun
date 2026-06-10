@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MedMentor - My Profile</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070910;
+      color: white;
+      display: flex;
+    }
+
+    .sidebar {
+      width: 240px;
+      height: 100vh;
+      background: #0d1018;
+      border-right: 1px solid #1d2230;
+      padding: 20px 14px;
+      box-sizing: border-box;
+      position: fixed;
+      left: 0;
+      top: 0;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 35px;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7c4dff, #28d9ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .logo-text h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .logo-text p {
+      margin: 0;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #22d3ee;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      color: #8d96aa;
+      font-size: 15px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .menu-item.active {
+      background: linear-gradient(90deg, #6d4aff, #8b5cf6);
+      color: white;
+      font-weight: bold;
+    }
+
+    .menu-item:hover {
+      background: #171b26;
+      color: white;
+    }
+
+    .main {
+      margin-left: 240px;
+      flex: 1;
+      min-height: 100vh;
+      background: #0f121b;
+    }
+
+    .header {
+      padding: 28px 36px;
+      border-bottom: 1px solid #252a38;
+      background: #0d1018;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 34px;
+      letter-spacing: 1px;
+    }
+
+    .header p {
+      color: #8d96aa;
+      margin-top: 8px;
+    }
+
+    .section {
+      padding: 34px 36px;
+      border-bottom: 1px solid #252a38;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .purple-icon {
+      color: #8b5cf6;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .form-grid.two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: bold;
+      color: #d7d9e0;
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      background: #10131c;
+      border: 1px solid #242a38;
+      color: white;
+      padding: 13px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      outline: none;
+      box-sizing: border-box;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #8b5cf6;
+    }
+
+    textarea {
+      min-height: 95px;
+      resize: vertical;
+    }
+
+    .wide {
+      grid-column: span 3;
+    }
+
+    .save-button {
+      margin-top: 30px;
+      background: linear-gradient(90deg, #7c4dff, #22d3ee);
+      color: white;
+      border: none;
+      padding: 15px 28px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 15px;
+    }
+
+    .save-button:hover {
+      opacity: 0.9;
+    }
+
+    .note {
+      color: #8d96aa;
+      font-size: 13px;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">⚕</div>
+      <div class="logo-text">
+        <h2>MedMentor</h2>
+        <p>AI PLATFORM</p>
+      </div>
+    </div>
+
+    <a href="index.html" class="menu-item">Dashboard</a>
+    <a href="profile.html" class="menu-item active">My Profile</a>
+    <a href="#" class="menu-item">AI Mentor</a>
+    <a href="#" class="menu-item">Career Explorer</a>
+    <a href="#" class="menu-item">Opportunities</a>
+    <a href="#" class="menu-item">Clinic Finder</a>
+    <a href="#" class="menu-item">Mentor Directory</a>
+    <a href="#" class="menu-item">Colleges</a>
+    <a href="#" class="menu-item">Extracurriculars</a>
+    <a href="#" class="menu-item">My Activities</a>
+    <a href="#" class="menu-item">Course Planner</a>
+    <a href="#" class="menu-item">Resume Builder</a>
+    <a href="#" class="menu-item">Resources</a>
+  </div>
+
+  <div class="main">
+
+    <div class="header">
+      <h1>My Profile</h1>
+      <p>Enter your personal, academic, activity, and goal information.</p>
+    </div>
+
+    <!-- BASIC INFORMATION -->
+    <div class="section">
+      <div class="section-title">
+        <span class="purple-icon">◇</span>
+        <span>Basic Information</span>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" placeholder="Enter full name">
+        </div>
+
+        <div class="form-group">
+          <label>Grade Level *</label>
+          <select>
+            <option value="">Select grade</option>
+            <option>9th Grade</option>
+            <option>10th Grade</option>
+            <option>11th Grade</option>
+            <option>12th Grade</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>School</label>
+          <input type="text" placeholder="Enter school name">
+        </div>
+
+        <div class="form-group">
+          <label>City</label>
+          <input type="text" placeholder="Enter city">
+        </div>
+
+        <div class="form-group">
+          <label>State</label>
+          <select>
+            <option value="">Select state</option>
+            <option>CA</option>
+            <option>NY</option>
+            <option>TX</option>
+            <option>FL</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>ZIP Code</label>
+          <input type="text" placeholder="Enter ZIP code">
+        </div>
+
+        <div class="form-group">
+          <label>Intended Career</label>
+          <select>
+            <option value="">Select career</option>
+            <option>Surgeon</option>
+            <option>Doctor</option>
+            <option>Nurse</option>
+            <option>Physician Assistant</option>
+            <option>Dentist</option>
+            <option>Pharmacist</option>
+            <option>Researcher</option>
+            <option>Undecided</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACADEMICS -->
+    <div class="section">
+      <div class="section-title">
+        <span class="purple-icon">▱</span>
+        <span>Academics</span>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>GPA (Weighted)</label>
+          <input type="text" placeholder="Example: 4.2">
+        </div>
+
+        <div class="form-group">
+          <label>GPA (Unweighted)</label>
+          <input type="text" placeholder="Example: 3.8">
+        </div>
+
+        <div class="form-group">
+          <label>Class Rank</label>
+          <input type="text" placeholder="Example: 100/658">
+        </div>
+
+        <div class="form-group">
+          <label>SAT Score</label>
+          <input type="text" placeholder="Enter SAT score">
+        </div>
+
+        <div class="form-group">
+          <label>ACT Score</label>
+          <input type="text" placeholder="Enter ACT score">
+        </div>
+
+        <div class="form-group">
+          <label>Course Rigor Level</label>
+          <select>
+            <option value="">Select level</option>
+            <option>Regular</option>
+            <option>Honors</option>
+            <option>AP</option>
+            <option>Dual Enrollment</option>
+            <option>Mixed</option>
+          </select>
+        </div>
+
+        <div class="form-group wide">
+          <label>AP Courses</label>
+          <textarea placeholder="List AP courses here"></textarea>
+        </div>
+
+        <div class="form-group wide">
+          <label>Honors Courses</label>
+          <textarea placeholder="List honors courses here"></textarea>
+        </div>
+
+        <div class="form-group wide">
+          <label>Dual Enrollment Courses</label>
+          <textarea placeholder="List dual enrollment courses here"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- EXPERIENCE & ACTIVITIES -->
+    <div class="section">
+      <div class="section-title">
+        <span class="purple-icon">▣</span>
+        <span>Experience & Activities</span>
+      </div>
+
+      <div class="form-grid two">
+        <div class="form-group">
+          <label>Volunteer Experience</label>
+          <textarea placeholder="Describe your volunteer experience"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Leadership Experience</label>
+          <textarea placeholder="Describe leadership roles"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Clinical Experience</label>
+          <textarea placeholder="Hospital volunteering, shadowing, clinic work, etc."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Research Experience</label>
+          <textarea placeholder="Science fair, lab project, independent research, etc."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Awards</label>
+          <textarea placeholder="List awards, honors, competitions, certificates"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Projects</label>
+          <textarea placeholder="List personal projects, websites, nonprofits, apps, etc."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Extracurricular Activities</label>
+          <textarea placeholder="Clubs, sports, music, organizations, etc."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Work / Internship Experience</label>
+          <textarea placeholder="Jobs, internships, programs, summer experiences"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLLEGE & CAREER GOALS -->
+    <div class="section">
+      <div class="section-title">
+        <span class="purple-icon">✦</span>
+        <span>College & Career Goals</span>
+      </div>
+
+      <div class="form-grid two">
+        <div class="form-group">
+          <label>Dream Colleges</label>
+          <textarea placeholder="List colleges you are interested in"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Target Major</label>
+          <input type="text" placeholder="Example: Biology, Neuroscience, Public Health">
+        </div>
+
+        <div class="form-group">
+          <label>Career Goal</label>
+          <textarea placeholder="Describe your long-term career goal"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Biggest Concerns</label>
+          <textarea placeholder="What are you worried about or need help with?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Strengths</label>
+          <textarea placeholder="What are you good at?"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Areas to Improve</label>
+          <textarea placeholder="What do you want to improve?"></textarea>
+        </div>
+      </div>
+
+      <button class="save-button" onclick="alert('For now, this button only shows this message. Later we will make it save.')">
+        Save Profile
+      </button>
+
+      <p class="note">
+        Note: Right now, this page lets users type information, but it does not save permanently yet. Later, we can connect it to Supabase.
+      </p>
+    </div>
+
+  </div>
+
+</body>
+</html>
