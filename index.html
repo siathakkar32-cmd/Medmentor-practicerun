@@ -5,294 +5,535 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #070910;
-      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f6f4ef;
+      color: #161616;
       display: flex;
     }
 
-    /* LEFT SIDEBAR */
     .sidebar {
-      width: 240px;
-      height: 100vh;
-      background: #0d1018;
-      border-right: 1px solid #1d2230;
-      padding: 20px 14px;
-      box-sizing: border-box;
+      width: 245px;
+      min-height: 100vh;
+      background: #fbfaf7;
+      border-right: 1px solid #e5e0d8;
+      padding: 32px 18px;
       overflow-y: auto;
     }
 
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 35px;
+      margin-bottom: 32px;
+      text-align: left;
     }
 
-    .logo-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, #7c4dff, #28d9ff);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 20px;
-    }
-
-    .logo-text h2 {
+    .logo h2 {
       margin: 0;
-      font-size: 20px;
+      font-family: Georgia, serif;
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: -1px;
     }
 
-    .logo-text p {
-      margin: 0;
+    .logo p {
+      margin: 8px 0 0;
       font-size: 10px;
-      letter-spacing: 2px;
-      color: #22d3ee;
+      letter-spacing: 4px;
+      color: #7c7770;
+      text-transform: uppercase;
+      text-align: center;
     }
 
     .menu-item {
       display: block;
-      padding: 14px 16px;
-      margin-bottom: 8px;
-      border-radius: 12px;
-      color: #8d96aa;
-      font-size: 15px;
-      cursor: pointer;
       text-decoration: none;
+      color: #303030;
+      padding: 13px 16px;
+      margin-bottom: 8px;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: 0.2s;
     }
 
     .menu-item.active {
-      background: linear-gradient(90deg, #6d4aff, #8b5cf6);
-      color: white;
-      font-weight: bold;
+      background: #ece8e1;
+      color: #111;
+      font-weight: 700;
     }
 
     .menu-item:hover {
-      background: #171b26;
-      color: white;
+      background: #f0ece5;
     }
 
-    /* MAIN AREA */
+    .track-card,
+    .quote-card {
+      margin-top: 28px;
+      border: 1px solid #e2ddd5;
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .track-label {
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #9a9288;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .track-card strong {
+      display: block;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .quote-card {
+      font-family: Georgia, serif;
+      font-size: 17px;
+      line-height: 1.45;
+      color: #2b2b2b;
+      min-height: 160px;
+      background:
+        radial-gradient(circle at bottom left, rgba(180,165,145,0.15), transparent 45%),
+        #fbfaf7;
+    }
+
+    .quote-mark {
+      font-size: 40px;
+      color: #c4b8aa;
+      line-height: 1;
+    }
+
+    .quote-author {
+      margin-top: 16px;
+      font-family: Arial, sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #8d857b;
+    }
+
     .main {
       flex: 1;
-      padding: 38px 60px;
-      box-sizing: border-box;
+      min-height: 100vh;
+      padding: 34px 38px 24px;
       background:
-        radial-gradient(circle at top right, rgba(124, 77, 255, 0.18), transparent 25%),
-        #070910;
+        radial-gradient(circle at 68% 11%, rgba(214,198,170,0.35), transparent 12%),
+        linear-gradient(180deg, #fbfaf7 0%, #f5f2ec 100%);
     }
 
-    .top-row {
+    .top-nav {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
+      gap: 18px;
+      font-size: 13px;
+      color: #4b4741;
+      margin-bottom: 4px;
     }
 
-    .small-label {
-      color: #8b5cf6;
+    .profile-dot {
+      width: 34px;
+      height: 34px;
+      background: #e8e3db;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 310px;
+      gap: 34px;
+      align-items: center;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: 220px;
+      bottom: -12px;
+      width: 420px;
+      height: 120px;
+      opacity: 0.35;
+      background:
+        repeating-radial-gradient(ellipse at center, rgba(0,0,0,0.12) 0 1px, transparent 1px 8px);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .eyebrow {
       font-size: 11px;
-      letter-spacing: 4px;
-      font-weight: bold;
+      letter-spacing: 5px;
+      color: #6f6a63;
+      text-transform: uppercase;
+      margin-bottom: 18px;
     }
 
     .title {
-      font-size: 58px;
-      margin: 12px 0 30px;
-      letter-spacing: 4px;
-      font-weight: 900;
-      background: linear-gradient(90deg, #ffffff, #8b5cf6, #22d3ee);
-      -webkit-background-clip: text;
-      color: transparent;
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 76px;
+      font-weight: 400;
+      letter-spacing: -3px;
+      line-height: 0.95;
+    }
+
+    .subtitle {
+      margin-top: 22px;
+      font-size: 17px;
+      line-height: 1.45;
+      color: #3c3935;
+      max-width: 480px;
+    }
+
+    .mentor-area {
+      text-align: center;
+      z-index: 2;
     }
 
     .mentor-button {
-      background: linear-gradient(90deg, #7c4dff, #9b5cff);
-      border: none;
+      width: 230px;
+      background: #111;
       color: white;
-      padding: 16px 28px;
-      font-weight: bold;
-      letter-spacing: 1px;
+      border: none;
+      padding: 19px 22px;
+      border-radius: 9px;
+      font-size: 16px;
       cursor: pointer;
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 22px;
-      margin-bottom: 22px;
+    .mentor-sub {
+      margin-top: 14px;
+      color: #5f5a53;
+      font-size: 13px;
     }
 
-    .grid-bottom {
+    .dashboard-grid {
       display: grid;
-      grid-template-columns: 1.35fr 1fr;
-      gap: 22px;
+      grid-template-columns: 1.05fr 1.65fr 0.8fr;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .lower-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1.3fr;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
     .card {
-      background: #10131c;
-      border: 1px solid #222838;
-      border-radius: 10px;
+      background: rgba(255,255,255,0.82);
+      border: 1px solid #e4dfd7;
+      border-radius: 12px;
       padding: 24px;
-      box-sizing: border-box;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 10px 30px rgba(30, 25, 20, 0.035);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
     }
 
     .card h2 {
-      margin-top: 0;
-      font-size: 20px;
+      margin: 0;
+      font-size: 13px;
       letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
-    /* READINESS CIRCLE */
-    .score-card {
+    .small-muted {
+      font-size: 12px;
+      color: #7b746b;
+    }
+
+    .readiness-card {
+      min-height: 350px;
+      text-align: center;
+    }
+
+    .score-circle {
+      width: 185px;
+      height: 185px;
+      margin: 20px auto 18px;
+      border-radius: 50%;
+      border: 10px solid #ebe8e3;
+      border-top-color: #8a7967;
+      border-right-color: #8a7967;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 280px;
-    }
-
-    .circle {
-      width: 135px;
-      height: 135px;
-      border-radius: 50%;
-      border: 6px solid #202536;
-      border-top-color: #22d3ee;
-      border-right-color: #60a5fa;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 18px 0;
+      font-family: Georgia, serif;
     }
 
     .score {
-      font-size: 46px;
-      color: #ffbd22;
-      font-weight: 900;
+      font-size: 58px;
+      line-height: 1;
+    }
+
+    .score-total {
+      font-size: 18px;
+      color: #4b4742;
     }
 
     .status {
-      color: #ffbd22;
-      font-weight: bold;
-      letter-spacing: 1px;
-      margin-top: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
 
-    .tiny {
-      font-size: 10px;
-      color: #536078;
-      letter-spacing: 2px;
+    .card-text {
+      font-size: 13px;
+      color: #5d5750;
+      line-height: 1.5;
     }
 
-    /* BREAKDOWN */
     .bar-row {
       display: grid;
-      grid-template-columns: 120px 1fr 35px;
+      grid-template-columns: 130px 1fr 60px;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
       margin: 15px 0;
-      font-size: 12px;
-      color: #7b849a;
+      font-size: 13px;
+      color: #2e2b27;
     }
 
     .bar-bg {
-      height: 4px;
-      background: #1d2230;
-      border-radius: 5px;
+      height: 5px;
+      background: #ebe7e1;
+      border-radius: 999px;
       overflow: hidden;
     }
 
     .bar-fill {
       height: 100%;
-      background: linear-gradient(90deg, #8b5cf6, #22d3ee);
+      background: #b09a83;
+      border-radius: 999px;
     }
 
     .num {
-      color: #8b5cf6;
-      font-weight: bold;
       text-align: right;
+      color: #3a3733;
+      font-size: 13px;
     }
 
-    .num.good {
-      color: #22d3ee;
+    .quick-stats {
+      min-height: 350px;
     }
 
-    .num.bad {
-      color: #ff4d6d;
+    .stat-item {
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      gap: 14px;
+      padding: 17px 0;
+      border-bottom: 1px solid #ece7df;
+      align-items: center;
     }
 
-    .num.warn {
-      color: #ffbd22;
+    .stat-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #f0ece5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5b5147;
     }
 
-    /* QUICK ACCESS */
+    .stat-title {
+      font-size: 13px;
+      color: #514b44;
+    }
+
+    .stat-number {
+      font-size: 28px;
+      font-family: Georgia, serif;
+      margin: 3px 0;
+    }
+
+    .stat-link {
+      font-size: 12px;
+      color: #7d766d;
+    }
+
     .quick-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
     }
 
     .quick-box {
-      border: 1px solid #202638;
-      padding: 16px;
-      color: #8da2c0;
-      font-size: 14px;
-      background: #0d1018;
-    }
-
-    .quick-box span {
-      display: block;
-      color: #38435a;
-      font-size: 10px;
-      margin-bottom: 8px;
-    }
-
-    /* ACTIVITY */
-    .activity-item {
-      margin-top: 28px;
+      background: #fbfaf7;
+      border: 1px solid #eee9e1;
+      border-radius: 9px;
+      padding: 20px 16px;
+      min-height: 92px;
       display: flex;
-      gap: 14px;
-      align-items: flex-start;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: 0.2s ease;
     }
 
-    .dot {
-      width: 8px;
-      height: 8px;
-      background: #8b5cf6;
-      margin-top: 6px;
+    .quick-box:hover {
+      background: #111;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .quick-icon {
+      font-size: 25px;
+      color: #4b4540;
+      margin-bottom: 12px;
+    }
+
+    .quick-box:hover .quick-icon {
+      color: white;
+    }
+
+    .quick-number {
+      font-size: 11px;
+      color: #8f877c;
+      margin-bottom: 4px;
+    }
+
+    .quick-name {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .activity-card {
+      min-height: 250px;
+    }
+
+    .activity-item {
+      display: grid;
+      grid-template-columns: 55px 1fr 90px;
+      gap: 14px;
+      align-items: center;
+      padding: 13px 0;
+    }
+
+    .activity-icon {
+      width: 42px;
+      height: 42px;
+      border: 1px solid #dcd6cd;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5e554b;
+      font-size: 20px;
     }
 
     .activity-title {
-      font-weight: bold;
       font-size: 14px;
+      font-weight: 700;
     }
 
     .activity-sub {
-      color: #6d768a;
       font-size: 12px;
+      color: #7a746d;
+      margin-top: 3px;
     }
 
-    .hours {
-      margin-left: auto;
-      color: #22d3ee;
-      font-size: 12px;
-      font-weight: bold;
+    .activity-time {
+      text-align: right;
+      font-size: 13px;
+      color: #36322d;
+    }
+
+    .insights-card {
+      display: grid;
+      grid-template-columns: 1fr 1.1fr 1.1fr 1.1fr;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .insight-title {
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .radar {
+      width: 90px;
+      height: 90px;
+      border: 1px solid #d8d2c8;
+      margin-bottom: 8px;
+      background:
+        linear-gradient(45deg, transparent 49%, #d8d2c8 50%, transparent 51%),
+        linear-gradient(-45deg, transparent 49%, #d8d2c8 50%, transparent 51%);
+    }
+
+    .insight-box {
+      border: 1px solid #e7e1d8;
+      border-radius: 8px;
+      padding: 18px;
+      background: #fbfaf7;
+      min-height: 96px;
+    }
+
+    .insight-box strong {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .mini-bar {
+      margin-top: 12px;
+      height: 5px;
+      background: #ebe7e1;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .mini-fill {
+      height: 100%;
+      background: #8d7a68;
     }
 
     .footer {
       text-align: center;
-      color: #283246;
-      font-size: 9px;
-      letter-spacing: 2px;
-      margin-top: 35px;
+      font-size: 11px;
+      color: #8a837a;
+      margin-top: 12px;
     }
 
-    /* TABLET + MOBILE */
+    @media screen and (max-width: 1100px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .quick-stats {
+        grid-column: span 2;
+      }
+
+      .lower-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .insights-card {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
     @media screen and (max-width: 768px) {
       body {
         flex-direction: column;
@@ -300,70 +541,48 @@
 
       .sidebar {
         width: 100%;
-        height: auto;
+        min-height: auto;
         border-right: none;
-        border-bottom: 1px solid #1d2230;
-        overflow-y: visible;
-      }
-
-      .main {
-        padding: 24px;
-      }
-
-      .top-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .title {
-        font-size: 38px;
-        letter-spacing: 2px;
-      }
-
-      .mentor-button {
-        width: 100%;
-        margin-bottom: 25px;
-      }
-
-      .grid,
-      .grid-bottom {
-        grid-template-columns: 1fr;
-      }
-
-      .quick-grid {
-        grid-template-columns: 1fr;
+        border-bottom: 1px solid #e5e0d8;
       }
 
       .menu-item {
         text-align: center;
       }
 
-      .bar-row {
-        grid-template-columns: 100px 1fr 35px;
-      }
-    }
-
-    /* SMALL PHONES */
-    @media screen and (max-width: 480px) {
       .main {
-        padding: 16px;
+        padding: 24px 16px;
+      }
+
+      .top-nav {
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
       }
 
       .title {
-        font-size: 32px;
+        font-size: 52px;
       }
 
-      .card {
-        padding: 16px;
+      .mentor-button {
+        width: 100%;
       }
 
-      .circle {
-        width: 110px;
-        height: 110px;
+      .dashboard-grid,
+      .lower-grid,
+      .insights-card {
+        grid-template-columns: 1fr;
       }
 
-      .score {
-        font-size: 36px;
+      .quick-stats {
+        grid-column: span 1;
+      }
+
+      .quick-grid {
+        grid-template-columns: 1fr 1fr;
       }
 
       .bar-row {
@@ -375,6 +594,34 @@
         text-align: left;
       }
     }
+
+    @media screen and (max-width: 480px) {
+      .title {
+        font-size: 42px;
+      }
+
+      .quick-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .activity-item {
+        grid-template-columns: 45px 1fr;
+      }
+
+      .activity-time {
+        grid-column: 2;
+        text-align: left;
+      }
+
+      .score-circle {
+        width: 150px;
+        height: 150px;
+      }
+
+      .score {
+        font-size: 48px;
+      }
+    }
   </style>
 </head>
 
@@ -382,144 +629,210 @@
 
   <div class="sidebar">
     <div class="logo">
-      <div class="logo-icon">⚕</div>
-      <div class="logo-text">
-        <h2>MedMentor</h2>
-        <p>AI PLATFORM</p>
-      </div>
+      <h2>MedMentor</h2>
+      <p>AI Platform</p>
     </div>
 
-    <a href="index.html" class="menu-item active">Dashboard</a>
-    <a href="profile.html" class="menu-item">My Profile</a>
-    <a href="#" class="menu-item">AI Mentor</a>
-    <a href="#" class="menu-item">Career Explorer</a>
-    <a href="#" class="menu-item">Opportunities</a>
-    <a href="#" class="menu-item">Clinic Finder</a>
-    <a href="#" class="menu-item">Mentor Directory</a>
-    <a href="#" class="menu-item">Colleges</a>
-    <a href="#" class="menu-item">Extracurriculars</a>
-    <a href="#" class="menu-item">My Activities</a>
-    <a href="#" class="menu-item">Course Planner</a>
-    <a href="#" class="menu-item">Resume Builder</a>
-    <a href="#" class="menu-item">Resources</a>
+    <a href="index.html" class="menu-item active">⌂ &nbsp; Dashboard</a>
+    <a href="profile.html" class="menu-item">♙ &nbsp; My Profile</a>
+    <a href="#" class="menu-item">✧ &nbsp; AI Mentor</a>
+    <a href="#" class="menu-item">⌁ &nbsp; Career Explorer</a>
+    <a href="#" class="menu-item">▣ &nbsp; Opportunities</a>
+    <a href="#" class="menu-item">⌾ &nbsp; Clinic Finder</a>
+    <a href="#" class="menu-item">♧ &nbsp; Mentor Directory</a>
+    <a href="#" class="menu-item">▱ &nbsp; Colleges</a>
+    <a href="#" class="menu-item">♡ &nbsp; Extracurriculars</a>
+    <a href="#" class="menu-item">▤ &nbsp; My Activities</a>
+    <a href="#" class="menu-item">▥ &nbsp; Course Planner</a>
+    <a href="#" class="menu-item">▧ &nbsp; Resume Builder</a>
+    <a href="#" class="menu-item">▰ &nbsp; Resources</a>
+
+    <div class="track-card">
+      <div class="track-label">Current Track</div>
+      <strong>Surgeon Track</strong>
+      <strong>Grade 11th</strong>
+    </div>
+
+    <div class="quote-card">
+      <div class="quote-mark">“</div>
+      The expert in anything was once a beginner.
+      <div class="quote-author">Helen Hayes</div>
+    </div>
   </div>
 
   <div class="main">
 
-    <div class="top-row">
+    <div class="top-nav">
+      <span>▣ May 22, 2025</span>
+      <span>♢</span>
+      <div class="profile-dot">J</div>
+    </div>
+
+    <section class="hero">
       <div>
-        <div class="small-label">// GRADE 11TH • SURGEON TRACK</div>
-        <h1 class="title">HEY, JENNA_</h1>
+        <div class="eyebrow">// Grade 11th · Surgeon Track</div>
+        <h1 class="title">Hey, Jenna_</h1>
+        <p class="subtitle">
+          Track your progress. Build your future.<br>
+          Every step today builds your impact tomorrow.
+        </p>
       </div>
 
-      <button class="mentor-button">ASK AI MENTOR ↗</button>
-    </div>
+      <div class="mentor-area">
+        <button class="mentor-button">Ask AI Mentor ✦</button>
+        <div class="mentor-sub">Get personalized guidance →</div>
+      </div>
+    </section>
 
-    <div class="grid">
+    <div class="dashboard-grid">
 
-      <div class="card score-card">
-        <div class="tiny">// READINESS</div>
+      <div class="card readiness-card">
+        <div class="card-header">
+          <h2>Readiness Score</h2>
+          <span class="small-muted">ⓘ</span>
+        </div>
 
-        <div class="circle">
+        <div class="score-circle">
           <div class="score">44</div>
+          <div class="score-total">/100</div>
         </div>
 
-        <div class="status">BUILDING</div>
-        <div class="tiny">OVERALL SCORE</div>
+        <div class="status">Developing Foundation</div>
+        <div class="card-text">
+          You’re on the right path. Focus on strengthening your weakest areas.
+        </div>
       </div>
 
       <div class="card">
-        <h2>BREAKDOWN</h2>
-
-        <div class="bar-row">
-          <div>ACADEMICS</div>
-          <div class="bar-bg"><div class="bar-fill" style="width: 68%;"></div></div>
-          <div class="num">68</div>
+        <div class="card-header">
+          <h2>Breakdown</h2>
+          <span class="small-muted">Last updated: Today</span>
         </div>
 
-        <div class="bar-row">
-          <div>COURSE RIGOR</div>
-          <div class="bar-bg"><div class="bar-fill" style="width: 76%;"></div></div>
-          <div class="num">76</div>
+        <div class="bar-row"><div>Academics</div><div class="bar-bg"><div class="bar-fill" style="width:68%"></div></div><div class="num">68 / 100</div></div>
+        <div class="bar-row"><div>Course Rigor</div><div class="bar-bg"><div class="bar-fill" style="width:76%"></div></div><div class="num">76 / 100</div></div>
+        <div class="bar-row"><div>Leadership</div><div class="bar-bg"><div class="bar-fill" style="width:20%"></div></div><div class="num">20 / 100</div></div>
+        <div class="bar-row"><div>Volunteering</div><div class="bar-bg"><div class="bar-fill" style="width:100%"></div></div><div class="num">100 / 100</div></div>
+        <div class="bar-row"><div>Clinical</div><div class="bar-bg"><div class="bar-fill" style="width:35%"></div></div><div class="num">35 / 100</div></div>
+        <div class="bar-row"><div>Research</div><div class="bar-bg"><div class="bar-fill" style="width:0%"></div></div><div class="num">0 / 100</div></div>
+        <div class="bar-row"><div>Awards</div><div class="bar-bg"><div class="bar-fill" style="width:0%"></div></div><div class="num">0 / 100</div></div>
+        <div class="bar-row"><div>Projects</div><div class="bar-bg"><div class="bar-fill" style="width:25%"></div></div><div class="num">25 / 100</div></div>
+        <div class="bar-row"><div>College</div><div class="bar-bg"><div class="bar-fill" style="width:41%"></div></div><div class="num">41 / 100</div></div>
+      </div>
+
+      <div class="card quick-stats">
+        <div class="card-header">
+          <h2>Quick Stats</h2>
+          <span class="small-muted">ⓘ</span>
         </div>
 
-        <div class="bar-row">
-          <div>LEADERSHIP</div>
-          <div class="bar-bg"><div class="bar-fill" style="width: 20%;"></div></div>
-          <div class="num bad">20</div>
+        <div class="stat-item">
+          <div class="stat-icon">⌁</div>
+          <div>
+            <div class="stat-title">Activities Logged</div>
+            <div class="stat-number">18</div>
+            <div class="stat-link">View all</div>
+          </div>
         </div>
 
-        <div class="bar-row">
-          <div>VOLUNTEERING</div>
-          <div class="bar-bg"><div class="bar-fill" style="width: 100%;"></div></div>
-          <div class="num good">100</div>
+        <div class="stat-item">
+          <div class="stat-icon">◷</div>
+          <div>
+            <div class="stat-title">Hours Completed</div>
+            <div class="stat-number">126</div>
+            <div class="stat-link">View all</div>
+          </div>
         </div>
 
-        <div class="bar-row">
-          <div>CLINICAL</div>
-          <div class="bar-bg"><div class="bar-fill" style="width: 35%;"></div></div>
-          <div class="num bad">35</div>
-        </div>
-
-        <div class="bar-row">
-          <div>RESEARCH</div>
-          <div class="bar-bg"><div class="bar-fill" style="width: 0%;"></div></div>
-          <div class="num bad">0</div>
-        </div>
-
-        <div class="bar-row">
-          <div>AWARDS</div>
-          <div class="bar-bg"><div class="bar-fill" style="width: 0%;"></div></div>
-          <div class="num bad">0</div>
-        </div>
-
-        <div class="bar-row">
-          <div>PROJECTS</div>
-          <div class="bar-bg"><div class="bar-fill" style="width: 25%;"></div></div>
-          <div class="num bad">25</div>
-        </div>
-
-        <div class="bar-row">
-          <div>COLLEGE</div>
-          <div class="bar-bg"><div class="bar-fill" style="width: 41%;"></div></div>
-          <div class="num warn">41</div>
+        <div class="stat-item">
+          <div class="stat-icon">☏</div>
+          <div>
+            <div class="stat-title">Mentor Chats</div>
+            <div class="stat-number">4</div>
+            <div class="stat-link">View all</div>
+          </div>
         </div>
       </div>
 
     </div>
 
-    <div class="grid-bottom">
+    <div class="lower-grid">
 
       <div class="card">
-        <h2>QUICK ACCESS</h2>
+        <div class="card-header">
+          <h2>Quick Access</h2>
+          <span class="small-muted">⋮</span>
+        </div>
 
         <div class="quick-grid">
-          <div class="quick-box"><span>01</span>AI Mentor</div>
-          <div class="quick-box"><span>02</span>Career Explorer</div>
-          <div class="quick-box"><span>03</span>Clinic Finder</div>
-          <div class="quick-box"><span>04</span>Colleges</div>
-          <div class="quick-box"><span>05</span>Course Planner</div>
-          <div class="quick-box"><span>06</span>Resume Builder</div>
+          <div class="quick-box"><div class="quick-icon">✺</div><div><div class="quick-number">01</div><div class="quick-name">AI Mentor</div></div></div>
+          <div class="quick-box"><div class="quick-icon">◉</div><div><div class="quick-number">02</div><div class="quick-name">Career Explorer</div></div></div>
+          <div class="quick-box"><div class="quick-icon">✚</div><div><div class="quick-number">03</div><div class="quick-name">Clinic Finder</div></div></div>
+          <div class="quick-box"><div class="quick-icon">▱</div><div><div class="quick-number">04</div><div class="quick-name">Colleges</div></div></div>
+          <div class="quick-box"><div class="quick-icon">▤</div><div><div class="quick-number">05</div><div class="quick-name">Course Planner</div></div></div>
+          <div class="quick-box"><div class="quick-icon">▧</div><div><div class="quick-number">06</div><div class="quick-name">Resume Builder</div></div></div>
         </div>
       </div>
 
-      <div class="card">
-        <h2>ACTIVITY LOG</h2>
+      <div class="card activity-card">
+        <div class="card-header">
+          <h2>Activity Log</h2>
+          <span class="small-muted">View all activity →</span>
+        </div>
 
         <div class="activity-item">
-          <div class="dot"></div>
-          <div>
-            <div class="activity-title">Volunteer AT Temple</div>
-            <div class="activity-sub">Volunteer</div>
-          </div>
-          <div class="hours">100h</div>
+          <div class="activity-icon">♡</div>
+          <div><div class="activity-title">Volunteering at Temple</div><div class="activity-sub">Volunteer</div></div>
+          <div class="activity-time"><strong>100h</strong><br>2:30 PM</div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon">▤</div>
+          <div><div class="activity-title">Profile Updated</div><div class="activity-sub">Academic information reviewed</div></div>
+          <div class="activity-time">1:15 PM</div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon">☏</div>
+          <div><div class="activity-title">AI Mentor Chat</div><div class="activity-sub">Discussed leadership opportunities</div></div>
+          <div class="activity-time">11:40 AM</div>
+        </div>
+
+        <div class="activity-item">
+          <div class="activity-icon">☆</div>
+          <div><div class="activity-title">New Recommendation</div><div class="activity-sub">Check out clinical volunteering roles</div></div>
+          <div class="activity-time">Yesterday</div>
         </div>
       </div>
 
+    </div>
+
+    <div class="card insights-card">
+      <div>
+        <div class="insight-title">Insights For You</div>
+        <div class="radar"></div>
+      </div>
+
+      <div>
+        <strong>Focus Areas</strong>
+        <div class="card-text">Strengthen these areas to improve your readiness score.</div>
+      </div>
+
+      <div class="insight-box">
+        <strong>Leadership <span style="float:right; font-weight:400;">20 / 100</span></strong>
+        <div class="card-text">Needs improvement</div>
+        <div class="mini-bar"><div class="mini-fill" style="width:20%;"></div></div>
+      </div>
+
+      <div class="insight-box">
+        <strong>Clinical <span style="float:right; font-weight:400;">35 / 100</span></strong>
+        <div class="card-text">Needs improvement</div>
+        <div class="mini-bar"><div class="mini-fill" style="width:35%;"></div></div>
+      </div>
     </div>
 
     <div class="footer">
-      MEDMENTOR DOES NOT PROVIDE MEDICAL ADVICE // EDUCATION & CAREER GUIDANCE ONLY
+      MedMentor does not provide medical advice · Education and career guidance only
     </div>
 
   </div>
