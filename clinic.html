@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>MedMentor - Clinic Finder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070910;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0b0e15;
+      border-right: 1px solid #171c28;
+      padding: 18px 14px;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #7c4dff, #22d3ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .logo-text h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-text p {
+      margin: 0;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #22d3ee;
+      font-weight: bold;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 13px 14px;
+      margin-bottom: 7px;
+      border-radius: 11px;
+      color: #8d96aa;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .menu-item.active {
+      background: linear-gradient(90deg, #6d4aff, #8b5cf6);
+      color: white;
+      font-weight: bold;
+    }
+
+    .menu-item:hover {
+      background: #151a26;
+      color: white;
+    }
+
+    /* MAIN */
+    .main {
+      flex: 1;
+      min-height: 100vh;
+      padding: 34px 58px 30px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
+        #070910;
+    }
+
+    .small-label {
+      color: #8b5cf6;
+      font-size: 11px;
+      letter-spacing: 4px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: 48px;
+      margin: 0;
+      letter-spacing: 4px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ffffff, #8b5cf6, #22d3ee);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      color: #8d96aa;
+      max-width: 760px;
+      line-height: 1.5;
+      margin-top: 8px;
+      margin-bottom: 24px;
+      font-size: 15px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #1d2230;
+      margin-bottom: 24px;
+      max-width: 1120px;
+    }
+
+    .search-panel {
+      max-width: 1120px;
+      background: rgba(16, 19, 28, 0.88);
+      border: 1px solid #252b3a;
+      border-left: 1px solid #8b5cf6;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 24px;
+    }
+
+    .search-label {
+      color: #536078;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .location-box {
+      background: #0d1018;
+      border: 1px solid #202638;
+      border-radius: 10px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      color: #8d96aa;
+    }
+
+    .location-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+
+    .find-btn {
+      background: linear-gradient(90deg, #7c4dff, #9b5cff);
+      border: none;
+      color: white;
+      height: 46px;
+      border-radius: 10px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+    }
+
+    .find-btn:hover {
+      opacity: 0.9;
+    }
+
+    .search-note {
+      margin-top: 10px;
+      color: #536078;
+      font-size: 11px;
+      letter-spacing: 1px;
+    }
+
+    .filter-row {
+      max-width: 1120px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .category-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+    }
+
+    .tab {
+      background: transparent;
+      border: 1px solid #202638;
+      color: #536078;
+      padding: 10px 14px;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .tab.active {
+      border-color: #8b5cf6;
+      color: white;
+      background: rgba(139, 92, 246, 0.12);
+    }
+
+    .tab:hover {
+      border-color: #8b5cf6;
+      color: white;
+    }
+
+    .small-search {
+      background: #0d1018;
+      border: 1px solid #202638;
+      border-radius: 10px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      min-width: 180px;
+      color: #536078;
+    }
+
+    .small-search input {
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      margin-left: 8px;
+      width: 100%;
+      font-size: 13px;
+    }
+
+    .clinic-grid {
+      max-width: 1120px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .clinic-card {
+      background: rgba(16, 19, 28, 0.88);
+      border: 1px solid #252b3a;
+      border-radius: 12px;
+      padding: 20px;
+      min-height: 190px;
+      position: relative;
+      transition: 0.2s;
+    }
+
+    .clinic-card:hover {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.14);
+      transform: translateY(-2px);
+    }
+
+    .external-icon {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      color: #536078;
+      font-size: 15px;
+    }
+
+    .clinic-type {
+      color: #536078;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .clinic-name {
+      font-size: 17px;
+      font-weight: 900;
+      margin-bottom: 9px;
+      padding-right: 24px;
+      line-height: 1.35;
+    }
+
+    .clinic-address {
+      color: #536078;
+      font-size: 12px;
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .clinic-desc {
+      color: #8d96aa;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .email-btn {
+      width: 100%;
+      background: rgba(139, 92, 246, 0.08);
+      border: 1px solid #8b5cf6;
+      color: #b794ff;
+      border-radius: 9px;
+      padding: 12px;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .email-btn:hover {
+      background: rgba(139, 92, 246, 0.16);
+      color: white;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    /* EMAIL TEMPLATE MODAL */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      z-index: 10;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 620px;
+      background: #10131c;
+      border: 1px solid #252b3a;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.55);
+    }
+
+    .modal h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+
+    .modal p {
+      color: #8d96aa;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .email-template {
+      background: #0d1018;
+      border: 1px solid #202638;
+      border-radius: 10px;
+      padding: 16px;
+      color: #dbe4ff;
+      line-height: 1.6;
+      font-size: 14px;
+      white-space: pre-wrap;
+      margin: 16px 0;
+      max-height: 340px;
+      overflow-y: auto;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .modal-btn {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .copy-btn {
+      background: linear-gradient(90deg, #7c4dff, #9b5cff);
+      color: white;
+    }
+
+    .close-btn {
+      background: #0d1018;
+      border: 1px solid #252b3a;
+      color: #8d96aa;
+    }
+
+    /* MOBILE */
+    @media screen and (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #171c28;
+      }
+
+      .menu-item {
+        text-align: center;
+      }
+
+      .main {
+        padding: 24px 18px;
+      }
+
+      .title {
+        font-size: 34px;
+      }
+
+      .search-row {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .small-search {
+        width: 100%;
+      }
+
+      .clinic-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .title {
+        font-size: 28px;
+        letter-spacing: 2px;
+      }
+
+      .modal-actions {
+        flex-direction: column;
+      }
+
+      .modal-btn {
+        width: 100%;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">⚕</div>
+      <div class="logo-text">
+        <h2>MedMentor</h2>
+        <p>AI PLATFORM</p>
+      </div>
+    </div>
+
+<a href="index.html" class="menu-item">Dashboard</a>
+<a href="profile.html" class="menu-item">My Profile</a>
+<a href="chat.html" class="menu-item">AI Mentor</a>
+<a href="career.html" class="menu-item">Career Explorer</a>
+<a href="opportunities.html" class="menu-item">Opportunities</a>
+<a href="clinic.html" class="menu-item active">Clinic Finder</a>
+<a href="#" class="menu-item">Mentor Directory</a>
+<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+<a href="my-activities.html" class="menu-item">My Activities</a>
+<a href="course-planner.html" class="menu-item">Course Planner</a>
+<a href="resume-builder.html" class="menu-item">Resume Builder</a>
+<a href="resources.html" class="menu-item">Resources</a>
+
+  </div>
+
+  <div class="main">
+
+
+<div class="small-label">// LOCAL OPPORTUNITIES</div>
+<h1 class="title">CLINIC_FINDER</h1>
+<p class="subtitle">
+  Find real clinics, hospitals, and labs near you. Get a ready-to-send email to inquire about shadowing or volunteering.
+</p>
+
+<div class="divider"></div>
+
+<div class="search-panel">
+  <div class="search-label">// Search by location</div>
+
+  <div class="search-row">
+    <div class="location-box">
+      📍
+<input type="text" id="locationInput" placeholder="Enter your city or ZIP code">
+    </div>
+
+    <button class="find-btn" onclick="findClinics()">✦ FIND CLINICS</button>
+  </div>
+
+  <div class="search-note">// AI will generate card results near your entered location</div>
+</div>
+
+<div class="filter-row">
+ <div class="category-tabs">
+  <button class="tab active" onclick="filterCategory('all', this)">All</button>
+  <button class="tab" onclick="filterCategory('hospital', this)">Hospital</button>
+  <button class="tab" onclick="filterCategory('free clinic', this)">Free Clinic</button>
+  <button class="tab" onclick="filterCategory('private practice', this)">Private Practice</button>
+  <button class="tab" onclick="filterCategory('urgent care', this)">Urgent Care</button>
+  <button class="tab" onclick="filterCategory('nursing home', this)">Nursing Home</button>
+  <button class="tab" onclick="filterCategory('research lab', this)">Research Lab</button>
+  <button class="tab" onclick="filterCategory('community health', this)">Community Health</button>
+  <button class="tab" onclick="filterCategory('dental clinic', this)">Dental Clinic</button>
+  <button class="tab" onclick="filterCategory('physical therapy', this)">Physical Therapy</button>
+  <button class="tab" onclick="filterCategory('public health', this)">Public Health</button>
+  <button class="tab" onclick="filterCategory('medical nonprofit', this)">Medical Nonprofit</button>
+</div>
+
+  <div class="small-search">
+    🔍
+    <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchClinics()">
+  </div>
+</div>
+
+<div class="clinic-grid" id="clinicGrid">
+  <div class="clinic-card">
+    <div class="clinic-type">Ready</div>
+    <div class="clinic-name">Enter a location to begin</div>
+    <div class="clinic-desc">
+      Type your city or ZIP code above, then click FIND CLINICS to generate AI-powered clinic and healthcare opportunity cards.
+    </div>
+  </div>
+</div>
+
+  </div>
+
+  <div class="modal-bg" id="emailModal">
+    <div class="modal">
+      <h2>Email Template</h2>
+      <p>Use this as a starting point. Edit it with your name, grade, school, and availability.</p>
+  <div class="email-template" id="emailText"></div>
+
+  <div class="modal-actions">
+    <button class="modal-btn close-btn" onclick="closeEmailTemplate()">Close</button>
+    <button class="modal-btn copy-btn" onclick="copyEmail()">Copy Email</button>
+  </div>
+</div>
+  </div>
+
+  <script>
+    let selectedCategory = "all";
+    let lastClinicResults = [];
+
+    function safeText(value) {
+      if (value === null || value === undefined) {
+        return "";
+      }
+      return String(value);
+    }
+
+    function escapeHtml(value) {
+      return safeText(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function escapeJsString(value) {
+      return safeText(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+    }
+
+    function filterCategory(category, button) {
+      selectedCategory = category;
+
+      document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.remove("active");
+      });
+
+      button.classList.add("active");
+      applyFilters();
+    }
+
+    function searchClinics() {
+      applyFilters();
+    }
+
+    function applyFilters() {
+      const searchValue = document.getElementById("searchInput").value.toLowerCase();
+      const cards = document.querySelectorAll(".clinic-card");
+
+      cards.forEach(card => {
+        const category = (card.getAttribute("data-category") || "").toLowerCase();
+        const keywords = (card.getAttribute("data-keywords") || "").toLowerCase();
+        const titleElement = card.querySelector(".clinic-name");
+        const title = titleElement ? titleElement.innerText.toLowerCase() : "";
+
+        const matchesCategory = selectedCategory === "all" || category.includes(selectedCategory);
+        const matchesSearch = searchValue === "" || keywords.includes(searchValue) || title.includes(searchValue);
+
+        if (matchesCategory && matchesSearch) {
+          card.classList.remove("hidden");
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+    }
+
+    function findClinics() {
+      const location = document.getElementById("locationInput").value.trim();
+      const clinicGrid = document.getElementById("clinicGrid");
+
+      if (!location) {
+        alert("Please enter a location first.");
+        return;
+      }
+
+      clinicGrid.innerHTML = `
+        <div class="clinic-card">
+          <div class="clinic-type">Searching</div>
+          <div class="clinic-name">Finding clinics near ${escapeHtml(location)}...</div>
+          <div class="clinic-desc">
+            Please wait while MedMentor AI finds healthcare places near your location.
+          </div>
+        </div>
+      `;
+
+      const webhookUrl = "https://tejas400.app.n8n.cloud/webhook/clinic-finder-cards";
+      const fullUrl = webhookUrl + "?location=" + encodeURIComponent(location);
+
+      fetch(fullUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Workflow error: " + response.status);
+          }
+
+          return response.json();
+        })
+        .then(data => {
+          const clinics = data.clinics || [];
+
+          if (clinics.length === 0) {
+            clinicGrid.innerHTML = `
+              <div class="clinic-card">
+                <div class="clinic-type">No Results</div>
+                <div class="clinic-name">No clinics found</div>
+                <div class="clinic-desc">
+                  Try entering a broader location like your city, county, or ZIP code.
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          lastClinicResults = clinics;
+
+          clinicGrid.innerHTML = clinics.map((clinic, index) => {
+            const name = escapeHtml(clinic.name || "Healthcare Organization");
+            const type = escapeHtml(clinic.type || "Healthcare");
+            const address = escapeHtml(clinic.address || "Search near this location");
+            const description = escapeHtml(clinic.description || "Contact this organization to ask about student opportunities.");
+            const keywords = escapeHtml(
+              `${clinic.name || ""} ${clinic.type || ""} ${clinic.address || ""} ${clinic.description || ""}`
+            );
+
+            return `
+              <div class="clinic-card" data-category="${type.toLowerCase()}" data-keywords="${keywords.toLowerCase()}">
+                <div class="external-icon">↗</div>
+                <div class="clinic-type">${type}</div>
+                <div class="clinic-name">${name}</div>
+                <div class="clinic-address">📍 ${address}</div>
+                <div class="clinic-desc">${description}</div>
+                <button class="email-btn" onclick="openEmailTemplateFromResult(${index})">
+                  ✉ VIEW EMAIL TEMPLATE →
+                </button>
+              </div>
+            `;
+          }).join("");
+
+          selectedCategory = "all";
+          document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+          const firstTab = document.querySelector(".tab");
+          if (firstTab) {
+            firstTab.classList.add("active");
+          }
+        })
+        .catch(error => {
+          console.log("Clinic Finder error:", error);
+
+          clinicGrid.innerHTML = `
+            <div class="clinic-card">
+              <div class="clinic-type">Error</div>
+              <div class="clinic-name">Please try again in a few moments.</div>
+              <div class="clinic-desc">
+                The system has crashed temporarily. Please wait a little and try your search again.
+              </div>
+            </div>
+          `;
+        });
+    }
+
+    function openEmailTemplateFromResult(index) {
+      const clinic = lastClinicResults[index];
+      const clinicName = clinic && clinic.name ? clinic.name : "this healthcare organization";
+      const emailTip = clinic && clinic.emailTip ? clinic.emailTip : "Ask about volunteer, shadowing, student observation, or internship opportunities.";
+      openEmailTemplate(clinicName, emailTip);
+    }
+
+    function openEmailTemplate(clinicName, emailTip) {
+      const tipText = emailTip || "Ask about volunteer, shadowing, student observation, or internship opportunities.";
+
+      const template =
+`Subject: Student Volunteer or Shadowing Inquiry
+
+Hello,
+
+My name is [Your Name], and I am a high school student interested in pursuing a future career in medicine and healthcare.
+
+I am reaching out to ask whether ${clinicName} offers any volunteer, shadowing, student observation, internship, or community service opportunities for high school students.
+
+I am especially interested in learning more about patient care, healthcare teamwork, and the day-to-day responsibilities of medical professionals.
+
+Specific question to ask:
+${tipText}
+
+I would be grateful for any information about available programs, requirements, applications, age restrictions, parent permission forms, or next steps.
+
+Thank you for your time and consideration.
+
+Sincerely,
+[Your Name]
+[Grade Level]
+[School Name]
+[Phone Number]
+[Email Address]`;
+
+      document.getElementById("emailText").innerText = template;
+      document.getElementById("emailModal").style.display = "flex";
+    }
+
+    function closeEmailTemplate() {
+      document.getElementById("emailModal").style.display = "none";
+    }
+
+    function copyEmail() {
+      const text = document.getElementById("emailText").innerText;
+      navigator.clipboard.writeText(text);
+      alert("Email template copied!");
+    }
+  </script>
+
+</body>
+</html>
