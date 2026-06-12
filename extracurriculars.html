@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>MedMentor - Extracurriculars Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070910;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0b0e15;
+      border-right: 1px solid #171c28;
+      padding: 18px 14px;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #7c4dff, #22d3ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .logo-text h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-text p {
+      margin: 0;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #22d3ee;
+      font-weight: bold;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 13px 14px;
+      margin-bottom: 7px;
+      border-radius: 11px;
+      color: #8d96aa;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .menu-item.active {
+      background: linear-gradient(90deg, #6d4aff, #8b5cf6);
+      color: white;
+      font-weight: bold;
+    }
+
+    .menu-item:hover {
+      background: #151a26;
+      color: white;
+    }
+
+    /* MAIN */
+    .main {
+      flex: 1;
+      min-height: 100vh;
+      padding: 34px 58px 30px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
+        #070910;
+    }
+
+    .small-label {
+      color: #8b5cf6;
+      font-size: 11px;
+      letter-spacing: 4px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: 48px;
+      margin: 0;
+      letter-spacing: 4px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ffffff, #8b5cf6, #22d3ee);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      color: #8d96aa;
+      max-width: 800px;
+      line-height: 1.5;
+      margin-top: 8px;
+      margin-bottom: 24px;
+      font-size: 15px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #1d2230;
+      margin-bottom: 24px;
+      max-width: 1120px;
+    }
+
+    .strategy-panel {
+      max-width: 1120px;
+      background: rgba(16, 19, 28, 0.88);
+      border: 1px solid #252b3a;
+      border-left: 1px solid #8b5cf6;
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 24px;
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .section-label {
+      color: #8b5cf6;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .strategy-text {
+      color: #8d96aa;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .strategy-btn {
+      background: linear-gradient(90deg, #7c4dff, #9b5cff);
+      border: none;
+      color: white;
+      height: 46px;
+      border-radius: 10px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+    }
+
+    .strategy-btn:hover {
+      opacity: 0.9;
+    }
+
+    .content-layout {
+      max-width: 1120px;
+      display: grid;
+      grid-template-columns: 290px 1fr;
+      gap: 18px;
+    }
+
+    .category-panel {
+      background: transparent;
+    }
+
+    .browse-label {
+      color: #536078;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .category-btn {
+      width: 100%;
+      background: rgba(16, 19, 28, 0.7);
+      border: 1px solid #202638;
+      color: #536078;
+      border-radius: 10px;
+      padding: 14px 16px;
+      text-align: left;
+      margin-bottom: 8px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .category-btn span {
+      color: #384255;
+      font-size: 10px;
+      margin-right: 8px;
+    }
+
+    .category-btn.active {
+      border-color: #8b5cf6;
+      color: white;
+      background: rgba(139, 92, 246, 0.12);
+    }
+
+    .category-btn:hover {
+      border-color: #8b5cf6;
+      color: white;
+    }
+
+    .activities-panel {
+      min-width: 0;
+    }
+
+    .activities-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .activities-title {
+      font-size: 18px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      font-weight: 900;
+      margin: 0;
+    }
+
+    .legend {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .legend-tag {
+      border: 1px solid #202638;
+      padding: 5px 8px;
+      font-size: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #8d96aa;
+    }
+
+    .legend-tag.extreme {
+      border-color: #ff4d8d;
+      color: #ff4d8d;
+    }
+
+    .legend-tag.very {
+      border-color: #22d3ee;
+      color: #22d3ee;
+    }
+
+    .legend-tag.high {
+      border-color: #8b5cf6;
+      color: #b794ff;
+    }
+
+    .legend-tag.moderate {
+      border-color: #536078;
+      color: #8d96aa;
+    }
+
+    .activity-card {
+      background: rgba(16, 19, 28, 0.88);
+      border: 1px solid #252b3a;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 12px;
+      transition: 0.2s;
+    }
+
+    .activity-card:hover {
+      border-color: #8b5cf6;
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.12);
+    }
+
+    .activity-name {
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .impact-badge {
+      border: 1px solid #8b5cf6;
+      color: #b794ff;
+      font-size: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 6px;
+      border-radius: 3px;
+      font-weight: bold;
+    }
+
+    .impact-badge.extreme {
+      border-color: #ff4d8d;
+      color: #ff4d8d;
+    }
+
+    .impact-badge.very {
+      border-color: #22d3ee;
+      color: #22d3ee;
+    }
+
+    .impact-badge.moderate {
+      border-color: #536078;
+      color: #8d96aa;
+    }
+
+    .activity-desc {
+      color: #8d96aa;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .activity-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .mini-tag {
+      background: #0d1018;
+      border: 1px solid #202638;
+      color: #536078;
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-size: 11px;
+    }
+
+    .ai-panel {
+      max-width: 1120px;
+      display: none;
+      margin-top: 22px;
+      background: rgba(16, 19, 28, 0.9);
+      border: 1px solid #8b5cf6;
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .ai-panel h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+    }
+
+    .ai-panel p {
+      color: #8d96aa;
+      line-height: 1.6;
+      font-size: 14px;
+      margin: 0 0 12px;
+    }
+
+    .roadmap-list {
+      color: #8d96aa;
+      line-height: 1.8;
+      font-size: 14px;
+      padding-left: 20px;
+    }
+
+    @media screen and (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #171c28;
+      }
+
+      .menu-item {
+        text-align: center;
+      }
+
+      .main {
+        padding: 24px 18px;
+      }
+
+      .title {
+        font-size: 34px;
+      }
+
+      .strategy-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .content-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .activities-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .legend {
+        justify-content: flex-start;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .title {
+        font-size: 28px;
+        letter-spacing: 2px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">⚕</div>
+      <div class="logo-text">
+        <h2>MedMentor</h2>
+        <p>AI PLATFORM</p>
+      </div>
+    </div>
+
+<a href="index.html" class="menu-item">Dashboard</a>
+<a href="profile.html" class="menu-item">My Profile</a>
+<a href="chat.html" class="menu-item">AI Mentor</a>
+<a href="career.html" class="menu-item">Career Explorer</a>
+<a href="opportunities.html" class="menu-item">Opportunities</a>
+<a href="clinic.html" class="menu-item">Clinic Finder</a>
+<a href="#" class="menu-item">Mentor Directory</a>
+<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+<a href="extracurriculars.html" class="menu-item active">Extracurriculars</a>
+<a href="my-activities.html" class="menu-item">My Activities</a>
+<a href="course-planner.html" class="menu-item">Course Planner</a>
+<a href="resume-builder.html" class="menu-item">Resume Builder</a>
+<a href="resources.html" class="menu-item">Resources</a>
+  </div>
+
+  <div class="main">
+
+
+<div class="small-label">// ACTIVITY PLANNING</div>
+<h1 class="title">EXTRACURRICULARS_GUIDE</h1>
+<p class="subtitle">
+  Find the highest-impact activities for pre-med applicants. Compare clubs, volunteering, research, competitions, certifications, and leadership ideas.
+</p>
+
+<div class="divider"></div>
+
+<div class="strategy-panel">
+  <div>
+    <div class="section-label">// AI Personalized Strategy</div>
+    <div class="strategy-text">
+      Get a custom extracurricular roadmap for your grade level, interests, and current experience.
+    </div>
+  </div>
+
+  <button class="strategy-btn" onclick="showStrategy()">✣ GET MY STRATEGY</button>
+</div>
+
+<div class="content-layout">
+
+  <div class="category-panel">
+    <div class="browse-label">// Browse by type</div>
+
+    <button class="category-btn active" onclick="showCategory('medical', this)">
+      <span>01</span> Medical Clubs & Organizations
+    </button>
+
+    <button class="category-btn" onclick="showCategory('volunteering', this)">
+      <span>02</span> Volunteering & Clinical
+    </button>
+
+    <button class="category-btn" onclick="showCategory('research', this)">
+      <span>03</span> Research & Academic
+    </button>
+
+    <button class="category-btn" onclick="showCategory('leadership', this)">
+      <span>04</span> Leadership & Impact
+    </button>
+
+    <button class="category-btn" onclick="showCategory('competitions', this)">
+      <span>05</span> Competitions & Awards
+    </button>
+
+    <button class="category-btn" onclick="showCategory('skills', this)">
+      <span>06</span> Certifications & Skills
+    </button>
+  </div>
+
+  <div class="activities-panel">
+    <div class="activities-header">
+      <h2 class="activities-title" id="categoryTitle">Medical Clubs & Organizations</h2>
+
+      <div class="legend">
+        <span class="legend-tag extreme">Extreme</span>
+        <span class="legend-tag very">Very High</span>
+        <span class="legend-tag high">High</span>
+        <span class="legend-tag moderate">Moderate</span>
+      </div>
+    </div>
+
+    <div id="activityList"></div>
+  </div>
+
+</div>
+
+<div class="ai-panel" id="aiPanel">
+  <h2>Your Starter EC Strategy</h2>
+  <p>
+    For a pre-med focused applicant, the goal is not to do random clubs. The goal is to build a clear story:
+    healthcare interest, service, leadership, research or learning, and real community impact.
+  </p>
+
+  <ol class="roadmap-list">
+    <li><strong>Start with service:</strong> volunteer at a hospital, clinic, nursing home, blood drive, or health nonprofit.</li>
+    <li><strong>Add leadership:</strong> become an officer, start a chapter, organize a health event, or lead a fundraiser.</li>
+    <li><strong>Create impact:</strong> build something measurable like a health workshop, awareness campaign, tutoring program, or AI health education tool.</li>
+    <li><strong>Go deeper:</strong> add research, science competitions, certifications, or a summer program when possible.</li>
+    <li><strong>Track everything:</strong> record hours, responsibilities, results, awards, and personal reflections.</li>
+  </ol>
+</div>
+
+
+  </div>
+
+  <script>
+    const activities = {
+      medical: {
+        title: "Medical Clubs & Organizations",
+        items: [
+          {
+            name: "HOSA – Future Health Professionals",
+            impact: "Very High",
+            level: "very",
+            desc: "National pre-med organization with competitions, leadership roles, and healthcare-focused events. Strong for applications if you compete or hold office.",
+            tags: ["Competitions", "Leadership", "Pre-Med"]
+          },
+          {
+            name: "Medical Club / Pre-Med Club",
+            impact: "High",
+            level: "high",
+            desc: "Join or start a school club focused on healthcare careers, guest speakers, health education, and volunteering.",
+            tags: ["School Club", "Leadership", "Easy Start"]
+          },
+          {
+            name: "Biology / Science Olympiad",
+            impact: "High",
+            level: "high",
+            desc: "Competitive team science. Medals, state placements, or leadership make this much stronger.",
+            tags: ["STEM", "Awards", "Competition"]
+          },
+          {
+            name: "Red Cross Club",
+            impact: "High",
+            level: "high",
+            desc: "Organize blood drives, CPR awareness, disaster relief education, or service events. Great if you lead projects.",
+            tags: ["Service", "Health", "Community"]
+          },
+          {
+            name: "Anatomy & Physiology Club",
+            impact: "Moderate",
+            level: "moderate",
+            desc: "Shows interest in biology and medicine. Stronger if connected to projects, tutoring, competitions, or outreach.",
+            tags: ["Biology", "Learning", "School Club"]
+          },
+          {
+            name: "Debate / Medical Ethics Club",
+            impact: "High",
+            level: "high",
+            desc: "Shows communication, critical thinking, and maturity. Strong for medicine when connected to healthcare ethics.",
+            tags: ["Communication", "Ethics", "Leadership"]
+          }
+        ]
+      },
+
+      volunteering: {
+        title: "Volunteering & Clinical",
+        items: [
+          {
+            name: "Hospital Volunteering",
+            impact: "Very High",
+            level: "very",
+            desc: "One of the most direct ways to show healthcare exposure. Look for patient transport, front desk, gift shop, nursing unit, or volunteer services roles.",
+            tags: ["Clinical Exposure", "Service", "Consistency"]
+          },
+          {
+            name: "Clinic or Community Health Volunteering",
+            impact: "Very High",
+            level: "very",
+            desc: "Community clinics, health fairs, free clinics, and nonprofit health organizations can show service and public health interest.",
+            tags: ["Community Health", "Service", "Public Health"]
+          },
+          {
+            name: "Nursing Home / Senior Center Volunteering",
+            impact: "High",
+            level: "high",
+            desc: "Builds compassion, communication skills, and patient-facing experience. Strong if done consistently over months.",
+            tags: ["Patient Interaction", "Service", "Compassion"]
+          },
+          {
+            name: "Shadowing a Doctor",
+            impact: "High",
+            level: "high",
+            desc: "Good for career exploration, but hard for minors. Always follow rules, parent permission, and privacy requirements.",
+            tags: ["Career Exploration", "Observation", "Medicine"]
+          },
+          {
+            name: "Health Education Workshops",
+            impact: "Very High",
+            level: "very",
+            desc: "Teach younger students or community members about nutrition, CPR basics, mental health awareness, or disease prevention.",
+            tags: ["Leadership", "Teaching", "Impact"]
+          },
+          {
+            name: "Blood Drive Organizer",
+            impact: "High",
+            level: "high",
+            desc: "Organizing a blood drive shows leadership, logistics, public health awareness, and measurable impact.",
+            tags: ["Leadership", "Health", "Measurable Impact"]
+          }
+        ]
+      },
+
+      research: {
+        title: "Research & Academic",
+        items: [
+          {
+            name: "Science Research Project",
+            impact: "Extreme",
+            level: "extreme",
+            desc: "A serious independent or mentored research project can be one of the strongest activities, especially if submitted to competitions.",
+            tags: ["Research", "Science Fair", "Original Work"]
+          },
+          {
+            name: "University Lab Research",
+            impact: "Extreme",
+            level: "extreme",
+            desc: "Working with a professor or lab is highly valuable, but difficult to obtain. Strongest when you contribute meaningfully.",
+            tags: ["Lab", "Mentorship", "Academic Depth"]
+          },
+          {
+            name: "Public Health Research",
+            impact: "Very High",
+            level: "very",
+            desc: "Analyze a community health problem, survey data, or health education issue. Great for students interested in medicine and impact.",
+            tags: ["Public Health", "Data", "Community"]
+          },
+          {
+            name: "Research Paper or Literature Review",
+            impact: "High",
+            level: "high",
+            desc: "A structured paper on a medical topic can show curiosity, especially if paired with mentorship, presentation, or publication.",
+            tags: ["Writing", "Academic", "Medicine"]
+          },
+          {
+            name: "Data Science / AI Health Project",
+            impact: "Very High",
+            level: "very",
+            desc: "Create a tool, model, or dashboard related to healthcare education, disease awareness, or patient resources.",
+            tags: ["AI", "Health Tech", "Project"]
+          }
+        ]
+      },
+
+      leadership: {
+        title: "Leadership & Impact",
+        items: [
+          {
+            name: "Start a Health Initiative",
+            impact: "Extreme",
+            level: "extreme",
+            desc: "Create a real project that solves a problem, such as health education, clinic outreach, medical mentorship, or local resource access.",
+            tags: ["Founder", "Impact", "Leadership"]
+          },
+          {
+            name: "Club Officer Position",
+            impact: "High",
+            level: "high",
+            desc: "Being president, vice president, outreach lead, or event coordinator is strong if you actually lead projects.",
+            tags: ["Leadership", "School", "Execution"]
+          },
+          {
+            name: "Community Health Campaign",
+            impact: "Very High",
+            level: "very",
+            desc: "Run a campaign around mental health, nutrition, first aid, sleep, hygiene, chronic disease, or health equity.",
+            tags: ["Public Health", "Awareness", "Impact"]
+          },
+          {
+            name: "Mentor Younger Students",
+            impact: "High",
+            level: "high",
+            desc: "Tutor biology, chemistry, math, or help younger students learn about medicine and careers.",
+            tags: ["Mentorship", "Teaching", "Service"]
+          },
+          {
+            name: "Nonprofit or Student Organization",
+            impact: "Extreme",
+            level: "extreme",
+            desc: "Strong only if it has real users, events, partnerships, measurable results, or community value.",
+            tags: ["Founder", "Scale", "Measurable Impact"]
+          }
+        ]
+      },
+
+      competitions: {
+        title: "Competitions & Awards",
+        items: [
+          {
+            name: "Science Fair / ISEF Pathway",
+            impact: "Extreme",
+            level: "extreme",
+            desc: "Regional, state, national, or international science fair success is extremely strong for research-focused applicants.",
+            tags: ["Research", "Awards", "STEM"]
+          },
+          {
+            name: "HOSA Competitive Events",
+            impact: "Very High",
+            level: "very",
+            desc: "Strong if you place at regional, state, or international levels. Also helps show career-specific interest.",
+            tags: ["HOSA", "Medicine", "Awards"]
+          },
+          {
+            name: "USABO / Biology Olympiad",
+            impact: "Very High",
+            level: "very",
+            desc: "Competitive biology achievement is impressive, especially for students interested in medicine or life sciences.",
+            tags: ["Biology", "Competition", "Academic"]
+          },
+          {
+            name: "Medicine / Disease Olympiad",
+            impact: "High",
+            level: "high",
+            desc: "Shows focused interest in medicine and disease knowledge. Stronger with high placement or leadership.",
+            tags: ["Medicine", "Competition", "Pre-Med"]
+          },
+          {
+            name: "Research Poster Competition",
+            impact: "High",
+            level: "high",
+            desc: "Presenting your work publicly shows communication, research ability, and academic maturity.",
+            tags: ["Presentation", "Research", "Communication"]
+          }
+        ]
+      },
+
+      skills: {
+        title: "Certifications & Skills",
+        items: [
+          {
+            name: "CPR / First Aid Certification",
+            impact: "Moderate",
+            level: "moderate",
+            desc: "Useful and practical. Stronger when paired with volunteering, Red Cross work, or teaching others.",
+            tags: ["Certification", "Health", "Beginner"]
+          },
+          {
+            name: "Medical Terminology Course",
+            impact: "Moderate",
+            level: "moderate",
+            desc: "Shows interest in healthcare, but should not replace deeper activities like volunteering, research, or leadership.",
+            tags: ["Course", "Healthcare", "Skill"]
+          },
+          {
+            name: "EMT Explorer / Cadet Program",
+            impact: "Very High",
+            level: "very",
+            desc: "If available for your age, this can give strong emergency medicine exposure and service experience.",
+            tags: ["Emergency Medicine", "Service", "Hands-On"]
+          },
+          {
+            name: "Data Analysis / Coding Skill",
+            impact: "High",
+            level: "high",
+            desc: "Useful for medical research, AI health projects, dashboards, and public health data projects.",
+            tags: ["Coding", "AI", "Research"]
+          },
+          {
+            name: "Spanish or Medical Spanish",
+            impact: "High",
+            level: "high",
+            desc: "Language skills can be powerful for patient communication and community health service.",
+            tags: ["Language", "Service", "Patient Care"]
+          }
+        ]
+      }
+    };
+
+    function showCategory(categoryKey, button) {
+      document.querySelectorAll(".category-btn").forEach(btn => {
+        btn.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      const category = activities[categoryKey];
+      document.getElementById("categoryTitle").innerText = category.title;
+
+      const list = document.getElementById("activityList");
+
+      list.innerHTML = category.items.map(item => {
+        return `
+          <div class="activity-card">
+            <div class="activity-name">
+              ${item.name}
+              <span class="impact-badge ${item.level}">${item.impact} Impact</span>
+            </div>
+            <div class="activity-desc">${item.desc}</div>
+            <div class="activity-actions">
+              ${item.tags.map(tag => `<span class="mini-tag">${tag}</span>`).join("")}
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function showStrategy() {
+      const panel = document.getElementById("aiPanel");
+      panel.style.display = "block";
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    window.onload = function() {
+      const firstButton = document.querySelector(".category-btn");
+      showCategory("medical", firstButton);
+    };
+  </script>
+
+</body>
+</html>
