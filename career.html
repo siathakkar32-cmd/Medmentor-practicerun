@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>MedMentor - Career Explorer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070910;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0b0e15;
+      border-right: 1px solid #171c28;
+      padding: 18px 14px;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #7c4dff, #22d3ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .logo-text h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-text p {
+      margin: 0;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #22d3ee;
+      font-weight: bold;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 13px 14px;
+      margin-bottom: 7px;
+      border-radius: 11px;
+      color: #8d96aa;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .menu-item.active {
+      background: linear-gradient(90deg, #6d4aff, #8b5cf6);
+      color: white;
+      font-weight: bold;
+    }
+
+    .menu-item:hover {
+      background: #151a26;
+      color: white;
+    }
+
+    /* MAIN */
+    .main {
+      flex: 1;
+      min-height: 100vh;
+      padding: 34px 58px 30px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
+        #070910;
+    }
+
+    .small-label {
+      color: #8b5cf6;
+      font-size: 11px;
+      letter-spacing: 4px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .title {
+      font-size: 48px;
+      margin: 0;
+      letter-spacing: 4px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ffffff, #8b5cf6, #22d3ee);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      color: #8d96aa;
+      max-width: 680px;
+      line-height: 1.5;
+      margin-top: 8px;
+      margin-bottom: 24px;
+      font-size: 15px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #1d2230;
+      margin-bottom: 24px;
+      max-width: 1120px;
+    }
+
+    .career-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 22px;
+      max-width: 1120px;
+    }
+
+    .career-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .career-card {
+      background: rgba(16, 19, 28, 0.82);
+      border: 1px solid #202638;
+      border-radius: 12px;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 38px 1fr 24px;
+      gap: 14px;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .career-card:hover {
+      border-color: #8b5cf6;
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.18);
+    }
+
+    .career-card.active {
+      border-color: #22d3ee;
+      box-shadow: 0 0 22px rgba(34, 211, 238, 0.16);
+    }
+
+    .career-icon {
+      font-size: 22px;
+      color: #22d3ee;
+      text-align: center;
+    }
+
+    .career-name {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .career-meta {
+      color: #536078;
+      font-size: 11px;
+      margin-bottom: 7px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-size: 9px;
+      letter-spacing: 1px;
+      border: 1px solid #22d3ee;
+      color: #22d3ee;
+      padding: 3px 6px;
+      border-radius: 2px;
+      text-transform: uppercase;
+    }
+
+    .tag.purple {
+      border-color: #8b5cf6;
+      color: #8b5cf6;
+    }
+
+    .tag.green {
+      border-color: #22e6a8;
+      color: #22e6a8;
+    }
+
+    .arrow {
+      color: #536078;
+      font-size: 24px;
+    }
+
+    .detail-panel {
+      background: #10131c;
+      border: 1px solid #252b3a;
+      border-radius: 14px;
+      min-height: 420px;
+      padding: 28px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+      position: sticky;
+      top: 28px;
+    }
+
+    .empty-state {
+      height: 100%;
+      min-height: 330px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #536078;
+    }
+
+    .empty-icon {
+      font-size: 46px;
+      margin-bottom: 18px;
+      color: #536078;
+    }
+
+    .empty-state p {
+      letter-spacing: 3px;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .detail-title {
+      font-size: 30px;
+      margin: 0 0 8px;
+      font-weight: 900;
+    }
+
+    .detail-subtitle {
+      color: #8d96aa;
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .info-box {
+      background: #0d1018;
+      border: 1px solid #202638;
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .info-label {
+      color: #536078;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+
+    .info-value {
+      font-size: 15px;
+      font-weight: bold;
+      color: #dbe4ff;
+    }
+
+    .section-title {
+      color: #22d3ee;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin: 20px 0 10px;
+      font-weight: bold;
+    }
+
+    .detail-list {
+      color: #c7d2ea;
+      line-height: 1.7;
+      padding-left: 18px;
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .ai-tip {
+      margin-top: 22px;
+      background: linear-gradient(135deg, rgba(124, 77, 255, 0.2), rgba(34, 211, 238, 0.08));
+      border: 1px solid #352b6a;
+      border-radius: 12px;
+      padding: 16px;
+      color: #dbe4ff;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .ai-tip strong {
+      color: #ffffff;
+    }
+
+    /* MOBILE */
+    @media screen and (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #171c28;
+      }
+
+      .menu-item {
+        text-align: center;
+      }
+
+      .main {
+        padding: 24px 18px;
+      }
+
+      .title {
+        font-size: 34px;
+      }
+
+      .career-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .detail-panel {
+        position: static;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .title {
+        font-size: 28px;
+        letter-spacing: 2px;
+      }
+
+      .career-card {
+        grid-template-columns: 32px 1fr 18px;
+        padding: 14px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">⚕</div>
+      <div class="logo-text">
+        <h2>MedMentor</h2>
+        <p>AI PLATFORM</p>
+      </div>
+    </div>
+
+
+<a href="index.html" class="menu-item">Dashboard</a>
+<a href="profile.html" class="menu-item">My Profile</a>
+<a href="chat.html" class="menu-item">AI Mentor</a>
+<a href="career.html" class="menu-item active">Career Explorer</a>
+<a href="opportunities.html" class="menu-item">Opportunities</a>
+<a href="clinic.html" class="menu-item">Clinic Finder</a>
+<a href="#" class="menu-item">Mentor Directory</a>
+<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+<a href="my-activities.html" class="menu-item">My Activities</a>
+<a href="course-planner.html" class="menu-item">Course Planner</a>
+<a href="resume-builder.html" class="menu-item">Resume Builder</a>
+<a href="resources.html" class="menu-item">Resources</a>
+  </div>
+
+  <div class="main">
+
+<div class="small-label">// CAREER EXPLORATION</div>
+<h1 class="title">CAREER_EXPLORER</h1>
+<p class="subtitle">
+  Explore medical careers and specialties. Click any career to see what the role does, what classes help, and how to start preparing in high school.
+</p>
+
+<div class="divider"></div>
+
+<div class="career-layout">
+
+  <div class="career-list">
+
+    <div class="career-card" onclick="showCareer('doctor', this)">
+      <div class="career-icon">⚕</div>
+      <div>
+        <div class="career-name">Physician / Doctor</div>
+        <div class="career-meta">$208k+ • Long training path</div>
+        <div class="tag-row">
+          <span class="tag purple">High Demand</span>
+          <span class="tag">10+ Specialties</span>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="career-card" onclick="showCareer('surgeon', this)">
+      <div class="career-icon">✂</div>
+      <div>
+        <div class="career-name">Surgeon</div>
+        <div class="career-meta">$300k+ • Very competitive</div>
+        <div class="tag-row">
+          <span class="tag purple">High Demand</span>
+          <span class="tag">Hands-on</span>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="career-card" onclick="showCareer('nurse', this)">
+      <div class="career-icon">♡</div>
+      <div>
+        <div class="career-name">Nurse / Nurse Practitioner</div>
+        <div class="career-meta">$75k–$160k • Patient-centered</div>
+        <div class="tag-row">
+          <span class="tag green">Very High Demand</span>
+          <span class="tag">Flexible Path</span>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="career-card" onclick="showCareer('pa', this)">
+      <div class="career-icon">♙</div>
+      <div>
+        <div class="career-name">Physician Assistant (PA)</div>
+        <div class="career-meta">$115k–$150k • Team-based care</div>
+        <div class="tag-row">
+          <span class="tag green">Very High Demand</span>
+          <span class="tag">Shorter Path</span>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="career-card" onclick="showCareer('researcher', this)">
+      <div class="career-icon">⌬</div>
+      <div>
+        <div class="career-name">Medical Researcher</div>
+        <div class="career-meta">$65k–$130k+ • Lab and discovery</div>
+        <div class="tag-row">
+          <span class="tag purple">Research</span>
+          <span class="tag">Science Heavy</span>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="career-card" onclick="showCareer('dentist', this)">
+      <div class="career-icon">◌</div>
+      <div>
+        <div class="career-name">Dentist</div>
+        <div class="career-meta">$160k–$250k • Procedural care</div>
+        <div class="tag-row">
+          <span class="tag">Specialties</span>
+          <span class="tag purple">Hands-on</span>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="career-card" onclick="showCareer('pharmacist', this)">
+      <div class="career-icon">◇</div>
+      <div>
+        <div class="career-name">Pharmacist</div>
+        <div class="career-meta">$120k–$160k • Medication expert</div>
+        <div class="tag-row">
+          <span class="tag purple">Chemistry</span>
+          <span class="tag">Patient Care</span>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="career-card" onclick="showCareer('therapist', this)">
+      <div class="career-icon">☊</div>
+      <div>
+        <div class="career-name">Therapist / Psychologist</div>
+        <div class="career-meta">$60k–$140k • Mental health</div>
+        <div class="tag-row">
+          <span class="tag green">Very High Demand</span>
+          <span class="tag">Human Behavior</span>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+    <div class="career-card" onclick="showCareer('biomed', this)">
+      <div class="career-icon">⌁</div>
+      <div>
+        <div class="career-name">Biomedical Engineer</div>
+        <div class="career-meta">$75k–$130k • Tech + medicine</div>
+        <div class="tag-row">
+          <span class="tag purple">STEM</span>
+          <span class="tag">Innovation</span>
+        </div>
+      </div>
+      <div class="arrow">›</div>
+    </div>
+
+  </div>
+
+  <div class="detail-panel" id="detailPanel">
+    <div class="empty-state">
+      <div class="empty-icon">⚕</div>
+      <p>Select a career to explore</p>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <script>
+    const careers = {
+      doctor: {
+        title: "Physician / Doctor",
+        description: "Doctors diagnose illnesses, treat patients, manage health conditions, and often lead care teams. This is one of the most flexible healthcare paths because there are many specialties.",
+        salary: "$208k+",
+        training: "College → Medical School → Residency",
+        classes: "Biology, Chemistry, Anatomy, Statistics, Psychology",
+        activities: ["Volunteer at hospitals or clinics", "Shadow a doctor", "Join HOSA or a medical club", "Build strong science grades", "Start a health education project"],
+        specialties: ["Pediatrics", "Cardiology", "Emergency Medicine", "Internal Medicine", "Dermatology"],
+        tip: "If you are interested in becoming a doctor, focus on academics, clinical exposure, service, and leadership. Start documenting your activities now."
+      },
+      surgeon: {
+        title: "Surgeon",
+        description: "Surgeons treat injuries, diseases, and deformities through operations. This path requires excellent focus, strong hands-on skills, leadership, and many years of training.",
+        salary: "$300k+",
+        training: "College → Medical School → Surgical Residency → Fellowship",
+        classes: "Biology, Chemistry, Physics, Anatomy, Calculus or Statistics",
+        activities: ["Shadow surgeons if possible", "Volunteer in a hospital setting", "Practice fine motor skills through hobbies", "Do anatomy-related learning", "Build leadership experience"],
+        specialties: ["General Surgery", "Cardiothoracic Surgery", "Neurosurgery", "Orthopedic Surgery", "Plastic Surgery"],
+        tip: "For a surgeon track, clinical exposure and discipline matter. Try to find hospital volunteering, shadowing, and anatomy-focused learning opportunities."
+      },
+      nurse: {
+        title: "Nurse / Nurse Practitioner",
+        description: "Nurses provide direct patient care, monitor patient conditions, educate families, and support treatment plans. Nurse practitioners can diagnose and treat many conditions.",
+        salary: "$75k–$160k",
+        training: "BSN Nursing Program → RN License → Optional NP Graduate Program",
+        classes: "Biology, Anatomy, Psychology, Health Science, Statistics",
+        activities: ["Volunteer at care centers", "Get CPR certified", "Explore CNA programs when eligible", "Join service clubs", "Build communication skills"],
+        specialties: ["Pediatrics", "Emergency", "ICU", "Family Practice", "Nurse Anesthesia"],
+        tip: "This is a strong path if you enjoy patient care, communication, and hands-on healthcare."
+      },
+      pa: {
+        title: "Physician Assistant (PA)",
+        description: "Physician Assistants diagnose, treat, prescribe, and support physicians. PA is a great option for people who want patient care with a shorter training path than medical school.",
+        salary: "$115k–$150k",
+        training: "College → Patient Care Hours → PA School",
+        classes: "Biology, Chemistry, Anatomy, Physiology, Statistics",
+        activities: ["Get patient-care experience later", "Volunteer in clinics", "Shadow a PA", "Build teamwork skills", "Explore EMT/CNA options when eligible"],
+        specialties: ["Primary Care", "Emergency Medicine", "Surgery", "Dermatology", "Orthopedics"],
+        tip: "PA programs value patient-care hours, so start learning about ways to get healthcare experience early."
+      },
+      researcher: {
+        title: "Medical Researcher",
+        description: "Medical researchers study diseases, treatments, genetics, public health, and biology. They may work in labs, universities, hospitals, or biotech companies.",
+        salary: "$65k–$130k+",
+        training: "College → Research Experience → PhD, MD, or Master's",
+        classes: "Biology, Chemistry, Statistics, AP Research, Computer Science",
+        activities: ["Join science fair", "Email professors for research opportunities", "Learn data analysis", "Read medical papers", "Create a research project"],
+        specialties: ["Cancer Research", "Genetics", "Neuroscience", "Public Health", "Pharmacology"],
+        tip: "If you want research, build a project and learn how to ask a focused scientific question."
+      },
+      dentist: {
+        title: "Dentist",
+        description: "Dentists diagnose and treat oral health problems, perform procedures, and help patients prevent dental disease. It combines healthcare, precision, and business skills.",
+        salary: "$160k–$250k",
+        training: "College → Dental School → Optional Specialty Residency",
+        classes: "Biology, Chemistry, Anatomy, Art or Design, Business",
+        activities: ["Shadow a dentist", "Volunteer in community health", "Build manual dexterity", "Explore dental assisting later", "Learn about oral health education"],
+        specialties: ["Orthodontics", "Oral Surgery", "Pediatric Dentistry", "Endodontics", "Periodontics"],
+        tip: "Dentistry is great if you like procedures, detail work, and patient relationships."
+      },
+      pharmacist: {
+        title: "Pharmacist",
+        description: "Pharmacists are medication experts. They help patients understand prescriptions, prevent drug interactions, and may work in hospitals, clinics, pharmacies, or industry.",
+        salary: "$120k–$160k",
+        training: "College Prerequisites → PharmD Program",
+        classes: "Chemistry, Biology, Anatomy, Statistics, Health Science",
+        activities: ["Shadow a pharmacist", "Volunteer in health settings", "Learn basic chemistry well", "Explore medication safety topics", "Build communication skills"],
+        specialties: ["Hospital Pharmacy", "Clinical Pharmacy", "Oncology Pharmacy", "Industry", "Community Pharmacy"],
+        tip: "This path is a good fit if you like chemistry, details, and helping patients use medications safely."
+      },
+      therapist: {
+        title: "Therapist / Psychologist",
+        description: "Therapists and psychologists support mental health, behavior, emotions, coping skills, and relationships. This path is important and growing.",
+        salary: "$60k–$140k",
+        training: "College → Master's or Doctoral Program → Licensure",
+        classes: "Psychology, Biology, Statistics, Sociology, English",
+        activities: ["Volunteer with mental health organizations", "Peer counseling if available", "Study psychology", "Start awareness campaigns", "Build listening skills"],
+        specialties: ["Clinical Psychology", "School Psychology", "Counseling", "Neuropsychology", "Marriage and Family Therapy"],
+        tip: "This is a strong path if you are empathetic, patient, and interested in human behavior."
+      },
+      biomed: {
+        title: "Biomedical Engineer",
+        description: "Biomedical engineers combine engineering, biology, and medicine to design devices, prosthetics, imaging tools, and health technology.",
+        salary: "$75k–$130k",
+        training: "College Engineering Degree → Internships → Optional Graduate School",
+        classes: "Physics, Calculus, Biology, Computer Science, Engineering",
+        activities: ["Build STEM projects", "Join robotics or engineering clubs", "Learn coding", "Explore medical device design", "Enter science fairs"],
+        specialties: ["Medical Devices", "Prosthetics", "Biomaterials", "Imaging", "Biomechanics"],
+        tip: "This path is great if you like medicine but also love building, technology, design, and problem-solving."
+      }
+    };
+
+    function showCareer(key, element) {
+      const career = careers[key];
+
+      document.querySelectorAll(".career-card").forEach(card => {
+        card.classList.remove("active");
+      });
+
+      element.classList.add("active");
+
+      document.getElementById("detailPanel").innerHTML = `
+        <h2 class="detail-title">${career.title}</h2>
+        <p class="detail-subtitle">${career.description}</p>
+
+        <div class="info-grid">
+          <div class="info-box">
+            <div class="info-label">Typical Salary</div>
+            <div class="info-value">${career.salary}</div>
+          </div>
+
+          <div class="info-box">
+            <div class="info-label">Training Path</div>
+            <div class="info-value">${career.training}</div>
+          </div>
+        </div>
+
+        <div class="section-title">Helpful High School Classes</div>
+        <p class="detail-subtitle">${career.classes}</p>
+
+        <div class="section-title">Good Activities To Start</div>
+        <ul class="detail-list">
+          ${career.activities.map(item => `<li>${item}</li>`).join("")}
+        </ul>
+
+        <div class="section-title">Possible Specialties</div>
+        <ul class="detail-list">
+          ${career.specialties.map(item => `<li>${item}</li>`).join("")}
+        </ul>
+
+        <div class="ai-tip">
+          <strong>AI Mentor Tip:</strong> ${career.tip}
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>
