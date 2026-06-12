@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>MedMentor - AI Mentor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070910;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0b0e15;
+      border-right: 1px solid #171c28;
+      padding: 18px 14px;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #7c4dff, #22d3ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .logo-text h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-text p {
+      margin: 0;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #22d3ee;
+      font-weight: bold;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 13px 14px;
+      margin-bottom: 7px;
+      border-radius: 11px;
+      color: #8d96aa;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .menu-item.active {
+      background: linear-gradient(90deg, #6d4aff, #8b5cf6);
+      color: white;
+      font-weight: bold;
+    }
+
+    .menu-item:hover {
+      background: #151a26;
+      color: white;
+    }
+
+    /* MAIN PAGE */
+    .main {
+      flex: 1;
+      min-height: 100vh;
+      padding: 34px 58px 20px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
+        #070910;
+    }
+
+    .top-bar {
+      max-width: 1120px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .page-title-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .page-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: #1b1232;
+      color: #9b5cff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      box-shadow: 0 0 18px rgba(139, 92, 246, 0.2);
+    }
+
+    .page-title-text h1 {
+      margin: 0;
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+    }
+
+    .page-title-text p {
+      margin: 3px 0 0;
+      color: #7e8da8;
+      font-size: 13px;
+    }
+
+    .new-chat-btn {
+      background: #0d1018;
+      border: 1px solid #252b3a;
+      color: white;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-weight: bold;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .new-chat-btn:hover {
+      border-color: #8b5cf6;
+    }
+
+    .chat-shell {
+      max-width: 1120px;
+      height: calc(100vh - 130px);
+      min-height: 620px;
+      background: #10131c;
+      border: 1px solid #252b3a;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.35);
+    }
+
+    #n8n-chat {
+      width: 100%;
+      height: 100%;
+      background: #10131c;
+      overflow: hidden;
+    }
+
+    .footer-note {
+      max-width: 1120px;
+      margin-top: 10px;
+      text-align: center;
+      font-size: 11px;
+      color: #536078;
+    }
+
+    /* N8N CHAT THEME */
+    :root {
+      --chat--color-primary: #8b5cf6;
+      --chat--color-primary-shade-50: #7c4dff;
+      --chat--color-primary-shade-100: #6d4aff;
+
+      --chat--color-secondary: #22d3ee;
+      --chat--color-white: #ffffff;
+
+      --chat--color-light: #10131c;
+      --chat--color-light-shade-50: #151a26;
+      --chat--color-light-shade-100: #202638;
+      --chat--color-medium: #536078;
+      --chat--color-dark: #0d1018;
+
+      --chat--color-disabled: #8d96aa;
+      --chat--color-typing: #dbe4ff;
+
+      --chat--spacing: 1rem;
+      --chat--border-radius: 14px;
+
+      --chat--window--width: 100%;
+      --chat--window--height: 100%;
+
+      --chat--header--background: #10131c;
+      --chat--header--color: #ffffff;
+
+      --chat--message--bot--background: #171b26;
+      --chat--message--bot--color: #dbe4ff;
+
+      --chat--message--user--background: #8b5cf6;
+      --chat--message--user--color: #ffffff;
+
+      --chat--toggle--background: #8b5cf6;
+      --chat--toggle--hover--background: #7c4dff;
+      --chat--toggle--active--background: #6d4aff;
+    }
+
+    /* FORCE FULL EMBEDDED CHAT LOOK */
+    #n8n-chat,
+    #n8n-chat * {
+      box-sizing: border-box;
+    }
+
+    #n8n-chat .chat-window {
+      width: 100% !important;
+      height: 100% !important;
+      max-height: 100% !important;
+      border: none !important;
+      border-radius: 0 !important;
+      background: #10131c !important;
+      box-shadow: none !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+      position: relative !important;
+    }
+
+    #n8n-chat .chat-layout {
+      background: #10131c !important;
+      height: 100% !important;
+      min-height: 0 !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    #n8n-chat .chat-header {
+      display: none !important;
+    }
+
+    #n8n-chat .chat-body {
+      background: #10131c !important;
+      flex: 1 !important;
+      min-height: 0 !important;
+      height: auto !important;
+      overflow: hidden !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    #n8n-chat .chat-messages-list,
+    #n8n-chat .chat-messages {
+      background: #10131c !important;
+      flex: 1 !important;
+      min-height: 0 !important;
+      height: auto !important;
+      max-height: none !important;
+      overflow-y: auto !important;
+      overflow-x: hidden !important;
+      padding: 30px 30px 20px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: flex-start !important;
+      align-items: center !important;
+      gap: 14px !important;
+      scroll-behavior: smooth !important;
+    }
+
+    #n8n-chat .chat-message {
+      max-width: 760px !important;
+      width: fit-content !important;
+      border-radius: 16px !important;
+      line-height: 1.6 !important;
+      font-size: 14px !important;
+      padding: 14px 16px !important;
+      word-wrap: break-word !important;
+      overflow-wrap: break-word !important;
+      white-space: normal !important;
+    }
+
+    #n8n-chat .chat-message-from-bot {
+      background: #171b26 !important;
+      color: #dbe4ff !important;
+      border: 1px solid #252b3a !important;
+      margin-right: auto !important;
+      margin-left: auto !important;
+    }
+
+    #n8n-chat .chat-message-from-user {
+      background: linear-gradient(90deg, #6d4aff, #8b5cf6) !important;
+      color: white !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+
+    #n8n-chat .chat-input {
+      flex-shrink: 0 !important;
+      background: #10131c !important;
+      border-top: 1px solid #202638 !important;
+      padding: 14px 22px 18px !important;
+    }
+
+    #n8n-chat .chat-inputs {
+      background: transparent !important;
+      border: none !important;
+    }
+
+    #n8n-chat textarea {
+      background: #0d1018 !important;
+      color: white !important;
+      border: 1px solid #252b3a !important;
+      border-radius: 13px !important;
+      padding: 14px 16px !important;
+      font-size: 14px !important;
+      outline: none !important;
+      min-height: 48px !important;
+      max-height: 120px !important;
+    }
+
+    #n8n-chat textarea::placeholder {
+      color: #7e8da8 !important;
+    }
+
+    #n8n-chat textarea:focus {
+      border-color: #8b5cf6 !important;
+      box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.25) !important;
+    }
+
+    #n8n-chat button {
+      background: linear-gradient(135deg, #7c4dff, #9b5cff) !important;
+      color: white !important;
+      border-radius: 13px !important;
+      border: none !important;
+    }
+
+    /* SCROLLBAR STYLE */
+    #n8n-chat .chat-messages-list::-webkit-scrollbar,
+    #n8n-chat .chat-messages::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #n8n-chat .chat-messages-list::-webkit-scrollbar-track,
+    #n8n-chat .chat-messages::-webkit-scrollbar-track {
+      background: #0d1018;
+    }
+
+    #n8n-chat .chat-messages-list::-webkit-scrollbar-thumb,
+    #n8n-chat .chat-messages::-webkit-scrollbar-thumb {
+      background: #2f3650;
+      border-radius: 10px;
+    }
+
+    #n8n-chat .chat-messages-list::-webkit-scrollbar-thumb:hover,
+    #n8n-chat .chat-messages::-webkit-scrollbar-thumb:hover {
+      background: #8b5cf6;
+    }
+
+    /* MOBILE */
+    @media screen and (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #171c28;
+      }
+
+      .menu-item {
+        text-align: center;
+      }
+
+      .main {
+        padding: 24px 18px;
+      }
+
+      .top-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      .chat-shell {
+        height: 620px;
+        min-height: 620px;
+      }
+
+      .new-chat-btn {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .page-title-text h1 {
+        font-size: 22px;
+      }
+
+      .chat-shell {
+        height: 560px;
+        min-height: 560px;
+      }
+
+      #n8n-chat .chat-message {
+        max-width: 92% !important;
+      }
+    }
+/* FIX MESSAGE ALIGNMENT AND SCROLLING */
+
+/* Message area should scroll normally */
+#n8n-chat .chat-messages-list,
+#n8n-chat .chat-messages {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+  padding: 30px !important;
+}
+
+/* All messages */
+#n8n-chat .chat-message {
+  max-width: 72% !important;
+  width: fit-content !important;
+  max-height: 320px !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+  white-space: normal !important;
+}
+
+/* AI answers on the LEFT */
+#n8n-chat .chat-message-from-bot {
+  align-self: flex-start !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+  text-align: left !important;
+}
+
+/* User questions on the RIGHT */
+#n8n-chat .chat-message-from-user {
+  align-self: flex-end !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+  text-align: left !important;
+}
+
+/* Scrollbar inside long AI response bubble */
+#n8n-chat .chat-message::-webkit-scrollbar {
+  width: 6px;
+}
+
+#n8n-chat .chat-message::-webkit-scrollbar-track {
+  background: #0d1018;
+  border-radius: 10px;
+}
+
+#n8n-chat .chat-message::-webkit-scrollbar-thumb {
+  background: #3a415c;
+  border-radius: 10px;
+}
+
+#n8n-chat .chat-message::-webkit-scrollbar-thumb:hover {
+  background: #8b5cf6;
+}
+  </style>
+
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">⚕</div>
+      <div class="logo-text">
+        <h2>MedMentor</h2>
+        <p>AI PLATFORM</p>
+      </div>
+    </div>
+
+
+<a href="index.html" class="menu-item">Dashboard</a>
+<a href="profile.html" class="menu-item">My Profile</a>
+<a href="chat.html" class="menu-item active">AI Mentor</a>
+<a href="career.html" class="menu-item">Career Explorer</a>
+<a href="opportunities.html" class="menu-item">Opportunities</a>
+<a href="clinic.html" class="menu-item">Clinic Finder</a>
+<a href="#" class="menu-item">Mentor Directory</a>
+<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+<a href="my-activities.html" class="menu-item">My Activities</a>
+<a href="course-planner.html" class="menu-item">Course Planner</a>
+<a href="resume-builder.html" class="menu-item">Resume Builder</a>
+<a href="resources.html" class="menu-item">Resources</a>
+
+  </div>
+
+  <div class="main">
+
+<div class="top-bar">
+  <div class="page-title-row">
+    <div class="page-icon">✦</div>
+    <div class="page-title-text">
+      <h1>AI Mentor</h1>
+      <p>Personalized guidance for your healthcare career</p>
+    </div>
+  </div>
+
+  <button class="new-chat-btn" onclick="location.reload()">+ New Chat</button>
+</div>
+
+<div class="chat-shell">
+  <div id="n8n-chat"></div>
+</div>
+
+<div class="footer-note">
+  For education and career guidance only. Not medical advice.
+</div>
+
+  </div>
+
+  <script type="module">
+    import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+    createChat({
+      webhookUrl: 'https://tejas400.app.n8n.cloud/webhook/9ea9d437-8759-43c5-a53c-a56c5fc92df0/chat',
+      target: '#n8n-chat',
+      mode: 'fullscreen',
+      initialMessages: [
+        'Ask me anything!'
+      ],
+      i18n: {
+        en: {
+          title: 'MedMentor AI',
+          subtitle: 'I can help with college prep, opportunities, action plans, and more.',
+          inputPlaceholder: 'Ask your AI mentor anything...'
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
