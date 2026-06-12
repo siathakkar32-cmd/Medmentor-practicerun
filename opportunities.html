@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>MedMentor - Opportunities</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070910;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0b0e15;
+      border-right: 1px solid #171c28;
+      padding: 18px 14px;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #7c4dff, #22d3ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .logo-text h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-text p {
+      margin: 0;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #22d3ee;
+      font-weight: bold;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 13px 14px;
+      margin-bottom: 7px;
+      border-radius: 11px;
+      color: #8d96aa;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .menu-item.active {
+      background: linear-gradient(90deg, #6d4aff, #8b5cf6);
+      color: white;
+      font-weight: bold;
+    }
+
+    .menu-item:hover {
+      background: #151a26;
+      color: white;
+    }
+
+    .main {
+      flex: 1;
+      min-height: 100vh;
+      padding: 34px 58px 30px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
+        #070910;
+    }
+
+    .small-label {
+      color: #8b5cf6;
+      font-size: 11px;
+      letter-spacing: 4px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .title {
+      font-size: 48px;
+      margin: 0;
+      letter-spacing: 4px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ffffff, #8b5cf6, #22d3ee);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      color: #8d96aa;
+      max-width: 760px;
+      line-height: 1.5;
+      margin-top: 8px;
+      margin-bottom: 24px;
+      font-size: 15px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #1d2230;
+      margin-bottom: 24px;
+      max-width: 1120px;
+    }
+
+    .top-row {
+      max-width: 1120px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      gap: 20px;
+    }
+
+    .ai-match-btn {
+      background: linear-gradient(90deg, #7c4dff, #9b5cff);
+      border: none;
+      color: white;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-weight: bold;
+      font-size: 13px;
+      letter-spacing: 1.3px;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+      white-space: nowrap;
+    }
+
+    .ai-match-btn:hover {
+      opacity: 0.9;
+    }
+
+    .search-row {
+      max-width: 1120px;
+      display: grid;
+      grid-template-columns: 1fr 190px;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .search-box,
+    .filter-box {
+      background: #0d1018;
+      border: 1px solid #252b3a;
+      border-radius: 12px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      color: #8d96aa;
+    }
+
+    .search-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+
+    .search-box input::placeholder {
+      color: #8d96aa;
+    }
+
+    .filter-box select {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .filter-box option {
+      background: #0d1018;
+      color: white;
+    }
+
+    .recommend-card {
+      max-width: 1120px;
+      background: rgba(16, 19, 28, 0.88);
+      border: 1px solid #4c2f86;
+      border-radius: 16px;
+      padding: 22px;
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.12);
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .section-icon {
+      color: #9b5cff;
+      font-size: 20px;
+    }
+
+    .opportunity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .opportunity-card {
+      background: #10131c;
+      border: 1px solid #252b3a;
+      border-radius: 12px;
+      padding: 18px;
+      min-height: 150px;
+      position: relative;
+      transition: 0.2s;
+    }
+
+    .opportunity-card:hover {
+      border-color: #8b5cf6;
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.14);
+    }
+
+    .fit-badge {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      background: #22153d;
+      color: #b794ff;
+      border: 1px solid #3d2a6a;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .opportunity-title {
+      font-size: 16px;
+      font-weight: 900;
+      margin-bottom: 12px;
+      padding-right: 70px;
+      line-height: 1.35;
+    }
+
+    .opportunity-desc {
+      color: #8d96aa;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .why {
+      color: #22d3ee;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    .benefit {
+      color: #9b5cff;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .category-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .category-tag {
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: #22d3ee;
+      border: 1px solid #22d3ee;
+      border-radius: 4px;
+      padding: 4px 7px;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .category-tag.purple {
+      color: #9b5cff;
+      border-color: #9b5cff;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media screen and (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #171c28;
+      }
+
+      .menu-item {
+        text-align: center;
+      }
+
+      .main {
+        padding: 24px 18px;
+      }
+
+      .title {
+        font-size: 34px;
+      }
+
+      .top-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .ai-match-btn {
+        width: 100%;
+      }
+
+      .search-row {
+        grid-template-columns: 1fr;
+      }
+
+      .opportunity-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .title {
+        font-size: 28px;
+        letter-spacing: 2px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">⚕</div>
+      <div class="logo-text">
+        <h2>MedMentor</h2>
+        <p>AI PLATFORM</p>
+      </div>
+    </div>
+
+```
+<a href="index.html" class="menu-item">Dashboard</a>
+<a href="profile.html" class="menu-item">My Profile</a>
+<a href="chat.html" class="menu-item">AI Mentor</a>
+<a href="career.html" class="menu-item">Career Explorer</a>
+<a href="opportunities.html" class="menu-item active">Opportunities</a>
+<a href="clinic.html" class="menu-item">Clinic Finder</a>
+<a href="#" class="menu-item">Mentor Directory</a>
+<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+<a href="my-activities.html" class="menu-item">My Activities</a>
+<a href="course-planner.html" class="menu-item">Course Planner</a>
+<a href="resume-builder.html" class="menu-item">Resume Builder</a>
+<a href="resources.html" class="menu-item">Resources</a>
+```
+
+  </div>
+
+  <div class="main">
+
+```
+<div class="top-row">
+  <div>
+    <div class="small-label">// Opportunity Matching</div>
+    <h1 class="title">OPPORTUNITIES</h1>
+    <p class="subtitle">
+      Discover healthcare, research, clinical, volunteer, and internship opportunities that match your pre-med goals.
+    </p>
+  </div>
+
+  <button class="ai-match-btn" onclick="runAiMatch()">✦ AI MATCH</button>
+</div>
+
+<div class="divider"></div>
+
+<div class="search-row">
+  <div class="search-box">
+    🔍
+    <input type="text" id="searchInput" placeholder="Enter your city, ZIP code, or interest..." onkeyup="filterOpportunities()">
+  </div>
+
+  <div class="filter-box">
+    <select id="categoryFilter" onchange="filterOpportunities()">
+      <option value="all">All Categories</option>
+      <option value="research">Research</option>
+      <option value="volunteer">Volunteer</option>
+      <option value="internship">Internship</option>
+      <option value="program">Program</option>
+      <option value="clinical">Clinical</option>
+    </select>
+  </div>
+</div>
+
+<div class="recommend-card">
+  <div class="section-title">
+    <span class="section-icon">✣</span>
+    AI Recommended for You
+  </div>
+
+  <div class="opportunity-grid" id="opportunityGrid">
+
+    <div class="opportunity-card">
+      <div class="fit-badge">Ready</div>
+      <div class="opportunity-title">Enter a location or interest to begin</div>
+      <div class="opportunity-desc">
+        Type your city, ZIP code, or healthcare interest above, then click AI MATCH to generate personalized opportunity cards.
+      </div>
+      <div class="why">Why: MedMentor will search based on your exact input.</div>
+      <div class="benefit">Benefit: Results will appear here as cards.</div>
+      <div class="category-row">
+        <span class="category-tag">Ready</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+```
+
+  </div>
+
+  <script>
+    function safeText(value) {
+      if (value === null || value === undefined) {
+        return "";
+      }
+      return String(value);
+    }
+
+    function escapeHtml(value) {
+      return safeText(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function filterOpportunities() {
+      const searchValue = document.getElementById("searchInput").value.toLowerCase();
+      const categoryValue = document.getElementById("categoryFilter").value;
+      const cards = document.querySelectorAll(".opportunity-card");
+
+      cards.forEach(card => {
+        const keywords = (card.getAttribute("data-keywords") || "").toLowerCase();
+        const category = (card.getAttribute("data-category") || "").toLowerCase();
+        const titleElement = card.querySelector(".opportunity-title");
+        const title = titleElement ? titleElement.innerText.toLowerCase() : "";
+
+        const matchesSearch =
+          searchValue === "" ||
+          keywords.includes(searchValue) ||
+          title.includes(searchValue);
+
+        const matchesCategory =
+          categoryValue === "all" ||
+          category.includes(categoryValue);
+
+        if (matchesSearch && matchesCategory) {
+          card.classList.remove("hidden");
+        } else {
+          card.classList.add("hidden");
+        }
+      });
+    }
+
+    function runAiMatch() {
+      const searchInput = document.getElementById("searchInput");
+      const locationOrInterest = searchInput.value.trim();
+      const categoryValue = document.getElementById("categoryFilter").value;
+      const opportunityGrid = document.getElementById("opportunityGrid");
+
+      if (!locationOrInterest) {
+        alert("Please enter a city, location, ZIP code, or interest first.");
+        return;
+      }
+
+      opportunityGrid.innerHTML = `
+        <div class="opportunity-card">
+          <div class="fit-badge">AI</div>
+          <div class="opportunity-title">Finding opportunities...</div>
+          <div class="opportunity-desc">
+            Please wait while MedMentor AI finds healthcare, research, volunteering, internship, and pre-med opportunities for you.
+          </div>
+          <div class="why">Why: Searching based on your input.</div>
+          <div class="benefit">Benefit: Results will appear as opportunity cards.</div>
+          <div class="category-row">
+            <span class="category-tag">Searching</span>
+          </div>
+        </div>
+      `;
+
+      const webhookUrl = "https://tejas400.app.n8n.cloud/webhook/opportunities-finder";
+      const fullUrl =
+        webhookUrl +
+        "?location=" +
+        encodeURIComponent(locationOrInterest) +
+        "&interest=" +
+        encodeURIComponent(categoryValue);
+
+      fetch(fullUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Workflow error: " + response.status);
+          }
+
+          return response.json();
+        })
+        .then(data => {
+          const opportunities = data.opportunities || [];
+
+          if (opportunities.length === 0) {
+            opportunityGrid.innerHTML = `
+              <div class="opportunity-card">
+                <div class="fit-badge">0%</div>
+                <div class="opportunity-title">No opportunities found</div>
+                <div class="opportunity-desc">
+                  Try entering a broader location, nearby city, or different keyword.
+                </div>
+                <div class="why">Why: The AI could not find enough matches for this search.</div>
+                <div class="benefit">Benefit: Try searching by city, county, or interest area.</div>
+                <div class="category-row">
+                  <span class="category-tag">No Results</span>
+                </div>
+              </div>
+            `;
+            return;
+          }
+
+          opportunityGrid.innerHTML = opportunities.map(opportunity => {
+            const title = escapeHtml(opportunity.title || "Untitled Opportunity");
+            const type = escapeHtml(opportunity.type || "Opportunity");
+            const location = escapeHtml(opportunity.location || "Location not listed");
+            const description = escapeHtml(opportunity.description || "No description provided.");
+            const why = escapeHtml(opportunity.why || "This may support your pre-med goals.");
+            const benefit = escapeHtml(opportunity.benefit || "This may strengthen your experience.");
+            const fit = escapeHtml(opportunity.fit || "8.0");
+
+            const categoryText = type.toLowerCase();
+            const keywords = escapeHtml(
+              title + " " + type + " " + location + " " + description + " " + why + " " + benefit
+            ).toLowerCase();
+
+            return `
+              <div class="opportunity-card" data-category="${categoryText}" data-keywords="${keywords}">
+                <div class="fit-badge">${fit}% fit</div>
+                <div class="opportunity-title">${title}</div>
+                <div class="opportunity-desc">
+                  ${description}
+                </div>
+                <div class="why">Why: ${why}</div>
+                <div class="benefit">Benefit: ${benefit}</div>
+                <div class="category-row">
+                  <span class="category-tag">${type}</span>
+                  <span class="category-tag purple">${location}</span>
+                </div>
+              </div>
+            `;
+          }).join("");
+
+          document.getElementById("categoryFilter").value = "all";
+        })
+        .catch(error => {
+          console.log("Opportunities Finder error:", error);
+
+          opportunityGrid.innerHTML = `
+            <div class="opportunity-card">
+              <div class="fit-badge">Error</div>
+              <div class="opportunity-title">Please try again in a few moments.</div>
+              <div class="opportunity-desc">
+                The system has crashed temporarily. Please wait a little and try your search again.
+              </div>
+              <div class="why">Why: The AI opportunity finder is temporarily unavailable.</div>
+              <div class="benefit">Benefit: Your page is still working. Only the AI search needs to retry.</div>
+              <div class="category-row">
+                <span class="category-tag">Error</span>
+              </div>
+            </div>
+          `;
+        });
+    }
+  </script>
+
+</body>
+</html>
