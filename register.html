@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>MedMentor - Register</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(139, 92, 246, 0.10), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.07), transparent 28%),
+        #070910;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .auth-page {
+      width: 100%;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    .auth-icon {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 24px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #7c4dff, #9b5cff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      font-weight: bold;
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.28);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      margin-top: 12px;
+      margin-bottom: 42px;
+      color: #8d96aa;
+      font-size: 17px;
+    }
+
+    .auth-card {
+      background: rgba(16, 19, 28, 0.86);
+      border: 1px solid #252b3a;
+      border-radius: 22px;
+      padding: 38px;
+      text-align: left;
+      box-shadow: 0 0 45px rgba(0, 0, 0, 0.35);
+    }
+
+    .field-row {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .input-wrap {
+      height: 56px;
+      background: #0d1018;
+      border: 1px solid #252b3a;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      gap: 12px;
+    }
+
+    .input-wrap:focus-within {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+    }
+
+    .input-icon {
+      color: #8d96aa;
+      font-size: 18px;
+      width: 20px;
+      text-align: center;
+    }
+
+    input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      font-size: 15px;
+      height: 100%;
+    }
+
+    input::placeholder {
+      color: #8d96aa;
+    }
+
+    .auth-btn {
+      width: 100%;
+      height: 58px;
+      border: none;
+      border-radius: 13px;
+      background: linear-gradient(90deg, #8b5cf6, #9b5cff);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 2px;
+      box-shadow: 0 0 25px rgba(139, 92, 246, 0.20);
+    }
+
+    .auth-btn:hover {
+      opacity: 0.92;
+    }
+
+    .bottom-text {
+      margin-top: 32px;
+      color: #8d96aa;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .bottom-text a {
+      color: #9b5cff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .bottom-text a:hover {
+      color: white;
+    }
+
+    .message {
+      display: none;
+      border-radius: 12px;
+      padding: 13px;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    .message.success {
+      background: rgba(34, 211, 238, 0.10);
+      border: 1px solid #22d3ee;
+      color: #a5f3fc;
+    }
+
+    .message.error {
+      background: rgba(248, 113, 113, 0.10);
+      border: 1px solid #f87171;
+      color: #fecaca;
+    }
+
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 18px;
+      }
+
+      .auth-page {
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 29px;
+      }
+
+      .auth-card {
+        padding: 25px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="auth-page">
+
+<div class="auth-icon">⚕</div>
+
+<h1>Create account</h1>
+<div class="subtitle">Start your MedMentor profile</div>
+
+<div class="auth-card">
+
+  <div class="message" id="messageBox"></div>
+
+  <div class="field-row">
+    <label>Email</label>
+    <div class="input-wrap">
+      <div class="input-icon">✉</div>
+      <input type="email" id="email" placeholder="you@example.com">
+    </div>
+  </div>
+
+  <div class="field-row">
+    <label>Password</label>
+    <div class="input-wrap">
+      <div class="input-icon">▣</div>
+      <input type="password" id="password" placeholder="Create a password">
+    </div>
+  </div>
+
+  <button class="auth-btn" onclick="registerUser()">Create Account</button>
+
+</div>
+
+<div class="bottom-text">
+  Already have an account? <a href="login.html">Log in</a>
+</div>
+
+
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  const SUPABASE_URL = "https://xyuijponokewnavycdgr.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh5dWlqcG9ub2tld25hdnljZGdyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEyMjM4OTAsImV4cCI6MjA5Njc5OTg5MH0.A0KQlmB4FxfWeLjpILjsyJoQBuXtcBb9KiHYKAOxB8M";
+
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  function showMessage(text, type) {
+    const messageBox = document.getElementById("messageBox");
+    messageBox.style.display = "block";
+    messageBox.className = "message " + type;
+    messageBox.innerText = text;
+  }
+
+  async function registerUser() {
+    alert("Button clicked. Trying to create account now.");
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+
+    if (!email || !password) {
+      showMessage("Please enter an email and password.", "error");
+      return;
+    }
+
+    if (password.length < 6) {
+      showMessage("Password must be at least 6 characters.", "error");
+      return;
+    }
+
+   const { data, error } = await supabaseClient.auth.signUp({
+  email: email,
+  password: password,
+  options: {
+    emailRedirectTo: "http://127.0.0.1:5500/login.html"
+  }
+});
+
+    if (error) {
+      showMessage(error.message, "error");
+      console.log(error);
+      return;
+    }
+
+    showMessage("Account created. Check your email to confirm, then log in.", "success");
+
+    setTimeout(function() {
+      window.location.href = "login.html";
+    }, 1800);
+  }
+</script>
+
+</body>
+</html>

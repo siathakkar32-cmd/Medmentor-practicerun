@@ -1,0 +1,309 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MedMentor - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top, rgba(139, 92, 246, 0.10), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.07), transparent 28%),
+        #070910;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .login-page {
+      width: 100%;
+      max-width: 560px;
+      text-align: center;
+    }
+
+    .login-icon {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 24px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #7c4dff, #9b5cff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      font-weight: bold;
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.28);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      margin-top: 12px;
+      margin-bottom: 48px;
+      color: #8d96aa;
+      font-size: 17px;
+    }
+
+    .login-card {
+      background: rgba(16, 19, 28, 0.86);
+      border: 1px solid #252b3a;
+      border-radius: 22px;
+      padding: 38px;
+      text-align: left;
+      box-shadow: 0 0 45px rgba(0, 0, 0, 0.35);
+    }
+
+    .field-row {
+      margin-bottom: 20px;
+    }
+
+    .label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    label {
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .forgot-link {
+      color: #9b5cff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .forgot-link:hover {
+      color: white;
+    }
+
+    .input-wrap {
+      height: 56px;
+      background: #0d1018;
+      border: 1px solid #252b3a;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      gap: 12px;
+    }
+
+    .input-wrap:focus-within {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
+    }
+
+    .input-icon {
+      color: #8d96aa;
+      font-size: 18px;
+      width: 20px;
+      text-align: center;
+    }
+
+    input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: white;
+      font-size: 15px;
+      height: 100%;
+    }
+
+    input::placeholder {
+      color: #8d96aa;
+    }
+
+    .login-btn {
+      width: 100%;
+      height: 58px;
+      border: none;
+      border-radius: 13px;
+      background: linear-gradient(90deg, #8b5cf6, #9b5cff);
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 2px;
+      box-shadow: 0 0 25px rgba(139, 92, 246, 0.20);
+    }
+
+    .login-btn:hover {
+      opacity: 0.92;
+    }
+
+    .bottom-text {
+      margin-top: 32px;
+      color: #8d96aa;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    .bottom-text a {
+      color: #9b5cff;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .bottom-text a:hover {
+      color: white;
+    }
+
+    .message {
+      display: none;
+      border-radius: 12px;
+      padding: 13px;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    .message.success {
+      background: rgba(34, 211, 238, 0.10);
+      border: 1px solid #22d3ee;
+      color: #a5f3fc;
+    }
+
+    .message.error {
+      background: rgba(248, 113, 113, 0.10);
+      border: 1px solid #f87171;
+      color: #fecaca;
+    }
+
+    @media screen and (max-width: 600px) {
+      body {
+        padding: 18px;
+      }
+
+      .login-page {
+        max-width: 100%;
+      }
+
+      h1 {
+        font-size: 29px;
+      }
+
+      .subtitle {
+        margin-bottom: 34px;
+      }
+
+      .login-card {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-page">
+
+    <div class="login-icon">⚕</div>
+
+    <h1>Welcome back</h1>
+    <div class="subtitle">Log in to your MedMentor account</div>
+
+    <div class="login-card">
+
+      <div class="message" id="messageBox"></div>
+
+      <div class="field-row">
+        <div class="label-row">
+          <label>Email</label>
+        </div>
+
+        <div class="input-wrap">
+          <div class="input-icon">✉</div>
+          <input type="email" id="email" placeholder="you@example.com">
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="label-row">
+          <label>Password</label>
+          <a class="forgot-link" onclick="forgotPassword()">Forgot password?</a>
+        </div>
+
+        <div class="input-wrap">
+          <div class="input-icon">▣</div>
+          <input type="password" id="password" placeholder="••••••••">
+        </div>
+      </div>
+
+      <button class="login-btn" onclick="loginUser()">Log in</button>
+
+    </div>
+
+    <div class="bottom-text">
+      Don't have an account? <a href="register.html">Create one</a>
+    </div>
+
+  </div>
+
+  <script type="module">
+    import { supabase } from "./supabase.js";
+
+    function showMessage(text, type) {
+      const messageBox = document.getElementById("messageBox");
+      messageBox.style.display = "block";
+      messageBox.className = "message " + type;
+      messageBox.innerText = text;
+    }
+
+    window.loginUser = async function() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!email || !password) {
+        showMessage("Please enter your email and password.", "error");
+        return;
+      }
+
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+      if (error) {
+        showMessage(error.message, "error");
+        return;
+      }
+
+      showMessage("Login successful. Redirecting to your dashboard...", "success");
+
+      setTimeout(function() {
+        window.location.href = "index.html";
+      }, 900);
+    };
+
+    window.forgotPassword = function() {
+      alert("Password reset will be connected later.");
+    };
+  </script>
+
+</body>
+</html>
+
+
