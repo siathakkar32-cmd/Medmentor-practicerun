@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>MedMentor - My Activities</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070910;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0b0e15;
+      border-right: 1px solid #171c28;
+      padding: 18px 14px;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #7c4dff, #22d3ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .logo-text h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-text p {
+      margin: 0;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #22d3ee;
+      font-weight: bold;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 13px 14px;
+      margin-bottom: 7px;
+      border-radius: 11px;
+      color: #8d96aa;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .menu-item.active {
+      background: linear-gradient(90deg, #6d4aff, #8b5cf6);
+      color: white;
+      font-weight: bold;
+    }
+
+    .menu-item:hover {
+      background: #151a26;
+      color: white;
+    }
+
+    .main {
+      flex: 1;
+      min-height: 100vh;
+      padding: 36px 58px 30px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 77, 255, 0.14), transparent 30%),
+        #070910;
+    }
+
+    .page-wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 26px;
+      gap: 20px;
+    }
+
+    .title {
+      font-size: 28px;
+      margin: 0;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+    }
+
+    .subtitle {
+      color: #8d96aa;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    .add-btn {
+      background: linear-gradient(90deg, #7c4dff, #9b5cff);
+      border: none;
+      color: white;
+      border-radius: 12px;
+      padding: 13px 19px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .add-btn:hover {
+      opacity: 0.9;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: rgba(16, 19, 28, 0.9);
+      border: 1px solid #252b3a;
+      border-radius: 12px;
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-height: 88px;
+    }
+
+    .stat-icon {
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .purple {
+      color: #9b5cff;
+    }
+
+    .cyan {
+      color: #22d3ee;
+    }
+
+    .pink {
+      color: #ff4d8d;
+    }
+
+    .stat-number {
+      font-size: 25px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      color: #8d96aa;
+      font-size: 12px;
+    }
+
+    .activity-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .activity-card {
+      background: rgba(16, 19, 28, 0.92);
+      border: 1px solid #252b3a;
+      border-radius: 12px;
+      padding: 22px;
+      position: relative;
+      min-height: 114px;
+    }
+
+    .activity-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-right: 42px;
+      margin-bottom: 8px;
+    }
+
+    .activity-title {
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .activity-badge {
+      background: #b8ffd0;
+      color: #003b18;
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .activity-role {
+      color: #7c4dff;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 9px;
+    }
+
+    .activity-desc {
+      color: #8d96aa;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 11px;
+    }
+
+    .activity-meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      color: #667188;
+      font-size: 12px;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      background: transparent;
+      border: none;
+      color: #8d96aa;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .delete-btn:hover {
+      color: #ff4d8d;
+    }
+
+    .empty-card {
+      background: rgba(16, 19, 28, 0.92);
+      border: 1px dashed #252b3a;
+      border-radius: 12px;
+      padding: 35px;
+      text-align: center;
+      color: #8d96aa;
+    }
+
+    .empty-card h3 {
+      margin-top: 0;
+      color: white;
+    }
+
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      z-index: 10;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 620px;
+      background: #10131c;
+      border: 1px solid #252b3a;
+      border-radius: 16px;
+      padding: 24px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal h2 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+
+    .modal p {
+      color: #8d96aa;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .field.full {
+      grid-column: span 2;
+    }
+
+    label {
+      display: block;
+      color: #8d96aa;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: #0d1018;
+      border: 1px solid #202638;
+      color: white;
+      border-radius: 10px;
+      padding: 12px;
+      outline: none;
+      font-size: 14px;
+      font-family: Arial, sans-serif;
+    }
+
+    textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #8b5cf6;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .modal-btn {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .save-btn {
+      background: linear-gradient(90deg, #7c4dff, #9b5cff);
+      color: white;
+    }
+
+    .cancel-btn {
+      background: #0d1018;
+      border: 1px solid #252b3a;
+      color: #8d96aa;
+    }
+
+    @media screen and (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #171c28;
+      }
+
+      .menu-item {
+        text-align: center;
+      }
+
+      .main {
+        padding: 24px 18px;
+      }
+
+      .top-row {
+        flex-direction: column;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media screen and (max-width: 520px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full {
+        grid-column: span 1;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">⚕</div>
+      <div class="logo-text">
+        <h2>MedMentor</h2>
+        <p>AI PLATFORM</p>
+      </div>
+    </div>
+
+
+<a href="index.html" class="menu-item">Dashboard</a>
+<a href="profile.html" class="menu-item">My Profile</a>
+<a href="chat.html" class="menu-item">AI Mentor</a>
+<a href="career.html" class="menu-item">Career Explorer</a>
+<a href="opportunities.html" class="menu-item">Opportunities</a>
+<a href="clinic.html" class="menu-item">Clinic Finder</a>
+<a href="#" class="menu-item">Mentor Directory</a>
+<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+<a href="my-activities.html" class="menu-item active">My Activities</a>
+<a href="course-planner.html" class="menu-item">Course Planner</a>
+<a href="resume-builder.html" class="menu-item">Resume Builder</a>
+<a href="resources.html" class="menu-item">Resources</a>
+  </div>
+
+  <div class="main">
+    <div class="page-wrap">
+
+  <div class="top-row">
+    <div>
+      <h1 class="title">Extracurricular Tracker</h1>
+      <div class="subtitle">Track all your activities and experiences</div>
+    </div>
+
+    <button class="add-btn" onclick="openModal()">＋ Add Activity</button>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon purple">🎖</div>
+      <div>
+        <div class="stat-number" id="totalActivities">0</div>
+        <div class="stat-label">Total Activities</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon cyan">◷</div>
+      <div>
+        <div class="stat-number" id="totalHours">0</div>
+        <div class="stat-label">Total Hours</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon purple">♙</div>
+      <div>
+        <div class="stat-number" id="leadershipRoles">0</div>
+        <div class="stat-label">Leadership Roles</div>
+      </div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-icon pink">♡</div>
+      <div>
+        <div class="stat-number" id="serviceHours">0</div>
+        <div class="stat-label">Service Hours</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="activity-list" id="activityList"></div>
+
+</div>
+
+
+  </div>
+
+  <div class="modal-bg" id="activityModal">
+    <div class="modal">
+      <h2>Add Activity</h2>
+      <p>Add a volunteer experience, club, leadership role, internship, research, award, or project.</p>
+
+
+  <div class="form-grid">
+    <div class="field full">
+      <label>Activity Name</label>
+      <input type="text" id="activityName" placeholder="Example: Volunteer At Temple">
+    </div>
+
+    <div class="field">
+      <label>Type</label>
+      <select id="activityType">
+        <option value="volunteer">volunteer</option>
+        <option value="clinical">clinical</option>
+        <option value="leadership">leadership</option>
+        <option value="research">research</option>
+        <option value="club">club</option>
+        <option value="competition">competition</option>
+        <option value="award">award</option>
+        <option value="internship">internship</option>
+        <option value="project">project</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Role / Position</label>
+      <input type="text" id="activityRole" placeholder="Example: Tour Guide">
+    </div>
+
+    <div class="field">
+      <label>Total Hours</label>
+      <input type="number" id="activityHours" placeholder="Example: 180">
+    </div>
+
+    <div class="field">
+      <label>Service Hours</label>
+      <input type="number" id="activityServiceHours" placeholder="Example: 180">
+    </div>
+
+    <div class="field">
+      <label>Start Date</label>
+      <input type="date" id="startDate">
+    </div>
+
+    <div class="field">
+      <label>End Date</label>
+      <input type="date" id="endDate">
+    </div>
+
+    <div class="field full">
+      <label>Description</label>
+      <textarea id="activityDescription" placeholder="Example: Touring visitors around the temple and greeting people..."></textarea>
+    </div>
+  </div>
+
+  <div class="modal-actions">
+    <button class="modal-btn cancel-btn" onclick="closeModal()">Cancel</button>
+    <button class="modal-btn save-btn" onclick="saveActivity()">Save Activity</button>
+  </div>
+</div>
+
+
+  </div>
+
+  <script>
+    let activities = JSON.parse(localStorage.getItem("medmentorActivities")) || [];
+
+    function openModal() {
+      document.getElementById("activityModal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("activityModal").style.display = "none";
+      clearForm();
+    }
+
+    function clearForm() {
+      document.getElementById("activityName").value = "";
+      document.getElementById("activityType").value = "volunteer";
+      document.getElementById("activityRole").value = "";
+      document.getElementById("activityHours").value = "";
+      document.getElementById("activityServiceHours").value = "";
+      document.getElementById("startDate").value = "";
+      document.getElementById("endDate").value = "";
+      document.getElementById("activityDescription").value = "";
+    }
+
+    function saveActivity() {
+      const name = document.getElementById("activityName").value.trim();
+      const type = document.getElementById("activityType").value;
+      const role = document.getElementById("activityRole").value.trim();
+      const hours = Number(document.getElementById("activityHours").value) || 0;
+      const serviceHours = Number(document.getElementById("activityServiceHours").value) || 0;
+      const startDate = document.getElementById("startDate").value;
+      const endDate = document.getElementById("endDate").value;
+      const description = document.getElementById("activityDescription").value.trim();
+
+      if (!name) {
+        alert("Please enter an activity name.");
+        return;
+      }
+
+      const activity = {
+        id: Date.now(),
+        name: name,
+        type: type,
+        role: role,
+        hours: hours,
+        serviceHours: serviceHours,
+        startDate: startDate,
+        endDate: endDate,
+        description: description
+      };
+
+      activities.push(activity);
+      localStorage.setItem("medmentorActivities", JSON.stringify(activities));
+      closeModal();
+      renderActivities();
+    }
+
+    function deleteActivity(id) {
+      const confirmDelete = confirm("Delete this activity?");
+      if (!confirmDelete) {
+        return;
+      }
+
+      activities = activities.filter(activity => activity.id !== id);
+      localStorage.setItem("medmentorActivities", JSON.stringify(activities));
+      renderActivities();
+    }
+
+    function renderActivities() {
+      const list = document.getElementById("activityList");
+
+      updateStats();
+
+      if (activities.length === 0) {
+        list.innerHTML = `
+          <div class="empty-card">
+            <h3>No activities yet</h3>
+            <p>Click “Add Activity” to start tracking your extracurriculars, service hours, leadership, and experiences.</p>
+          </div>
+        `;
+        return;
+      }
+
+      list.innerHTML = activities.map(activity => {
+        return `
+          <div class="activity-card">
+            <button class="delete-btn" onclick="deleteActivity(${activity.id})">♲</button>
+
+            <div class="activity-title-row">
+              <div class="activity-title">${escapeHtml(activity.name)}</div>
+              <div class="activity-badge">${escapeHtml(activity.type)}</div>
+            </div>
+
+            <div class="activity-role">${escapeHtml(activity.role || "Role not entered")}</div>
+
+            <div class="activity-desc">
+              ${escapeHtml(activity.description || "No description entered.")}
+            </div>
+
+            <div class="activity-meta">
+              <span>◷ ${activity.hours || 0} hours</span>
+              <span>${formatDates(activity.startDate, activity.endDate)}</span>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function updateStats() {
+      const totalActivities = activities.length;
+      const totalHours = activities.reduce((sum, activity) => sum + (Number(activity.hours) || 0), 0);
+      const serviceHours = activities.reduce((sum, activity) => sum + (Number(activity.serviceHours) || 0), 0);
+
+      const leadershipRoles = activities.filter(activity => {
+        const text = (activity.role + " " + activity.type).toLowerCase();
+        return (
+          text.includes("president") ||
+          text.includes("vice president") ||
+          text.includes("founder") ||
+          text.includes("captain") ||
+          text.includes("officer") ||
+          text.includes("leader") ||
+          text.includes("leadership")
+        );
+      }).length;
+
+      document.getElementById("totalActivities").innerText = totalActivities;
+      document.getElementById("totalHours").innerText = totalHours;
+      document.getElementById("serviceHours").innerText = serviceHours;
+      document.getElementById("leadershipRoles").innerText = leadershipRoles;
+    }
+
+    function formatDates(start, end) {
+      if (!start && !end) {
+        return "Dates not entered";
+      }
+
+      if (start && !end) {
+        return start + " – Present";
+      }
+
+      if (!start && end) {
+        return "Until " + end;
+      }
+
+      return start + " – " + end;
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    window.onload = function() {
+      renderActivities();
+    };
+  </script>
+
+</body>
+</html>
