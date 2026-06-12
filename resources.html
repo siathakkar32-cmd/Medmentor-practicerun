@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>MedMentor - Resources</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070910;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0b0e15;
+      border-right: 1px solid #171c28;
+      padding: 18px 14px;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #7c4dff, #22d3ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .logo-text h2 {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-text p {
+      margin: 0;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #22d3ee;
+      font-weight: bold;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 13px 14px;
+      margin-bottom: 7px;
+      border-radius: 11px;
+      color: #8d96aa;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .menu-item.active {
+      background: linear-gradient(90deg, #6d4aff, #8b5cf6);
+      color: white;
+      font-weight: bold;
+    }
+
+    .menu-item:hover {
+      background: #151a26;
+      color: white;
+    }
+
+    .main {
+      flex: 1;
+      min-height: 100vh;
+      padding: 34px 58px 40px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 77, 255, 0.14), transparent 30%),
+        #070910;
+    }
+
+    .page-wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .title {
+      font-size: 30px;
+      margin: 0;
+      font-weight: 900;
+      letter-spacing: 0.3px;
+    }
+
+    .subtitle {
+      color: #8d96aa;
+      font-size: 14px;
+      margin-top: 12px;
+      margin-bottom: 28px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    .tab {
+      background: transparent;
+      border: none;
+      color: #8d96aa;
+      padding: 11px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .tab.active {
+      background: linear-gradient(90deg, #7c4dff, #9b5cff);
+      color: white;
+    }
+
+    .tab:hover {
+      color: white;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .resource-card {
+      background: rgba(16, 19, 28, 0.92);
+      border: 1px solid #252b3a;
+      border-radius: 12px;
+      padding: 22px;
+      min-height: 170px;
+      transition: 0.2s;
+    }
+
+    .resource-card:hover {
+      border-color: #8b5cf6;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.12);
+      transform: translateY(-2px);
+    }
+
+    .resource-tag {
+      display: inline-block;
+      background: #1b2030;
+      color: #c9d1e6;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .resource-title {
+      font-size: 18px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+
+    .resource-desc {
+      color: #8d96aa;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .visit-link {
+      color: #b794ff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .visit-link:hover {
+      color: white;
+    }
+
+    .empty-card {
+      grid-column: span 3;
+      background: rgba(16, 19, 28, 0.92);
+      border: 1px dashed #252b3a;
+      border-radius: 12px;
+      padding: 35px;
+      color: #8d96aa;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 1000px) {
+      .resource-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .empty-card {
+        grid-column: span 2;
+      }
+    }
+
+    @media screen and (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #171c28;
+      }
+
+      .menu-item {
+        text-align: center;
+      }
+
+      .main {
+        padding: 24px 18px;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .empty-card {
+        grid-column: span 1;
+      }
+
+      .tabs {
+        justify-content: flex-start;
+        gap: 8px;
+      }
+
+      .tab {
+        font-size: 13px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">⚕</div>
+      <div class="logo-text">
+        <h2>MedMentor</h2>
+        <p>AI PLATFORM</p>
+      </div>
+    </div>
+
+
+<a href="index.html" class="menu-item">Dashboard</a>
+<a href="profile.html" class="menu-item">My Profile</a>
+<a href="chat.html" class="menu-item">AI Mentor</a>
+<a href="career.html" class="menu-item">Career Explorer</a>
+<a href="opportunities.html" class="menu-item">Opportunities</a>
+<a href="clinic.html" class="menu-item">Clinic Finder</a>
+<a href="#" class="menu-item">Mentor Directory</a>
+<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+<a href="my-activities.html" class="menu-item">My Activities</a>
+<a href="course-planner.html" class="menu-item">Course Planner</a>
+<a href="resume-builder.html" class="menu-item">Resume Builder</a>
+<a href="resources.html" class="menu-item active">Resources</a>
+
+  </div>
+
+  <div class="main">
+    <div class="page-wrap">
+
+
+  <h1 class="title">Resource Library</h1>
+  <div class="subtitle">Curated resources for your healthcare journey</div>
+
+  <div class="tabs">
+    <button class="tab active" onclick="filterResources('all', this)">All</button>
+    <button class="tab" onclick="filterResources('pre-med', this)">Pre-Med</button>
+    <button class="tab" onclick="filterResources('admissions', this)">Admissions</button>
+    <button class="tab" onclick="filterResources('research', this)">Research</button>
+    <button class="tab" onclick="filterResources('shadowing', this)">Shadowing</button>
+    <button class="tab" onclick="filterResources('scholarships', this)">Scholarships</button>
+    <button class="tab" onclick="filterResources('stem', this)">STEM</button>
+    <button class="tab" onclick="filterResources('careers', this)">Careers</button>
+    <button class="tab" onclick="filterResources('volunteer', this)">Volunteer</button>
+  </div>
+
+  <div class="resource-grid" id="resourceGrid"></div>
+
+</div>
+
+
+  </div>
+
+  <script>
+    const resources = [
+      {
+        title: "AAMC Pre-Med Resources",
+        category: "pre-med",
+        tag: "Pre Med",
+        desc: "Official resources from the Association of American Medical Colleges for aspiring physicians.",
+        url: "https://students-residents.aamc.org/choosing-medical-career/medical-careers"
+      },
+      {
+        title: "Khan Academy MCAT Prep",
+        category: "pre-med",
+        tag: "Pre Med",
+        desc: "Free, comprehensive MCAT preparation materials covering all exam sections.",
+        url: "https://www.khanacademy.org/test-prep/mcat"
+      },
+      {
+        title: "Common App Guide",
+        category: "admissions",
+        tag: "College Admissions",
+        desc: "Everything you need to know about the college application process.",
+        url: "https://www.commonapp.org/"
+      },
+      {
+        title: "NIH Student Research",
+        category: "research",
+        tag: "Research",
+        desc: "Research training and opportunities for students at the National Institutes of Health.",
+        url: "https://www.training.nih.gov/"
+      },
+      {
+        title: "HOSA Future Health Professionals",
+        category: "stem",
+        tag: "Stem Competitions",
+        desc: "International student organization for future health professionals.",
+        url: "https://hosa.org/"
+      },
+      {
+        title: "Red Cross Volunteer",
+        category: "volunteer",
+        tag: "Volunteer Programs",
+        desc: "Volunteering opportunities with the American Red Cross in your community.",
+        url: "https://www.redcross.org/volunteer/volunteer-opportunities.html"
+      },
+      {
+        title: "Science Olympiad",
+        category: "stem",
+        tag: "Stem Competitions",
+        desc: "National STEM competition for middle and high school students.",
+        url: "https://www.soinc.org/"
+      },
+      {
+        title: "QuestBridge Scholarships",
+        category: "scholarships",
+        tag: "Scholarships",
+        desc: "National college match and scholarship program for outstanding low-income students.",
+        url: "https://www.questbridge.org/"
+      },
+      {
+        title: "Volunteer Match",
+        category: "volunteer",
+        tag: "Volunteer Programs",
+        desc: "Find volunteer opportunities in healthcare near you.",
+        url: "https://www.volunteermatch.org/"
+      },
+      {
+        title: "AMSA Pre-Med Guide",
+        category: "pre-med",
+        tag: "Pre Med",
+        desc: "American Medical Student Association resources for pre-medical students.",
+        url: "https://www.amsa.org/"
+      },
+      {
+        title: "Regeneron Science Talent Search",
+        category: "stem",
+        tag: "Stem Competitions",
+        desc: "Prestigious STEM research competition for high school seniors.",
+        url: "https://www.societyforscience.org/regeneron-sts/"
+      },
+      {
+        title: "Explore Health Careers",
+        category: "careers",
+        tag: "Medical Careers",
+        desc: "Comprehensive guide to health careers, education requirements, and pathways.",
+        url: "https://explorehealthcareers.org/"
+      },
+      {
+        title: "CDC Public Health Careers",
+        category: "careers",
+        tag: "Medical Careers",
+        desc: "Explore public health careers, fellowships, and educational pathways.",
+        url: "https://www.cdc.gov/fellowships/"
+      },
+      {
+        title: "National Society of High School Scholars",
+        category: "scholarships",
+        tag: "Scholarships",
+        desc: "Scholarships, leadership programs, and academic resources for high school students.",
+        url: "https://www.nshss.org/scholarships/"
+      },
+      {
+        title: "College Board BigFuture",
+        category: "admissions",
+        tag: "College Admissions",
+        desc: "College search, scholarship search, career planning, and admissions guidance.",
+        url: "https://bigfuture.collegeboard.org/"
+      },
+      {
+        title: "Virtual Shadowing",
+        category: "shadowing",
+        tag: "Shadowing",
+        desc: "Online physician shadowing and medical career exploration opportunities.",
+        url: "https://www.virtualshadowing.com/"
+      },
+      {
+        title: "Be My Eyes Volunteer",
+        category: "volunteer",
+        tag: "Volunteer Programs",
+        desc: "Volunteer remotely to assist blind and low-vision people through video calls.",
+        url: "https://www.bemyeyes.com/"
+      },
+      {
+        title: "Coursera Health Courses",
+        category: "pre-med",
+        tag: "Pre Med",
+        desc: "Online health, biology, public health, and medical-related courses from universities.",
+        url: "https://www.coursera.org/browse/health"
+      }
+    ];
+
+    function renderResources(list) {
+      const grid = document.getElementById("resourceGrid");
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="empty-card">
+            No resources found for this category.
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map(resource => {
+        return `
+          <div class="resource-card">
+            <div class="resource-tag">${resource.tag}</div>
+            <div class="resource-title">${resource.title}</div>
+            <div class="resource-desc">${resource.desc}</div>
+            <a href="${resource.url}" target="_blank" class="visit-link">↗ Visit Resource</a>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function filterResources(category, button) {
+      document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.remove("active");
+      });
+
+      button.classList.add("active");
+
+      if (category === "all") {
+        renderResources(resources);
+      } else {
+        const filtered = resources.filter(resource => resource.category === category);
+        renderResources(filtered);
+      }
+    }
+
+    window.onload = function() {
+      renderResources(resources);
+    };
+  </script>
+
+</body>
+</html>
