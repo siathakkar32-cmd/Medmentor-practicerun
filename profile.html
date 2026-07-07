@@ -1,102 +1,1154 @@
 <!DOCTYPE html>
+
 <html>
 <head>
   <title>MedMentor - My Profile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body{margin:0;font-family:Arial,sans-serif; background:#070910;color:white; display:flex;}
-    .sidebar{width:240px;height:100vh;background:#0d1018;border-right:1px solid #1d2230;padding:20px;box-sizing:border-box;position:fixed;left:0;top:0;overflow-y:auto;}
-    .logo{display:flex;align-items:center;gap:10px;margin-bottom:35px;}
-    .logo-icon{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,#7c4dff,#28d9ff);display:flex;justify-content:center;align-items:center;font-weight:bold;font-size:20px;}
-    .logo-text h2{margin:0;font-size:20px;} .logo-text p{margin:0;font-size:10px;letter-spacing:2px;color:#22d3ee;}
-    .menu-item{display:block;padding:14px 16px;margin-bottom:8px;border-radius:12px;color:#8d96aa;font-size:15px;cursor:pointer;text-decoration:none;}
-    .menu-item.active{background:linear-gradient(90deg,#6d4aff,#8b5cf6); color:white; font-weight:bold;}
-    .menu-item:hover{background:#171b26;color:white;}
-    .main{margin-left:240px;flex:1;min-height:100vh;background:#0f121b;}
-    .header{padding:28px 36px;border-bottom:1px solid #252a38;background:#0d1018;}
-    .header h1{margin:0;font-size:34px;letter-spacing:1px;}
-    .header p{color:#8d96aa;margin-top:8px;}
-    .section{padding:34px 36px;border-bottom:1px solid #252a38;}
-    .section-title{display:flex;align-items:center;gap:10px;margin-bottom:25px;font-size:22px;font-weight:bold;}
-    .purple-icon{color:#8b5cf6;}
-    .form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-    .form-grid.two{grid-template-columns:repeat(2,1fr);}
-    .form-group{display:flex;flex-direction:column;}
-    label{font-size:14px;font-weight:bold;color:#d7d9e0;margin-bottom:8px;}
-    input, select, textarea{background:#10131c;border:1px solid #242a38;color:white;padding:13px 14px;border-radius:12px;font-size:14px;outline:none;box-sizing:border-box;}
-    input:focus,select:focus,textarea:focus{border-color:#8b5cf6;}
-    textarea{min-height:95px;resize:vertical;}
-    .wide{grid-column:span 3;}
-    .save-button{margin-top:30px;background:linear-gradient(90deg,#7c4dff,#22d3ee);color:white;border:none;padding:15px 28px;border-radius:12px;font-weight:bold;cursor:pointer;font-size:15px;}
-    .save-button:hover{opacity:0.9;}
-    .note{color:#8d96aa;font-size:13px;margin-top:12px;}
-    @media screen and (max-width:768px){body{flex-direction:column;} .sidebar{width:100%;height:auto;position:relative;border-right:none;border-bottom:1px solid #1d2230;} .main{margin-left:0;padding:20px;} .form-grid{grid-template-columns:1fr !important;}}
-    @media screen and (max-width:480px){.header h1{font-size:28px;} input,select,textarea{font-size:13px;} .save-button{width:100%;}}
-  </style>
-</head>
-<body>
-  <div class="sidebar">
-  <div class="logo">
-    <div class="logo-icon">⚕</div>
-    <div class="logo-text">
-      <h2>MedMentor</h2>
-      <p>AI PLATFORM</p>
-    </div>
-  </div>
 
-  <a href="index.html" class="menu-item">Dashboard</a>
-  <a href="profile.html" class="menu-item active">My Profile</a>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070910;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0d1018;
+      border-right: 1px solid #1d2230;
+      padding: 18px 14px;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 34px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #7c4dff, #28d9ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .logo-text h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .logo-text p {
+      margin: 0;
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #22d3ee;
+    }
+
+    .menu-item {
+  display: block;
+  padding: 13px 14px;
+  margin-bottom: 7px;
+  border-radius: 11px;
+  color: #8d96aa;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+    .menu-item.active {
+      background: linear-gradient(90deg, #6d4aff, #8b5cf6);
+      color: white;
+      font-weight: bold;
+    }
+
+    .menu-item:hover {
+      background: #171b26;
+      color: white;
+    }
+
+    .main {
+      flex: 1;
+      min-height: 100vh;
+      padding: 36px 58px 34px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
+        #070910;
+    }
+
+    .page-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .page-label {
+  color: #8b5cf6;
+  font-size: 11px;
+  letter-spacing: 4px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+    .page-title {
+  font-size: 48px;
+  margin: 0;
+  letter-spacing: 4px;
+  font-weight: 900;
+  background: linear-gradient(90deg, #ffffff, #8b5cf6, #22d3ee);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.page-subtitle {
+  color: #8d96aa;
+  max-width: 800px;
+  line-height: 1.5;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+    .profile-hero {
+      background:
+        linear-gradient(135deg, rgba(139, 92, 246, 0.22), rgba(34, 211, 238, 0.08)),
+        #10131c;
+      border: 1px solid #252b3a;
+      border-radius: 18px;
+      padding: 26px;
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .avatar-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      background: #0d1018;
+      border: 2px solid #8b5cf6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 46px;
+      font-weight: 900;
+      color: #22d3ee;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .upload-label {
+      background: #0d1018;
+      border: 1px solid #252b3a;
+      color: #d7d9e0;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .upload-label:hover {
+      border-color: #8b5cf6;
+      color: white;
+    }
+
+    #profilePictureInput {
+      display: none;
+    }
+
+    .hero-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-name {
+      font-size: 30px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .hero-line {
+      color: #8d96aa;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      background: rgba(139, 92, 246, 0.14);
+      color: #c4b5fd;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-bottom: 22px;
+    }
+
+    .card {
+      background: #10131c;
+      border: 1px solid #222838;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.28);
+    }
+
+    .card.full {
+      grid-column: span 2;
+    }
+
+    .card-title {
+      margin: 0 0 18px;
+      font-size: 18px;
+      letter-spacing: 1px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title span {
+      color: #22d3ee;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-grid.three {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .field.full {
+      grid-column: span 2;
+    }
+
+    .form-grid.three .field.full {
+      grid-column: span 3;
+    }
+
+    label {
+      display: block;
+      color: #8d96aa;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: #0d1018;
+      border: 1px solid #202638;
+      color: white;
+      padding: 13px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      outline: none;
+      font-family: Arial, sans-serif;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #8b5cf6;
+    }
+
+    textarea {
+      min-height: 94px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .helper {
+      color: #536078;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    .privacy-box {
+      background: #0d1018;
+      border: 1px solid #202638;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #8d96aa;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .privacy-box input {
+      width: auto;
+    }
+
+    .save-area {
+      background: #10131c;
+      border: 1px solid #222838;
+      border-radius: 16px;
+      padding: 22px;
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .save-button {
+      background: linear-gradient(90deg, #7c4dff, #22d3ee);
+      color: white;
+      border: none;
+      padding: 15px 28px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .clear-button {
+      background: transparent;
+      color: #8d96aa;
+      border: 1px solid #242a38;
+      padding: 15px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 8px;
+    }
+
+    .clear-button:hover,
+    .save-button:hover {
+      opacity: 0.9;
+    }
+
+    .save-note {
+      color: #8d96aa;
+      font-size: 13px;
+      line-height: 1.5;
+      max-width: 560px;
+    }
+
+    .success {
+      color: #22d3ee;
+      font-weight: bold;
+    }
+
+    .warning {
+      color: #ffbd22;
+      font-weight: bold;
+    }
+
+    @media screen and (max-width: 980px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #1d2230;
+      }
+
+      .menu-item {
+        text-align: center;
+      }
+
+      .main {
+        padding: 26px 18px;
+      }
+
+      .profile-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .tag-row {
+        justify-content: center;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card.full {
+        grid-column: span 1;
+      }
+
+      .form-grid,
+      .form-grid.three {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full,
+      .form-grid.three .field.full {
+        grid-column: span 1;
+      }
+
+      .page-title {
+        font-size: 34px;
+      }
+    }
+
+    @media screen and (max-width: 520px) {
+      .save-area {
+        display: block;
+      }
+
+      .save-button,
+      .clear-button {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">⚕</div>
+      <div class="logo-text">
+        <h2>MedMentor</h2>
+        <p>AI PLATFORM</p>
+      </div>
+    </div>
+<a href="profile.html" class="menu-item">My Profile</a>
+<a href="friends.html" class="menu-item">Friends / Connections</a>
+<a href="index.html" class="menu-item">Dashboard</a>
 <a href="chat.html" class="menu-item">AI Mentor</a>
 <a href="career.html" class="menu-item">Career Explorer</a>
 <a href="opportunities.html" class="menu-item">Opportunities</a>
 <a href="clinic.html" class="menu-item">Clinic Finder</a>
-  <a href="#" class="menu-item">Mentor Directory</a>
 <a href="college-analyzer.html" class="menu-item">College Analyzer</a>
 <a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
 <a href="my-activities.html" class="menu-item">My Activities</a>
 <a href="course-planner.html" class="menu-item">Course Planner</a>
 <a href="resume-builder.html" class="menu-item">Resume Builder</a>
 <a href="resources.html" class="menu-item">Resources</a>
-</div>
+
+
+
+  </div>
+
   <div class="main">
-    <div class="header">
-      <h1>My Profile</h1>
-      <p>Enter your personal, academic, and activity information.</p>
+    <div class="page-wrap">
+
+  <div class="page-label">// STUDENT COMMUNITY PROFILE</div>
+  <h1 class="page-title">MY_PROFILE</h1>
+  <div class="page-subtitle">
+    Build a profile that introduces you to other students while also helping MedMentor personalize your dashboard, college planning, and AI advice.
+  </div>
+
+  <div class="profile-hero">
+    <div class="avatar-box">
+      <div class="avatar" id="profileAvatar">S</div>
+      <label class="upload-label" for="profilePictureInput">Upload Photo</label>
+      <input id="profilePictureInput" type="file" accept="image/*" onchange="handleProfilePicture(event)">
     </div>
 
-    <div class="section">
-      <div class="section-title"><span class="purple-icon">◇</span>Basic Information</div>
-      <div class="form-grid">
-        <div class="form-group"><label>Full Name *</label><input type="text" placeholder="Enter full name"></div>
-        <div class="form-group"><label>Grade Level *</label><select><option value="">Select grade</option><option>9th Grade</option><option>10th Grade</option><option>11th Grade</option><option>12th Grade</option></select></div>
-        <div class="form-group"><label>School</label><input type="text" placeholder="Enter school name"></div>
-        <div class="form-group"><label>City</label><input type="text" placeholder="Enter city"></div>
-        <div class="form-group"><label>State</label><select><option value="">Select state</option><option>CA</option><option>NY</option><option>TX</option><option>Other</option></select></div>
-        <div class="form-group"><label>ZIP Code</label><input type="text" placeholder="Enter ZIP code"></div>
-        <div class="form-group"><label>Intended Career</label><select><option value="">Select career</option><option>Surgeon</option><option>Doctor</option><option>Nurse</option><option>Physician Assistant</option><option>Dentist</option><option>Researcher</option><option>Undecided</option><option>Other</option></select></div>
+    <div class="hero-main">
+      <div class="hero-name" id="previewName">Your Name</div>
+      <div class="hero-line" id="previewLine">
+        Grade • School • City • Career Interest
+      </div>
+      <div class="hero-line" id="previewBio">
+        Add a short bio and fun fact so other students can understand who you are and what you care about.
+      </div>
+      <div class="tag-row" id="previewTags">
+        <div class="tag">Pre-Med</div>
+        <div class="tag">Research</div>
+        <div class="tag">Volunteering</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="card full">
+      <h2 class="card-title"><span>◇</span> Public Profile</h2>
+
+      <div class="form-grid three">
+        <div class="field">
+          <label>Display Name *</label>
+          <input id="fullName" type="text" placeholder="Example: John Smith " oninput="updatePreview()">
+        </div>
+
+        <div class="field">
+          <label>Grade Level *</label>
+          <select id="grade" onchange="updatePreview()">
+            <option value="">Select grade</option>
+            <option>9th Grade</option>
+            <option>10th Grade</option>
+            <option>11th Grade</option>
+            <option>12th Grade</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Graduation Year</label>
+          <input id="graduationYear" type="text" placeholder="Example: 2028">
+        </div>
+
+        <div class="field">
+          <label>School</label>
+          <input id="school" type="text" placeholder="Example: Cupertino High School" oninput="updatePreview()">
+        </div>
+
+        <div class="field">
+          <label>City / General Area</label>
+          <input id="city" type="text" placeholder="Example: Cupertino " oninput="updatePreview()">
+        </div>
+
+        <div class="field">
+          <label>State</label>
+          <select id="state">
+            <option value="">Select state</option>
+            <option>CA</option>
+            <option>NY</option>
+            <option>TX</option>
+            <option>FL</option>
+            <option>MA</option>
+            <option>PA</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Career Interest</label>
+          <select id="careerGoal" onchange="updatePreview()">
+            <option value="">Select career</option>
+            <option>Surgeon</option>
+            <option>Doctor</option>
+            <option>Nurse</option>
+            <option>Physician Assistant</option>
+            <option>Dentist</option>
+            <option>Researcher</option>
+            <option>Public Health</option>
+            <option>AI in Healthcare</option>
+            <option>Undecided</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Intended Major</label>
+          <input id="intendedMajor" type="text" placeholder="Biology, Neuroscience, Public Health" oninput="updatePreview()">
+        </div>
+
+        <div class="field">
+          <label>ZIP Code</label>
+          <input id="zipCode" type="text" placeholder="Private - used later for nearby matching">
+          <div class="helper">Keep this private. Later it can help match nearby students without showing exact location.</div>
+        </div>
+
+        <div class="field full">
+          <label>Short Bio</label>
+          <textarea id="shortBio" placeholder="Example: Hello! I am a high school student interested in medicine wand looking connect with some local friends." oninput="updatePreview()"></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Fun Fact</label>
+          <input id="funFact" type="text" placeholder="Example: I play volleyball and love building websites.">
+        </div>
+
+        <div class="field full">
+          <label>Interests</label>
+          <input id="interests" type="text" placeholder="Example: Surgery, biology, AI in healthcare, research, volunteering, volleyball" oninput="updatePreview()">
+          <div class="helper">Separate interests with commas. These become tags on your profile.</div>
+        </div>
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-title"><span class="purple-icon">▱</span>Academics</div>
+    <div class="card">
+      <h2 class="card-title"><span>✦</span> Looking For</h2>
+
       <div class="form-grid">
-        <div class="form-group"><label>GPA (Weighted)</label><input type="text" placeholder="Example: 4.2"></div>
-        <div class="form-group"><label>GPA (Unweighted)</label><input type="text" placeholder="Example: 3.8"></div>
-        <div class="form-group"><label>Class Rank</label><input type="text" placeholder="Example: 100/658"></div>
-        <div class="form-group"><label>SAT Score</label><input type="text" placeholder="Enter SAT score"></div>
-        <div class="form-group"><label>ACT Score</label><input type="text" placeholder="Enter ACT score"></div>
-        <div class="form-group"><label>Course Rigor Level</label><select><option value="">Select level</option><option>Regular</option><option>Honors</option><option>AP</option><option>Dual Enrollment</option><option>Mixed</option></select></div>
-        <div class="form-group wide"><label>AP Courses</label><textarea placeholder="List AP courses here"></textarea></div>
-        <div class="form-group wide"><label>Honors Courses</label><textarea placeholder="List honors courses here"></textarea></div>
-        <div class="form-group wide"><label>Dual Enrollment Courses</label><textarea placeholder="List dual enrollment courses here"></textarea></div>
+        <div class="field full">
+          <label>Connection Goals</label>
+          <textarea id="lookingFor" placeholder="Example: study buddy, research partner, volunteering partner, HOSA teammate, project collaborator, mentor"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Preferred Connection Type</label>
+          <select id="connectionType">
+            <option value="">Select one</option>
+            <option>Study Buddy</option>
+            <option>Volunteering Partner</option>
+            <option>Research Partner</option>
+            <option>Project Collaborator</option>
+            <option>College Application Buddy</option>
+            <option>Mentor / Advice</option>
+            <option>Any</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Availability</label>
+          <select id="availability">
+            <option value="">Select one</option>
+            <option>Weekdays</option>
+            <option>Weekends</option>
+            <option>After school</option>
+            <option>Summer only</option>
+            <option>Flexible</option>
+          </select>
+        </div>
       </div>
     </div>
 
-    <div class="section">
-      <div class="section-title"><span class="purple-icon">▣</span>Experience & Activities</div>
-      <div class="form-grid two">
-        <div class="form-group"><label>Volunteer Experience</label><textarea placeholder="Describe your volunteer experience"></textarea></div>
-        <div class="form-group"><label>Leadership Experience</label><textarea placeholder="Describe leadership roles"></textarea></div>
-        <div class="form-group"><label>Clinical Experience</label><textarea placeholder="Hospital volunteering, shadowing, clinic work, etc."></textarea></div>
-        <div class="form-group"><label>Research Experience</label><textarea placeholder="Science fair, lab project, independent research, etc."></textarea></div>
-        <div class="form-group"><label>Awards</label><textarea placeholder="List awards, honors, competitions, certificates"></textarea></div
+    <div class="card">
+      <h2 class="card-title"><span>▣</span> My Goals</h2>
+
+      <div class="form-grid">
+        <div class="field full">
+          <label>Dream Colleges</label>
+          <textarea id="dreamColleges" placeholder="Example: UCLA, Stanford, UC Irvine, Johns Hopkins"></textarea>
+        </div>
+
+        <div class="field full">
+          <label>College Goals / Notes</label>
+          <textarea id="collegeGoals" placeholder="Example: I want strong pre-med advising, research access, hospitals nearby, and good biology/neuroscience programs."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Biggest Weakness</label>
+          <select id="biggestWeakness">
+            <option value="">Select weakness</option>
+            <option>Research</option>
+            <option>Clinical Exposure</option>
+            <option>Leadership</option>
+            <option>Volunteering</option>
+            <option>Awards / Competitions</option>
+            <option>Course Rigor</option>
+            <option>College Planning</option>
+            <option>Not Sure</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Current 30-Day Focus</label>
+          <input id="currentFocus" type="text" placeholder="Example: finding research, improving SAT, building MedMentor">
+        </div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2 class="card-title"><span>▱</span> Private Academic Profile</h2>
+
+      <div class="form-grid three">
+        <div class="field">
+          <label>GPA Weighted</label>
+          <input id="gpaWeighted" type="text" placeholder="Example: 4.2">
+        </div>
+
+        <div class="field">
+          <label>GPA Unweighted</label>
+          <input id="gpaUnweighted" type="text" placeholder="Example: 3.8">
+        </div>
+
+        <div class="field">
+          <label>Class Rank</label>
+          <input id="classRank" type="text" placeholder="Example: 100/658">
+        </div>
+
+        <div class="field">
+          <label>SAT Score</label>
+          <input id="satScore" type="text" placeholder="Enter SAT score">
+        </div>
+
+        <div class="field">
+          <label>Target SAT Score</label>
+          <input id="targetSatScore" type="text" placeholder="Example: 1550">
+        </div>
+
+        <div class="field">
+          <label>ACT Score</label>
+          <input id="actScore" type="text" placeholder="Enter ACT score">
+        </div>
+
+        <div class="field">
+          <label>Course Rigor Level</label>
+          <select id="courseRigorLevel">
+            <option value="">Select level</option>
+            <option>Regular</option>
+            <option>Honors</option>
+            <option>AP</option>
+            <option>Dual Enrollment</option>
+            <option>Mixed</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Strongest Subject</label>
+          <input id="strongestSubject" type="text" placeholder="Example: Biology">
+        </div>
+
+        <div class="field">
+          <label>Weakest Subject</label>
+          <input id="weakestSubject" type="text" placeholder="Example: Math, physics, writing">
+        </div>
+
+        <div class="field full">
+          <label>AP Courses</label>
+          <textarea id="apClasses" placeholder="Example: AP Biology, AP Statistics, APUSH, AP Calculus AB"></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Honors Courses</label>
+          <textarea id="honorsCourses" placeholder="List honors courses here"></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Dual Enrollment Courses</label>
+          <textarea id="dualEnrollmentCourses" placeholder="List dual enrollment courses here"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2 class="card-title"><span>⚕</span> Private Readiness Details</h2>
+
+      <div class="form-grid">
+        <div class="field">
+          <label>Volunteer Experience</label>
+          <textarea id="volunteerExperience" placeholder="Example: Volunteering, food bank, tutoring, nonprofit service"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Leadership Experience</label>
+          <textarea id="leadershipExperience" placeholder="Example: Founder, officer, team captain, project lead, mentor"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Clinical Experience</label>
+          <textarea id="clinicalExperience" placeholder="Example: Hospital volunteering, clinic work, shadowing"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Research Experience</label>
+          <textarea id="researchExperience" placeholder="Example: Science fair, lab project, independent research, health data project"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Awards</label>
+          <textarea id="awards" placeholder="Example: HOSA, Olympiad, science fair, school awards, certificates"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Projects / Passion Projects</label>
+          <textarea id="projects" placeholder="Example: Health education campaign, Blood drive CLub "></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2 class="card-title"><span>◇</span> Privacy & Discovery Settings</h2>
+
+      <div class="privacy-box">
+        <input type="checkbox" id="showSchool" checked>
+        <span>Show my school on my public profile.</span>
+      </div>
+
+      <div class="privacy-box">
+        <input type="checkbox" id="showCity" checked>
+        <span>Show my city/general area on my public profile.</span>
+      </div>
+
+      <div class="privacy-box">
+        <input type="checkbox" id="showGrade" checked>
+        <span>Show my grade level on my public profile.</span>
+      </div>
+
+      <div class="privacy-box">
+        <input type="checkbox" id="allowFriendRequests" checked>
+        <span>Allow other students to send me friend/connect requests.</span>
+      </div>
+
+      <div class="privacy-box">
+        <input type="checkbox" id="allowNearbyMatching" checked>
+        <span>Allow MedMentor to recommend students near me using general location only.</span>
+      </div>
+
+      <div class="helper">
+        <span class="warning">Safety note:</span> This app should not display exact addresses, phone numbers, or private contact information. Use friend requests instead of showing direct contact details.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="save-area">
+    <div class="save-note" id="saveStatus">
+      Your profile saves in this browser using localStorage. After saving, go to Dashboard to see your readiness score update.
+    </div>
+
+    <div>
+      <button class="save-button" type="button" onclick="saveProfile()">SAVE PROFILE</button>
+      <button class="clear-button" type="button" onclick="clearProfile()">CLEAR</button>
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+  <script>
+    let profilePictureData = "";
+
+    const profileFields = [
+      "fullName",
+      "grade",
+      "school",
+      "city",
+      "state",
+      "zipCode",
+      "careerGoal",
+      "intendedMajor",
+      "graduationYear",
+      "shortBio",
+      "funFact",
+      "interests",
+      "lookingFor",
+      "connectionType",
+      "availability",
+      "gpaWeighted",
+      "gpaUnweighted",
+      "classRank",
+      "satScore",
+      "targetSatScore",
+      "actScore",
+      "courseRigorLevel",
+      "strongestSubject",
+      "weakestSubject",
+      "apClasses",
+      "honorsCourses",
+      "dualEnrollmentCourses",
+      "volunteerExperience",
+      "leadershipExperience",
+      "clinicalExperience",
+      "researchExperience",
+      "awards",
+      "projects",
+      "dreamColleges",
+      "collegeGoals",
+      "biggestWeakness",
+      "currentFocus"
+    ];
+
+    const checkboxFields = [
+      "showSchool",
+      "showCity",
+      "showGrade",
+      "allowFriendRequests",
+      "allowNearbyMatching"
+    ];
+
+    function handleProfilePicture(event) {
+      const file = event.target.files[0];
+
+      if (!file) {
+        return;
+      }
+
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        profilePictureData = e.target.result;
+        updateAvatar();
+      };
+
+      reader.readAsDataURL(file);
+    }
+
+    function updateAvatar() {
+      const avatar = document.getElementById("profileAvatar");
+      const name = document.getElementById("fullName").value.trim() || "Student";
+
+      if (profilePictureData) {
+        avatar.innerHTML = "<img src='" + profilePictureData + "' alt='Profile picture'>";
+      } else {
+        avatar.innerText = name.charAt(0).toUpperCase();
+      }
+    }
+
+    function getTagsFromInterests(value) {
+      const tags = String(value || "")
+        .split(",")
+        .map(tag => tag.trim())
+        .filter(tag => tag.length > 0);
+
+      return tags.slice(0, 8);
+    }
+
+    function updatePreview() {
+      const name = document.getElementById("fullName").value.trim() || "Your Name";
+      const grade = document.getElementById("grade").value || "Grade";
+      const school = document.getElementById("school").value.trim() || "School";
+      const city = document.getElementById("city").value.trim() || "City";
+      const career = document.getElementById("careerGoal").value || "Career Interest";
+      const major = document.getElementById("intendedMajor").value.trim();
+      const bio = document.getElementById("shortBio").value.trim();
+      const interests = document.getElementById("interests").value;
+
+      document.getElementById("previewName").innerText = name;
+
+      document.getElementById("previewLine").innerText =
+        grade + " • " + school + " • " + city + " • " + career + (major ? " • " + major : "");
+
+      document.getElementById("previewBio").innerText =
+        bio || "Add a short bio and fun fact so other students can understand who you are and what you care about.";
+
+      const previewTags = document.getElementById("previewTags");
+      const tags = getTagsFromInterests(interests);
+
+      if (tags.length === 0) {
+        previewTags.innerHTML = `
+          <div class="tag">Pre-Med</div>
+          <div class="tag">Research</div>
+          <div class="tag">Volunteering</div>
+        `;
+      } else {
+        previewTags.innerHTML = tags.map(tag => `<div class="tag">${escapeHtml(tag)}</div>`).join("");
+      }
+
+      updateAvatar();
+    }
+
+    function saveProfile() {
+      const profile = {};
+
+      profileFields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        profile[fieldId] = element ? element.value.trim() : "";
+      });
+
+      checkboxFields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        profile[fieldId] = element ? element.checked : false;
+      });
+
+      profile.profilePicture = profilePictureData;
+
+      profile.full_name = profile.fullName;
+      profile.display_name = profile.fullName;
+      profile.grade_level = profile.grade;
+      profile.career_goal = profile.careerGoal;
+      profile.intended_major = profile.intendedMajor;
+      profile.gpa_weighted = profile.gpaWeighted;
+      profile.gpa_unweighted = profile.gpaUnweighted;
+      profile.class_rank = profile.classRank;
+      profile.sat_score = profile.satScore;
+      profile.target_sat_score = profile.targetSatScore;
+      profile.act_score = profile.actScore;
+      profile.ap_classes = profile.apClasses;
+      profile.honors_courses = profile.honorsCourses;
+      profile.dual_enrollment_courses = profile.dualEnrollmentCourses;
+      profile.volunteer_experience = profile.volunteerExperience;
+      profile.leadership_experience = profile.leadershipExperience;
+      profile.clinical_experience = profile.clinicalExperience;
+      profile.research_experience = profile.researchExperience;
+      profile.dream_colleges = profile.dreamColleges;
+      profile.college_goals = profile.collegeGoals;
+
+      profile.publicProfile = {
+        displayName: profile.fullName,
+        grade: profile.grade,
+        school: profile.showSchool ? profile.school : "",
+        city: profile.showCity ? profile.city : "",
+        state: profile.state,
+        careerGoal: profile.careerGoal,
+        intendedMajor: profile.intendedMajor,
+        shortBio: profile.shortBio,
+        funFact: profile.funFact,
+        interests: getTagsFromInterests(profile.interests),
+        lookingFor: profile.lookingFor,
+        connectionType: profile.connectionType,
+        availability: profile.availability,
+        profilePicture: profile.profilePicture,
+        allowFriendRequests: profile.allowFriendRequests,
+        allowNearbyMatching: profile.allowNearbyMatching
+      };
+
+      profile.savedAt = new Date().toISOString();
+
+      localStorage.setItem("medmentorProfile", JSON.stringify(profile));
+
+      const status = document.getElementById("saveStatus");
+      status.innerHTML = "<span class='success'>Saved!</span> Your community profile and dashboard profile were both updated.";
+    }
+
+    function loadProfile() {
+      const raw = localStorage.getItem("medmentorProfile");
+
+      if (!raw) {
+        updatePreview();
+        return;
+      }
+
+      let profile = {};
+
+      try {
+        profile = JSON.parse(raw);
+      } catch (error) {
+        updatePreview();
+        return;
+      }
+
+      profileFields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        if (element && profile[fieldId] !== undefined) {
+          element.value = profile[fieldId];
+        }
+      });
+
+      checkboxFields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        if (element && profile[fieldId] !== undefined) {
+          element.checked = profile[fieldId];
+        }
+      });
+
+      profilePictureData = profile.profilePicture || "";
+
+      const status = document.getElementById("saveStatus");
+      status.innerHTML = "<span class='success'>Loaded saved profile.</span> Edit anything and click Save Profile again.";
+
+      updatePreview();
+    }
+
+    function clearProfile() {
+      const confirmClear = confirm("Are you sure you want to clear your saved profile?");
+
+      if (!confirmClear) {
+        return;
+      }
+
+      localStorage.removeItem("medmentorProfile");
+
+      profileFields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        if (element) {
+          element.value = "";
+        }
+      });
+
+      checkboxFields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        if (element) {
+          element.checked = true;
+        }
+      });
+
+      profilePictureData = "";
+
+      document.getElementById("saveStatus").innerText = "Saved profile cleared.";
+      updatePreview();
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+  <script>
+  function setActiveSidebarLink() {
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+    const menuItems = document.querySelectorAll(".menu-item");
+
+    menuItems.forEach(item => {
+      const itemPage = item.getAttribute("href");
+
+      item.classList.remove("active");
+
+      if (itemPage === currentPage) {
+        item.classList.add("active");
+      }
+    });
+  }
+
+  window.onload = function() {
+    loadProfile();
+    setActiveSidebarLink();
+  };
+</script>
+  </script>
+<script>
+  function setActiveSidebarLink() {
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+    const menuItems = document.querySelectorAll(".menu-item");
+
+    menuItems.forEach(item => {
+      const itemPage = item.getAttribute("href");
+
+      item.classList.remove("active");
+
+      if (itemPage === currentPage) {
+        item.classList.add("active");
+      }
+    });
+  }
+
+  setActiveSidebarLink();
+</script>
+</body>
+</html>

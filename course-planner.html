@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
   <title>MedMentor - Course Planner</title>
@@ -85,7 +84,7 @@
     .main {
       flex: 1;
       min-height: 100vh;
-      padding: 34px 58px 30px;
+      padding: 38px 60px 30px;
       background:
         radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
         #070910;
@@ -102,6 +101,7 @@
       letter-spacing: 4px;
       font-weight: bold;
       margin-bottom: 10px;
+      text-transform: uppercase;
     }
 
     .title {
@@ -116,7 +116,7 @@
 
     .subtitle {
       color: #8d96aa;
-      max-width: 800px;
+      max-width: 840px;
       line-height: 1.5;
       margin-top: 8px;
       margin-bottom: 24px;
@@ -400,6 +400,7 @@
 
       .title {
         font-size: 34px;
+        letter-spacing: 2px;
       }
 
       .ai-panel {
@@ -417,6 +418,10 @@
     }
 
     @media screen and (max-width: 480px) {
+      .main {
+        padding: 18px 14px;
+      }
+
       .title {
         font-size: 28px;
         letter-spacing: 2px;
@@ -425,9 +430,17 @@
       .guide-title {
         font-size: 18px;
       }
+
+      .guide-title-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .guide-line {
+        width: 100%;
+      }
     }
   </style>
-
 </head>
 
 <body>
@@ -441,239 +454,235 @@
       </div>
     </div>
 
-
-<a href="index.html" class="menu-item">Dashboard</a>
-<a href="profile.html" class="menu-item">My Profile</a>
-<a href="chat.html" class="menu-item">AI Mentor</a>
-<a href="career.html" class="menu-item">Career Explorer</a>
-<a href="opportunities.html" class="menu-item">Opportunities</a>
-<a href="clinic.html" class="menu-item">Clinic Finder</a>
-<a href="#" class="menu-item">Mentor Directory</a>
-<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
-<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
-<a href="my-activities.html" class="menu-item">My Activities</a>
-<a href="course-planner.html" class="menu-item active">Course Planner</a>
-<a href="resume-builder.html" class="menu-item">Resume Builder</a>
-<a href="resources.html" class="menu-item">Resources</a>
-
+    <a href="profile.html" class="menu-item">My Profile</a>
+    <a href="friends.html" class="menu-item">Friends / Connections</a>
+    <a href="index.html" class="menu-item">Dashboard</a>
+    <a href="chat.html" class="menu-item">AI Mentor</a>
+    <a href="career.html" class="menu-item">Career Explorer</a>
+    <a href="opportunities.html" class="menu-item">Opportunities</a>
+    <a href="clinic.html" class="menu-item">Clinic Finder</a>
+    <a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+    <a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+    <a href="my-activities.html" class="menu-item">My Activities</a>
+    <a href="course-planner.html" class="menu-item">Course Planner</a>
+    <a href="resume-builder.html" class="menu-item">Resume Builder</a>
+    <a href="resources.html" class="menu-item">Resources</a>
   </div>
 
   <div class="main">
     <div class="page-wrap">
 
-  <div class="small-label">// ACADEMIC PLANNING</div>
-  <h1 class="title">COURSE_PLANNER</h1>
-  <p class="subtitle">
-    Know exactly which classes to take each year to maximize your college and pre-med chances.
-  </p>
+      <div class="small-label">// ACADEMIC PLANNING</div>
+      <h1 class="title">COURSE_PLANNER</h1>
+      <p class="subtitle">
+        Know exactly which classes to take each year to maximize your college and pre-med chances.
+      </p>
 
-  <div class="divider"></div>
+      <div class="divider"></div>
 
-  <div class="ai-panel">
-    <div>
-      <div class="panel-label">// AI Personalized</div>
-      <div class="ai-title">GET YOUR PERSONAL COURSE ROADMAP</div>
-      <div class="ai-desc">Based on your grade, profile, goals, and target college path.</div>
-    </div>
-
-    <button class="generate-btn" onclick="showPlan()">✣ GENERATE PLAN</button>
-  </div>
-
-  <div class="guide-title-row">
-    <h2 class="guide-title">Grade-by-Grade Guide</h2>
-    <div class="guide-line"></div>
-    <div class="guide-tag">General</div>
-  </div>
-
-  <div class="grade-list">
-
-    <div class="grade-card">
-      <div class="grade-header" onclick="toggleGrade(this)">
-        <div class="grade-number">9</div>
+      <div class="ai-panel">
         <div>
-          <div class="grade-name">9th Grade</div>
-          <div class="grade-count">8 courses mapped</div>
+          <div class="panel-label">// AI Personalized</div>
+          <div class="ai-title">GET YOUR PERSONAL COURSE ROADMAP</div>
+          <div class="ai-desc">Based on your grade, profile, goals, and target college path.</div>
         </div>
-        <div class="arrow">⌄</div>
+
+        <button class="generate-btn" onclick="showPlan()">✣ GENERATE PLAN</button>
       </div>
 
-      <div class="grade-body">
-        <div class="grade-note">
-          9th grade is about building a strong GPA foundation and getting used to high school rigor.
-        </div>
+      <div class="guide-title-row">
+        <h2 class="guide-title">Grade-by-Grade Guide</h2>
+        <div class="guide-line"></div>
+        <div class="guide-tag">General</div>
+      </div>
 
-        <div class="course-columns">
-          <div>
-            <div class="course-section-label">Core / Required</div>
-            <div class="course-list">
-              <div class="course-item"><span class="course-dot">◎</span> Honors Biology or Biology</div>
-              <div class="course-item"><span class="course-dot">◎</span> Geometry or Algebra II</div>
-              <div class="course-item"><span class="course-dot">◎</span> English 9 Honors</div>
-              <div class="course-item"><span class="course-dot">◎</span> World History or AP Human Geography</div>
+      <div class="grade-list">
+
+        <div class="grade-card">
+          <div class="grade-header" onclick="toggleGrade(this)">
+            <div class="grade-number">9</div>
+            <div>
+              <div class="grade-name">9th Grade</div>
+              <div class="grade-count">8 courses mapped</div>
             </div>
+            <div class="arrow">⌄</div>
           </div>
 
-          <div class="recommended">
-            <div class="course-section-label">Recommended</div>
-            <div class="course-list">
-              <div class="course-item"><span class="course-dot">○</span> Health / Medical Careers elective</div>
-              <div class="course-item"><span class="course-dot">○</span> Spanish or another language</div>
-              <div class="course-item"><span class="course-dot">○</span> Computer Science intro</div>
-              <div class="course-item"><span class="course-dot">○</span> PE or graduation requirement</div>
+          <div class="grade-body">
+            <div class="grade-note">
+              9th grade is about building a strong GPA foundation and getting used to high school rigor.
             </div>
+
+            <div class="course-columns">
+              <div>
+                <div class="course-section-label">Core / Required</div>
+                <div class="course-list">
+                  <div class="course-item"><span class="course-dot">◎</span> Honors Biology or Biology</div>
+                  <div class="course-item"><span class="course-dot">◎</span> Geometry or Algebra II</div>
+                  <div class="course-item"><span class="course-dot">◎</span> English 9 Honors</div>
+                  <div class="course-item"><span class="course-dot">◎</span> World History or AP Human Geography</div>
+                </div>
+              </div>
+
+              <div class="recommended">
+                <div class="course-section-label">Recommended</div>
+                <div class="course-list">
+                  <div class="course-item"><span class="course-dot">○</span> Health / Medical Careers elective</div>
+                  <div class="course-item"><span class="course-dot">○</span> Spanish or another language</div>
+                  <div class="course-item"><span class="course-dot">○</span> Computer Science intro</div>
+                  <div class="course-item"><span class="course-dot">○</span> PE or graduation requirement</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grade-card">
+          <div class="grade-header" onclick="toggleGrade(this)">
+            <div class="grade-number">10</div>
+            <div>
+              <div class="grade-name">10th Grade</div>
+              <div class="grade-count">9 courses mapped</div>
+            </div>
+            <div class="arrow">⌄</div>
+          </div>
+
+          <div class="grade-body">
+            <div class="grade-note">
+              10th grade is the time to increase rigor while protecting your GPA.
+            </div>
+
+            <div class="course-columns">
+              <div>
+                <div class="course-section-label">Core / Required</div>
+                <div class="course-list">
+                  <div class="course-item"><span class="course-dot">◎</span> Honors Chemistry</div>
+                  <div class="course-item"><span class="course-dot">◎</span> Algebra II / Pre-Calculus</div>
+                  <div class="course-item"><span class="course-dot">◎</span> English 10 Honors</div>
+                  <div class="course-item"><span class="course-dot">◎</span> AP World History or Honors History</div>
+                </div>
+              </div>
+
+              <div class="recommended">
+                <div class="course-section-label">Recommended</div>
+                <div class="course-list">
+                  <div class="course-item"><span class="course-dot">○</span> AP Computer Science Principles</div>
+                  <div class="course-item"><span class="course-dot">○</span> Medical terminology</div>
+                  <div class="course-item"><span class="course-dot">○</span> Spanish 2 or 3</div>
+                  <div class="course-item"><span class="course-dot">○</span> Psychology elective</div>
+                  <div class="course-item"><span class="course-dot">○</span> Start SAT/ACT foundation</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grade-card active">
+          <div class="grade-header" onclick="toggleGrade(this)">
+            <div class="grade-number">11</div>
+            <div>
+              <div class="grade-name">11th Grade <span class="you-are-here">You are here</span></div>
+              <div class="grade-count">9 courses mapped</div>
+            </div>
+            <div class="arrow">⌃</div>
+          </div>
+
+          <div class="grade-body">
+            <div class="grade-note">
+              11th grade is the most important year for college admissions. AP scores, GPA, and SAT/ACT matter most here.
+            </div>
+
+            <div class="course-columns">
+              <div>
+                <div class="course-section-label">Core / Required</div>
+                <div class="course-list">
+                  <div class="course-item"><span class="course-dot">◎</span> AP Biology or AP Chemistry</div>
+                  <div class="course-item"><span class="course-dot">◎</span> Pre-Calculus or AP Calculus</div>
+                  <div class="course-item"><span class="course-dot">◎</span> English III (AP)</div>
+                  <div class="course-item"><span class="course-dot">◎</span> AP US History</div>
+                </div>
+              </div>
+
+              <div class="recommended">
+                <div class="course-section-label">Recommended</div>
+                <div class="course-list">
+                  <div class="course-item"><span class="course-dot">○</span> AP Psychology</div>
+                  <div class="course-item"><span class="course-dot">○</span> Anatomy & Physiology</div>
+                  <div class="course-item"><span class="course-dot">○</span> AP Statistics</div>
+                  <div class="course-item"><span class="course-dot">○</span> AP Environmental Science</div>
+                  <div class="course-item"><span class="course-dot">○</span> Dual Enrollment if available</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grade-card">
+          <div class="grade-header" onclick="toggleGrade(this)">
+            <div class="grade-number">12</div>
+            <div>
+              <div class="grade-name">12th Grade</div>
+              <div class="grade-count">8 courses mapped</div>
+            </div>
+            <div class="arrow">⌄</div>
+          </div>
+
+          <div class="grade-body">
+            <div class="grade-note">
+              12th grade should show continued rigor, maturity, and readiness for college-level science.
+            </div>
+
+            <div class="course-columns">
+              <div>
+                <div class="course-section-label">Core / Required</div>
+                <div class="course-list">
+                  <div class="course-item"><span class="course-dot">◎</span> AP Chemistry, AP Biology, or AP Physics</div>
+                  <div class="course-item"><span class="course-dot">◎</span> AP Calculus AB/BC or AP Statistics</div>
+                  <div class="course-item"><span class="course-dot">◎</span> AP English Literature or English IV</div>
+                  <div class="course-item"><span class="course-dot">◎</span> Government / Economics</div>
+                </div>
+              </div>
+
+              <div class="recommended">
+                <div class="course-section-label">Recommended</div>
+                <div class="course-list">
+                  <div class="course-item"><span class="course-dot">○</span> Anatomy & Physiology</div>
+                  <div class="course-item"><span class="course-dot">○</span> Medical internship or health science pathway</div>
+                  <div class="course-item"><span class="course-dot">○</span> Research / independent study</div>
+                  <div class="course-item"><span class="course-dot">○</span> Public health or psychology elective</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="plan-panel" id="planPanel">
+        <h2>Your Sample Pre-Med Course Roadmap</h2>
+        <p>
+          A strong medical-track schedule should balance rigor and GPA. Colleges like to see advanced science, math, writing, and meaningful electives, but not at the cost of weak grades.
+        </p>
+
+        <div class="plan-grid">
+          <div class="mini-card">
+            <h3>Priority 1</h3>
+            <p>Protect your GPA. A slightly less intense schedule with stronger grades is better than overload with poor grades.</p>
+          </div>
+
+          <div class="mini-card">
+            <h3>Priority 2</h3>
+            <p>Take at least one major advanced science class: AP Biology, AP Chemistry, AP Physics, or Anatomy.</p>
+          </div>
+
+          <div class="mini-card">
+            <h3>Priority 3</h3>
+            <p>Pair courses with activities: research, volunteering, HOSA, public health projects, or clinical exposure.</p>
           </div>
         </div>
       </div>
+
     </div>
-
-    <div class="grade-card">
-      <div class="grade-header" onclick="toggleGrade(this)">
-        <div class="grade-number">10</div>
-        <div>
-          <div class="grade-name">10th Grade</div>
-          <div class="grade-count">9 courses mapped</div>
-        </div>
-        <div class="arrow">⌄</div>
-      </div>
-
-      <div class="grade-body">
-        <div class="grade-note">
-          10th grade is the time to increase rigor while protecting your GPA.
-        </div>
-
-        <div class="course-columns">
-          <div>
-            <div class="course-section-label">Core / Required</div>
-            <div class="course-list">
-              <div class="course-item"><span class="course-dot">◎</span> Honors Chemistry</div>
-              <div class="course-item"><span class="course-dot">◎</span> Algebra II / Pre-Calculus</div>
-              <div class="course-item"><span class="course-dot">◎</span> English 10 Honors</div>
-              <div class="course-item"><span class="course-dot">◎</span> AP World History or Honors History</div>
-            </div>
-          </div>
-
-          <div class="recommended">
-            <div class="course-section-label">Recommended</div>
-            <div class="course-list">
-              <div class="course-item"><span class="course-dot">○</span> AP Computer Science Principles</div>
-              <div class="course-item"><span class="course-dot">○</span> Medical terminology</div>
-              <div class="course-item"><span class="course-dot">○</span> Spanish 2 or 3</div>
-              <div class="course-item"><span class="course-dot">○</span> Psychology elective</div>
-              <div class="course-item"><span class="course-dot">○</span> Start SAT/ACT foundation</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grade-card active">
-      <div class="grade-header" onclick="toggleGrade(this)">
-        <div class="grade-number">11</div>
-        <div>
-          <div class="grade-name">11th Grade <span class="you-are-here">You are here</span></div>
-          <div class="grade-count">9 courses mapped</div>
-        </div>
-        <div class="arrow">⌃</div>
-      </div>
-
-      <div class="grade-body">
-        <div class="grade-note">
-          11th grade is the most important year for college admissions. AP scores, GPA, and SAT/ACT matter most here.
-        </div>
-
-        <div class="course-columns">
-          <div>
-            <div class="course-section-label">Core / Required</div>
-            <div class="course-list">
-              <div class="course-item"><span class="course-dot">◎</span> AP Biology or AP Chemistry</div>
-              <div class="course-item"><span class="course-dot">◎</span> Pre-Calculus or AP Calculus</div>
-              <div class="course-item"><span class="course-dot">◎</span> English III (AP)</div>
-              <div class="course-item"><span class="course-dot">◎</span> AP US History</div>
-            </div>
-          </div>
-
-          <div class="recommended">
-            <div class="course-section-label">Recommended</div>
-            <div class="course-list">
-              <div class="course-item"><span class="course-dot">○</span> AP Psychology</div>
-              <div class="course-item"><span class="course-dot">○</span> Anatomy & Physiology</div>
-              <div class="course-item"><span class="course-dot">○</span> AP Statistics</div>
-              <div class="course-item"><span class="course-dot">○</span> AP Environmental Science</div>
-              <div class="course-item"><span class="course-dot">○</span> Dual Enrollment if available</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="grade-card">
-      <div class="grade-header" onclick="toggleGrade(this)">
-        <div class="grade-number">12</div>
-        <div>
-          <div class="grade-name">12th Grade</div>
-          <div class="grade-count">8 courses mapped</div>
-        </div>
-        <div class="arrow">⌄</div>
-      </div>
-
-      <div class="grade-body">
-        <div class="grade-note">
-          12th grade should show continued rigor, maturity, and readiness for college-level science.
-        </div>
-
-        <div class="course-columns">
-          <div>
-            <div class="course-section-label">Core / Required</div>
-            <div class="course-list">
-              <div class="course-item"><span class="course-dot">◎</span> AP Chemistry, AP Biology, or AP Physics</div>
-              <div class="course-item"><span class="course-dot">◎</span> AP Calculus AB/BC or AP Statistics</div>
-              <div class="course-item"><span class="course-dot">◎</span> AP English Literature or English IV</div>
-              <div class="course-item"><span class="course-dot">◎</span> Government / Economics</div>
-            </div>
-          </div>
-
-          <div class="recommended">
-            <div class="course-section-label">Recommended</div>
-            <div class="course-list">
-              <div class="course-item"><span class="course-dot">○</span> Anatomy & Physiology</div>
-              <div class="course-item"><span class="course-dot">○</span> Medical internship or health science pathway</div>
-              <div class="course-item"><span class="course-dot">○</span> Research / independent study</div>
-              <div class="course-item"><span class="course-dot">○</span> Public health or psychology elective</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="plan-panel" id="planPanel">
-    <h2>Your Sample Pre-Med Course Roadmap</h2>
-    <p>
-      A strong medical-track schedule should balance rigor and GPA. Colleges like to see advanced science, math, writing, and meaningful electives, but not at the cost of weak grades.
-    </p>
-
-    <div class="plan-grid">
-      <div class="mini-card">
-        <h3>Priority 1</h3>
-        <p>Protect your GPA. A slightly less intense schedule with stronger grades is better than overload with poor grades.</p>
-      </div>
-
-      <div class="mini-card">
-        <h3>Priority 2</h3>
-        <p>Take at least one major advanced science class: AP Biology, AP Chemistry, AP Physics, or Anatomy.</p>
-      </div>
-
-      <div class="mini-card">
-        <h3>Priority 3</h3>
-        <p>Pair courses with activities: research, volunteering, HOSA, public health projects, or clinical exposure.</p>
-      </div>
-    </div>
-  </div>
-
-</div>
-```
-
   </div>
 
   <script>
@@ -683,7 +692,9 @@
 
       document.querySelectorAll(".grade-card").forEach(item => {
         item.classList.remove("active");
+
         const arrow = item.querySelector(".arrow");
+
         if (arrow) {
           arrow.innerText = "⌄";
         }
@@ -691,7 +702,9 @@
 
       if (!isActive) {
         card.classList.add("active");
+
         const arrow = card.querySelector(".arrow");
+
         if (arrow) {
           arrow.innerText = "⌃";
         }
@@ -703,6 +716,25 @@
       panel.style.display = "block";
       panel.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+
+    function setActiveSidebarLink() {
+      const currentPage = window.location.pathname.split("/").pop() || "index.html";
+      const menuItems = document.querySelectorAll(".menu-item");
+
+      menuItems.forEach(item => {
+        const itemPage = item.getAttribute("href");
+
+        item.classList.remove("active");
+
+        if (itemPage === currentPage) {
+          item.classList.add("active");
+        }
+      });
+    }
+
+    window.onload = function() {
+      setActiveSidebarLink();
+    };
   </script>
 
 </body>

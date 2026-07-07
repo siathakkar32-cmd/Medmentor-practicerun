@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
   <title>MedMentor - Resume Builder</title>
@@ -85,7 +84,7 @@
     .main {
       flex: 1;
       min-height: 100vh;
-      padding: 34px 58px 40px;
+      padding: 38px 60px 40px;
       background:
         radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
         #070910;
@@ -97,7 +96,7 @@
 
     .small-label {
       color: #8b5cf6;
-      font-size: 10px;
+      font-size: 11px;
       letter-spacing: 4px;
       font-weight: bold;
       margin-bottom: 10px;
@@ -116,11 +115,11 @@
 
     .subtitle {
       color: #8d96aa;
-      max-width: 560px;
+      max-width: 840px;
       line-height: 1.5;
       margin-top: 8px;
       margin-bottom: 24px;
-      font-size: 14px;
+      font-size: 15px;
     }
 
     .divider {
@@ -398,6 +397,7 @@
 
       .title {
         font-size: 34px;
+        letter-spacing: 2px;
       }
 
       .ready-panel {
@@ -414,6 +414,10 @@
     }
 
     @media screen and (max-width: 480px) {
+      .main {
+        padding: 18px 14px;
+      }
+
       .title {
         font-size: 28px;
         letter-spacing: 2px;
@@ -426,9 +430,12 @@
       .modal-btn {
         width: 100%;
       }
+
+      .tabs {
+        flex-direction: column;
+      }
     }
   </style>
-
 </head>
 
 <body>
@@ -442,70 +449,67 @@
       </div>
     </div>
 
-
-<a href="index.html" class="menu-item">Dashboard</a>
-<a href="profile.html" class="menu-item">My Profile</a>
-<a href="chat.html" class="menu-item">AI Mentor</a>
-<a href="career.html" class="menu-item">Career Explorer</a>
-<a href="opportunities.html" class="menu-item">Opportunities</a>
-<a href="clinic.html" class="menu-item">Clinic Finder</a>
-<a href="#" class="menu-item">Mentor Directory</a>
-<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
-<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
-<a href="my-activities.html" class="menu-item">My Activities</a>
-<a href="course-planner.html" class="menu-item">Course Planner</a>
-<a href="resume-builder.html" class="menu-item active">Resume Builder</a>
-<a href="resources.html" class="menu-item">Resources</a>
+    <a href="profile.html" class="menu-item">My Profile</a>
+    <a href="friends.html" class="menu-item">Friends / Connections</a>
+    <a href="index.html" class="menu-item">Dashboard</a>
+    <a href="chat.html" class="menu-item">AI Mentor</a>
+    <a href="career.html" class="menu-item">Career Explorer</a>
+    <a href="opportunities.html" class="menu-item">Opportunities</a>
+    <a href="clinic.html" class="menu-item">Clinic Finder</a>
+    <a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+    <a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+    <a href="my-activities.html" class="menu-item">My Activities</a>
+    <a href="course-planner.html" class="menu-item">Course Planner</a>
+    <a href="resume-builder.html" class="menu-item">Resume Builder</a>
+    <a href="resources.html" class="menu-item">Resources</a>
   </div>
 
   <div class="main">
     <div class="page-wrap">
 
-  <div class="small-label">// Application Tools</div>
-  <h1 class="title">RESUME_BUILDER</h1>
-  <p class="subtitle">
-    Auto-generate a university application resume from your profile and get personalized tips to strengthen your application.
-  </p>
+      <div class="small-label">// APPLICATION TOOLS</div>
+      <h1 class="title">RESUME_BUILDER</h1>
+      <p class="subtitle">
+        Auto-generate a university application resume from your profile and get personalized tips to strengthen your application.
+      </p>
 
-  <div class="divider"></div>
+      <div class="divider"></div>
 
-  <div class="ready-panel">
-    <div>
-      <div class="ready-label">// Ready to Generate</div>
-      <div class="ready-text" id="readyText">Resume for Jenna Smith — 11th grade, 1 activities logged.</div>
+      <div class="ready-panel">
+        <div>
+          <div class="ready-label">// Ready to Generate</div>
+          <div class="ready-text" id="readyText">Resume is ready to build.</div>
+        </div>
+
+        <button class="build-btn" onclick="openModal()">✣ BUILD RESUME</button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab active" id="resumeTab" onclick="showTab('resume')">01 // Resume</button>
+        <button class="tab" id="tipsTab" onclick="showTab('tips')">02 // Tips</button>
+      </div>
+
+      <div class="resume-box" id="resumeBox">
+        <div class="file-bar">
+          <span>▧ application_resume.txt</span>
+          <button class="copy-btn" onclick="copyResume()">⧉ Copy</button>
+        </div>
+
+        <div class="resume-text" id="resumeText"></div>
+      </div>
+
+      <div class="tips-box" id="tipsBox">
+        <h2>Personalized Resume Tips</h2>
+        <ul>
+          <li><strong>Use numbers wherever possible:</strong> hours completed, people helped, funds raised, students mentored, or events organized.</li>
+          <li><strong>Turn tasks into impact:</strong> do not just say what you did. Explain what changed because of your work.</li>
+          <li><strong>Separate clinical exposure from general volunteering:</strong> this makes the resume easier for pre-med reviewers to read.</li>
+          <li><strong>Add leadership details:</strong> founder, officer, coordinator, team lead, trainer, mentor, or organizer.</li>
+          <li><strong>Keep descriptions short:</strong> each bullet should be clear, professional, and focused on action.</li>
+        </ul>
+      </div>
+
     </div>
-
-    <button class="build-btn" onclick="openModal()">✣ BUILD RESUME</button>
-  </div>
-
-  <div class="tabs">
-    <button class="tab active" id="resumeTab" onclick="showTab('resume')">01 // Resume</button>
-    <button class="tab" id="tipsTab" onclick="showTab('tips')">02 // Tips</button>
-  </div>
-
-  <div class="resume-box" id="resumeBox">
-    <div class="file-bar">
-      <span>▧ application_resume.txt</span>
-      <button class="copy-btn" onclick="copyResume()">⧉ Copy</button>
-    </div>
-
-    <div class="resume-text" id="resumeText"></div>
-  </div>
-
-  <div class="tips-box" id="tipsBox">
-    <h2>Personalized Resume Tips</h2>
-    <ul>
-      <li><strong>Use numbers wherever possible:</strong> hours completed, people helped, funds raised, students mentored, or events organized.</li>
-      <li><strong>Turn tasks into impact:</strong> do not just say what you did. Explain what changed because of your work.</li>
-      <li><strong>Separate clinical exposure from general volunteering:</strong> this makes the resume easier for pre-med reviewers to read.</li>
-      <li><strong>Add leadership details:</strong> founder, officer, coordinator, team lead, trainer, mentor, or organizer.</li>
-      <li><strong>Keep descriptions short:</strong> each bullet should be clear, professional, and focused on action.</li>
-    </ul>
-  </div>
-
-</div>
-```
-
   </div>
 
   <div class="modal-bg" id="resumeModal">
@@ -515,94 +519,91 @@
         Fill in the missing details. Activities saved in the My Activities page will be pulled in automatically from this browser.
       </p>
 
-```
-  <div class="form-grid">
-    <div class="field">
-      <label>Full Name</label>
-      <input type="text" id="studentName" placeholder="Example: Jenna Smith">
+      <div class="form-grid">
+        <div class="field">
+          <label>Full Name</label>
+          <input type="text" id="studentName" placeholder="Example: Joanna Perez">
+        </div>
+
+        <div class="field">
+          <label>Grade</label>
+          <input type="text" id="studentGrade" placeholder="Example: 11th grade">
+        </div>
+
+        <div class="field">
+          <label>City / State</label>
+          <input type="text" id="studentLocation" placeholder="Example: Irvine, CA">
+        </div>
+
+        <div class="field">
+          <label>Graduation Year</label>
+          <input type="text" id="gradYear" placeholder="Example: 2027">
+        </div>
+
+        <div class="field">
+          <label>Phone</label>
+          <input type="text" id="phone" placeholder="Example: 000-000-0000">
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+          <input type="text" id="email" placeholder="Example: student@email.com">
+        </div>
+
+        <div class="field full">
+          <label>School</label>
+          <input type="text" id="school" placeholder="Example: Irvine High School, Irvine, CA">
+        </div>
+
+        <div class="field">
+          <label>GPA</label>
+          <input type="text" id="gpa" placeholder="Example: 4.2 weighted | 3.8 unweighted">
+        </div>
+
+        <div class="field">
+          <label>AP / Honors Classes</label>
+          <input type="text" id="classes" placeholder="Example: AP Biology, AP US History, Honors Chemistry">
+        </div>
+
+        <div class="field full">
+          <label>Academic Honors</label>
+          <textarea id="honors" placeholder="Example: Honor Roll, Science Fair Award, Biology Olympiad..."></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Shadowing / Medical Exposure</label>
+          <textarea id="shadowing" placeholder="Example: Shadowed a physician and learned about patient care, medical ethics, and daily responsibilities."></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Skills / Certifications</label>
+          <textarea id="skills" placeholder="Example: CPR certified, first aid, public speaking, research, coding, leadership."></textarea>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="modal-btn cancel-btn" onclick="closeModal()">Cancel</button>
+        <button class="modal-btn save-btn" onclick="generateResume()">Generate Resume</button>
+      </div>
     </div>
-
-    <div class="field">
-      <label>Grade</label>
-      <input type="text" id="studentGrade" placeholder="Example: 11th grade">
-    </div>
-
-    <div class="field">
-      <label>City / State</label>
-      <input type="text" id="studentLocation" placeholder="Example: Chino Hills, CA">
-    </div>
-
-    <div class="field">
-      <label>Graduation Year</label>
-      <input type="text" id="gradYear" placeholder="Example: 2027">
-    </div>
-
-    <div class="field">
-      <label>Phone</label>
-      <input type="text" id="phone" placeholder="Example: 949-000-0000">
-    </div>
-
-    <div class="field">
-      <label>Email</label>
-      <input type="text" id="email" placeholder="Example: student@email.com">
-    </div>
-
-    <div class="field full">
-      <label>School</label>
-      <input type="text" id="school" placeholder="Example: Ayala High School, Chino Hills, CA">
-    </div>
-
-    <div class="field">
-      <label>GPA</label>
-      <input type="text" id="gpa" placeholder="Example: 4.2 weighted | 3.8 unweighted">
-    </div>
-
-    <div class="field">
-      <label>AP / Honors Classes</label>
-      <input type="text" id="classes" placeholder="Example: AP Biology, AP US History, Honors Chemistry">
-    </div>
-
-    <div class="field full">
-      <label>Academic Honors</label>
-      <textarea id="honors" placeholder="Example: Honor Roll, Science Fair Award, Biology Olympiad..."></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Shadowing / Medical Exposure</label>
-      <textarea id="shadowing" placeholder="Example: Shadowed a plastic surgeon and learned about patient care, surgical ethics, and daily responsibilities."></textarea>
-    </div>
-
-    <div class="field full">
-      <label>Skills / Certifications</label>
-      <textarea id="skills" placeholder="Example: CPR certified, first aid, AI tools, Python, public speaking..."></textarea>
-    </div>
-  </div>
-
-  <div class="modal-actions">
-    <button class="modal-btn cancel-btn" onclick="closeModal()">Cancel</button>
-    <button class="modal-btn save-btn" onclick="generateResume()">Generate Resume</button>
-  </div>
-</div>
-```
-
   </div>
 
   <script>
     let activities = JSON.parse(localStorage.getItem("medmentorActivities")) || [];
 
     let resumeData = JSON.parse(localStorage.getItem("medmentorResumeData")) || {
-      studentName: "Jenna Smith",
+      studentName: "Student Name",
       studentGrade: "11th grade",
-      studentLocation: "Chino Hills, CA",
+      studentLocation: "City, State",
       gradYear: "2027",
       phone: "[Phone Number]",
       email: "[Email Address]",
-      school: "Ayala High School, Chino Hills, CA",
-      gpa: "4.2 weighted | 3.8 unweighted",
-      classes: "AP Biology, AP World History, AP Computer Science, Honors English, Honors Chemistry",
-      honors: "[Placeholder for any academic honors, scholarships or recognitions earned]",
-      shadowing: "Shadowed a Plastic Surgeon\n- Gained insights into the day-to-day responsibilities and ethical considerations of surgical practice.",
-      skills: "Proficient in AI tools and healthcare research platforms"
+      school: "[High School]",
+      gpa: "[GPA]",
+      classes: "[AP / Honors Courses]",
+      honors: "[Placeholder for any academic honors, scholarships, or recognitions earned]",
+      shadowing: "[Placeholder for shadowing, clinical observation, or medical exposure]",
+      skills: "[Placeholder for skills and certifications relevant to pre-med or related fields]"
     };
 
     function openModal() {
@@ -656,31 +657,29 @@
         "Resume for " + resumeData.studentName + " — " + resumeData.studentGrade + ", " + totalActivities + " activities logged.";
 
       const volunteerActivities = activities.filter(a => {
-        const text = (a.type + " " + a.name + " " + a.role).toLowerCase();
+        const text = ((a.type || "") + " " + (a.name || "") + " " + (a.role || "")).toLowerCase();
         return text.includes("volunteer") || text.includes("clinical") || text.includes("service");
       });
 
       const leadershipActivities = activities.filter(a => {
-        const text = (a.type + " " + a.role + " " + a.name).toLowerCase();
+        const text = ((a.type || "") + " " + (a.role || "") + " " + (a.name || "")).toLowerCase();
         return text.includes("leader") || text.includes("leadership") || text.includes("president") || text.includes("founder") || text.includes("officer") || text.includes("captain");
       });
 
       const researchActivities = activities.filter(a => {
-        const text = (a.type + " " + a.name + " " + a.role).toLowerCase();
+        const text = ((a.type || "") + " " + (a.name || "") + " " + (a.role || "")).toLowerCase();
         return text.includes("research");
       });
 
       const clubActivities = activities.filter(a => {
-        const text = (a.type + " " + a.name + " " + a.role).toLowerCase();
+        const text = ((a.type || "") + " " + (a.name || "") + " " + (a.role || "")).toLowerCase();
         return text.includes("club") || text.includes("hosa") || text.includes("organization");
       });
 
-      const totalServiceHours = activities.reduce((sum, a) => sum + (Number(a.serviceHours) || 0), 0);
-      const totalHours = activities.reduce((sum, a) => sum + (Number(a.hours) || 0), 0);
+      const totalServiceHours = activities.reduce((sum, a) => sum + (Number(a.serviceHours || a.service_hours) || 0), 0);
 
       let text = "";
 
-      text += "```\n";
       text += centerText(resumeData.studentName, 72) + "\n";
       text += centerText(resumeData.studentLocation + " | " + resumeData.phone + " | " + resumeData.email, 72) + "\n\n";
 
@@ -688,7 +687,7 @@
       text += "------------------------------------------------------------\n";
       text += resumeData.school + "                                      Expected Graduation: " + resumeData.gradYear + "\n";
       text += "- GPA: " + resumeData.gpa + "\n";
-      text += "- AP Courses: " + resumeData.classes + "\n\n";
+      text += "- AP / Honors Courses: " + resumeData.classes + "\n\n";
 
       text += "ACADEMIC HONORS\n";
       text += "------------------------------------------------------------\n";
@@ -698,27 +697,27 @@
       text += "------------------------------------------------------------\n";
 
       text += "Leadership:\n";
+
       if (leadershipActivities.length > 0) {
         leadershipActivities.forEach(a => {
-          text += "- " + a.name + " — " + (a.role || "Leadership Role") + "\n";
+          text += "- " + (a.name || "Activity") + " — " + (a.role || "Leadership Role") + "\n";
           text += "  - " + (a.description || "Led or supported activities, events, or community initiatives.") + "\n";
         });
       } else {
-        text += "- Community Events Liaison, ASB (Associated Student Body)\n";
-        text += "  - Organized and facilitated school-wide events to promote community engagement and encourage student participation.\n";
+        text += "- [Placeholder for leadership role, officer position, founder role, team captain, or project lead]\n";
       }
 
       text += "\n";
 
       text += "Clubs:\n";
+
       if (clubActivities.length > 0) {
         clubActivities.forEach(a => {
-          text += "- " + a.name + " — " + (a.role || "Member") + "\n";
+          text += "- " + (a.name || "Club") + " — " + (a.role || "Member") + "\n";
           text += "  - " + (a.description || "Collaborated with peers and participated in workshops, events, or projects.") + "\n";
         });
       } else {
-        text += "- Future Business Leaders of America (FBLA)\n";
-        text += "  - Collaborated with peers to enhance business skills and participated in workshops to learn about entrepreneurship.\n";
+        text += "- [Placeholder for school clubs, HOSA, FBLA, science club, medical club, or student organizations]\n";
       }
 
       text += "\nVOLUNTEER & CLINICAL EXPERIENCE\n";
@@ -726,15 +725,15 @@
 
       if (volunteerActivities.length > 0) {
         volunteerActivities.forEach(a => {
-          text += a.name + " — " + (a.role || "Volunteer") + "                          Total Hours: " + (a.hours || 0) + "\n";
+          text += (a.name || "Volunteer Experience") + " — " + (a.role || "Volunteer") + "                          Total Hours: " + (a.hours || 0) + "\n";
           text += "- " + (a.description || "Assisted with community service and events, providing support to programs and outreach initiatives.") + "\n";
         });
       } else {
-        text += "Volunteer, [Name of Temple]                          Total Volunteer Hours: " + (totalServiceHours || 1800) + "\n";
-        text += "- Assisted with community services and events, providing support to various social programs and building outreach within the community.\n";
+        text += "Volunteer Experience                          Total Volunteer Hours: " + (totalServiceHours || "[Hours]") + "\n";
+        text += "- [Placeholder for volunteering, community service, clinic volunteering, hospital volunteering, or service work]\n";
       }
 
-      text += "\nShadowing Experience:\n";
+      text += "\nShadowing / Medical Exposure:\n";
       text += "- " + resumeData.shadowing.replace(/\n/g, "\n  ") + "\n";
 
       text += "\nRESEARCH EXPERIENCE\n";
@@ -742,19 +741,16 @@
 
       if (researchActivities.length > 0) {
         researchActivities.forEach(a => {
-          text += "- " + a.name + " — " + (a.role || "Researcher") + "\n";
+          text += "- " + (a.name || "Research Experience") + " — " + (a.role || "Researcher") + "\n";
           text += "  - " + (a.description || "Conducted research, reviewed academic sources, or contributed to a project.") + "\n";
         });
       } else {
-        text += "- [Placeholder for any research experience, if applicable]\n";
+        text += "- [Placeholder for any research experience, science fair project, lab work, paper, poster, or independent study]\n";
       }
 
       text += "\nSKILLS & CERTIFICATIONS\n";
       text += "------------------------------------------------------------\n";
       text += "- " + resumeData.skills + "\n";
-      text += "- [Placeholder for any additional skills or certifications relevant to pre-med or related fields]\n\n";
-
-      text += "```\n";
 
       document.getElementById("resumeText").innerText = text;
     }
@@ -766,7 +762,7 @@
     }
 
     function copyResume() {
-      const text = document.getElementById("resumeText").innerText.replace(/```/g, "").trim();
+      const text = document.getElementById("resumeText").innerText.trim();
       navigator.clipboard.writeText(text);
       alert("Resume copied!");
     }
@@ -790,7 +786,23 @@
       }
     }
 
+    function setActiveSidebarLink() {
+      const currentPage = window.location.pathname.split("/").pop() || "index.html";
+      const menuItems = document.querySelectorAll(".menu-item");
+
+      menuItems.forEach(item => {
+        const itemPage = item.getAttribute("href");
+
+        item.classList.remove("active");
+
+        if (itemPage === currentPage) {
+          item.classList.add("active");
+        }
+      });
+    }
+
     window.onload = function() {
+      setActiveSidebarLink();
       buildResumeText();
     };
   </script>

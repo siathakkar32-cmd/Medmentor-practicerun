@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
   <title>MedMentor - College Analyzer</title>
@@ -19,7 +18,6 @@
       min-height: 100vh;
     }
 
-    /* SIDEBAR */
     .sidebar {
       width: 240px;
       min-height: 100vh;
@@ -83,11 +81,10 @@
       color: white;
     }
 
-    /* MAIN */
     .main {
       flex: 1;
       min-height: 100vh;
-      padding: 34px 58px 30px;
+      padding: 38px 60px 30px;
       background:
         radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
         #070910;
@@ -99,6 +96,7 @@
       letter-spacing: 4px;
       font-weight: bold;
       margin-bottom: 10px;
+      text-transform: uppercase;
     }
 
     .title {
@@ -113,7 +111,7 @@
 
     .subtitle {
       color: #8d96aa;
-      max-width: 780px;
+      max-width: 840px;
       line-height: 1.5;
       margin-top: 8px;
       margin-bottom: 24px;
@@ -145,17 +143,28 @@
       font-weight: bold;
     }
 
-    .search-box {
+    .search-box,
+    .profile-box {
       width: 100%;
-      height: 44px;
       background: #0d1018;
       border: 1px solid #202638;
       border-radius: 10px;
       color: white;
-      padding: 0 14px;
+      padding: 13px 14px;
       outline: none;
       font-size: 14px;
       margin-bottom: 18px;
+      font-family: Arial, sans-serif;
+    }
+
+    .search-box {
+      height: 44px;
+    }
+
+    .profile-box {
+      min-height: 90px;
+      resize: vertical;
+      line-height: 1.5;
     }
 
     .state-tabs {
@@ -276,6 +285,11 @@
       opacity: 0.9;
     }
 
+    .analyze-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
     .analysis-panel {
       max-width: 1120px;
       display: none;
@@ -291,6 +305,10 @@
       padding: 20px;
     }
 
+    .analysis-card.full {
+      grid-column: span 2;
+    }
+
     .analysis-card h3 {
       margin: 0 0 12px;
       font-size: 18px;
@@ -303,22 +321,6 @@
       margin: 0;
     }
 
-    .tag-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .tag {
-      border: 1px solid #202638;
-      color: #8d96aa;
-      border-radius: 999px;
-      padding: 7px 10px;
-      font-size: 11px;
-      background: #0d1018;
-    }
-
     .action-list {
       margin: 0;
       padding-left: 18px;
@@ -328,7 +330,7 @@
     }
 
     .fit-score {
-      font-size: 42px;
+      font-size: 46px;
       font-weight: 900;
       background: linear-gradient(90deg, #8b5cf6, #22d3ee);
       -webkit-background-clip: text;
@@ -362,6 +364,7 @@
 
       .title {
         font-size: 34px;
+        letter-spacing: 2px;
       }
 
       .college-grid {
@@ -375,16 +378,23 @@
       .analysis-panel {
         grid-template-columns: 1fr;
       }
+
+      .analysis-card.full {
+        grid-column: span 1;
+      }
     }
 
     @media screen and (max-width: 480px) {
+      .main {
+        padding: 18px 14px;
+      }
+
       .title {
         font-size: 28px;
         letter-spacing: 2px;
       }
     }
   </style>
-
 </head>
 
 <body>
@@ -398,148 +408,159 @@
       </div>
     </div>
 
-<a href="index.html" class="menu-item">Dashboard</a>
-<a href="profile.html" class="menu-item">My Profile</a>
-<a href="chat.html" class="menu-item">AI Mentor</a>
-<a href="career.html" class="menu-item">Career Explorer</a>
-<a href="opportunities.html" class="menu-item">Opportunities</a>
-<a href="clinic.html" class="menu-item">Clinic Finder</a>
-<a href="#" class="menu-item">Mentor Directory</a>
-<a href="college-analyzer.html" class="menu-item active">College Analyzer</a>
-<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
-<a href="my-activities.html" class="menu-item">My Activities</a>
-<a href="course-planner.html" class="menu-item">Course Planner</a>
-<a href="resume-builder.html" class="menu-item">Resume Builder</a>
-<a href="resources.html" class="menu-item">Resources</a>
+    <a href="profile.html" class="menu-item">My Profile</a>
+    <a href="friends.html" class="menu-item">Friends / Connections</a>
+    <a href="index.html" class="menu-item">Dashboard</a>
+    <a href="chat.html" class="menu-item">AI Mentor</a>
+    <a href="career.html" class="menu-item">Career Explorer</a>
+    <a href="opportunities.html" class="menu-item">Opportunities</a>
+    <a href="clinic.html" class="menu-item">Clinic Finder</a>
+    <a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+    <a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+    <a href="my-activities.html" class="menu-item">My Activities</a>
+    <a href="course-planner.html" class="menu-item">Course Planner</a>
+    <a href="resume-builder.html" class="menu-item">Resume Builder</a>
+    <a href="resources.html" class="menu-item">Resources</a>
   </div>
 
   <div class="main">
 
-<div class="small-label">// COLLEGE PLANNING</div>
-<h1 class="title">COLLEGE_ANALYZER</h1>
-<p class="subtitle">
-  Pick any college and get a clear breakdown of what that school looks for, how competitive it is, and how to improve your chances.
-</p>
+    <div class="small-label">// COLLEGE PLANNING</div>
+    <h1 class="title">COLLEGE_ANALYZER</h1>
+    <p class="subtitle">
+      Pick any college and get an AI-powered breakdown of your fit, strengths, weaknesses, improvements, strategy, essay angle, and next steps.
+    </p>
 
-<div class="divider"></div>
+    <div class="divider"></div>
 
-<div class="panel">
-  <div class="section-label">// Select a college</div>
+    <div class="panel">
+      <div class="section-label">// Select a college</div>
 
-  <input
-    type="text"
-    id="collegeSearch"
-    class="search-box"
-    placeholder="Search any college by name..."
-    onkeyup="searchColleges()"
-  >
+      <input
+        type="text"
+        id="collegeSearch"
+        class="search-box"
+        placeholder="Search any college by name..."
+        onkeyup="searchColleges()"
+      >
 
-  <div class="section-label">// Browse by state</div>
+      <div class="section-label">// Browse by state</div>
 
-  <div class="state-tabs">
-    <button class="state-btn active" onclick="filterState('all', this)">All</button>
-    <button class="state-btn" onclick="filterState('california', this)">California</button>
-    <button class="state-btn" onclick="filterState('new york', this)">New York</button>
-    <button class="state-btn" onclick="filterState('massachusetts', this)">Massachusetts</button>
-    <button class="state-btn" onclick="filterState('texas', this)">Texas</button>
-    <button class="state-btn" onclick="filterState('pennsylvania', this)">Pennsylvania</button>
-    <button class="state-btn" onclick="filterState('florida', this)">Florida</button>
-    <button class="state-btn" onclick="filterState('other', this)">Other / National</button>
-  </div>
-
-  <div class="college-grid" id="collegeGrid">
-
-    <button class="college-btn active" data-state="california" data-keywords="stanford university california premed medical school" onclick="selectCollege('Stanford University', 'California', '3.96+', '1500-1570', '3.7%', '#3 Medical School', 'Intellectual vitality, original research, leadership, impact, and a clear spike. Strong preference for students who create something meaningful or solve a real community problem.', this)">Stanford University</button>
-
-    <button class="college-btn" data-state="california" data-keywords="uc berkeley california premed biology" onclick="selectCollege('UC Berkeley', 'California', '3.85+', 'Test Blind', '11%', 'Top public research university', 'Academic excellence, research, leadership, service, and strong fit for a competitive public university environment.', this)">UC Berkeley</button>
-
-    <button class="college-btn" data-state="california" data-keywords="ucla california premed biology medicine" onclick="selectCollege('UCLA', 'California', '3.85+', 'Test Blind', '9%', 'Top public university', 'Strong academics, service, leadership, healthcare exposure, and involvement in meaningful extracurriculars.', this)">UCLA</button>
-
-    <button class="college-btn" data-state="california" data-keywords="uc san diego ucsd california premed biology research" onclick="selectCollege('UC San Diego', 'California', '3.8+', 'Test Blind', '24%', 'Strong biology and research', 'Research interest, academic strength, STEM preparation, and consistent involvement in science or healthcare activities.', this)">UC San Diego</button>
-
-    <button class="college-btn" data-state="california" data-keywords="usc university southern california premed" onclick="selectCollege('USC', 'California', '3.8+', '1450-1550', '10%', 'Strong pre-med network', 'Leadership, service, strong essays, community impact, and strong academic performance.', this)">USC</button>
-
-    <button class="college-btn" data-state="california" data-keywords="uc irvine uci california premed" onclick="selectCollege('UC Irvine', 'California', '3.75+', 'Test Blind', '21%', 'Strong health sciences', 'Healthcare exposure, academic consistency, service, and strong fit for biomedical or public health interests.', this)">UC Irvine</button>
-
-    <button class="college-btn" data-state="california" data-keywords="caltech california science research engineering" onclick="selectCollege('Caltech', 'California', '3.95+', '1530-1580', '3%', 'Elite STEM school', 'Exceptional math/science talent, research, intellectual depth, and strong STEM achievements.', this)">Caltech</button>
-
-    <button class="college-btn" data-state="massachusetts" data-keywords="harvard university massachusetts premed ivy" onclick="selectCollege('Harvard University', 'Massachusetts', '3.95+', '1500-1580', '3%', 'Elite Ivy League', 'Academic excellence, unusual depth, leadership, initiative, impact, and a highly distinctive personal story.', this)">Harvard University</button>
-
-    <button class="college-btn" data-state="massachusetts" data-keywords="mit massachusetts institute technology science research" onclick="selectCollege('MIT', 'Massachusetts', '3.95+', '1520-1580', '4%', 'Elite STEM school', 'Deep STEM ability, problem-solving, research, creativity, and evidence of building or discovering something meaningful.', this)">MIT</button>
-
-    <button class="college-btn" data-state="new york" data-keywords="columbia university new york premed ivy" onclick="selectCollege('Columbia University', 'New York', '3.9+', '1500-1560', '4%', 'Ivy League in NYC', 'Academic excellence, intellectual curiosity, strong writing, leadership, and fit with Columbia’s Core Curriculum.', this)">Columbia University</button>
-
-    <button class="college-btn" data-state="new york" data-keywords="nyu new york university premed" onclick="selectCollege('NYU', 'New York', '3.75+', '1450-1550', '12%', 'Urban research university', 'Strong academics, clear career goals, service, independence, and fit for a fast-paced city environment.', this)">NYU</button>
-
-    <button class="college-btn" data-state="pennsylvania" data-keywords="upenn university pennsylvania premed ivy" onclick="selectCollege('University of Pennsylvania', 'Pennsylvania', '3.9+', '1500-1570', '6%', 'Ivy League', 'Leadership, academic excellence, interdisciplinary thinking, service, and strong fit with chosen program.', this)">University of Pennsylvania</button>
-
-    <button class="college-btn" data-state="texas" data-keywords="rice university texas premed" onclick="selectCollege('Rice University', 'Texas', '3.85+', '1500-1560', '8%', 'Strong STEM and pre-med', 'Academic strength, collaboration, research, service, and fit with a smaller high-achieving campus community.', this)">Rice University</button>
-
-    <button class="college-btn" data-state="florida" data-keywords="university of florida premed" onclick="selectCollege('University of Florida', 'Florida', '3.7+', '1300-1480', '24%', 'Large public research university', 'Strong grades, course rigor, leadership, service, and clear academic preparation.', this)">University of Florida</button>
-
-    <button class="college-btn" data-state="other" data-keywords="johns hopkins university maryland premed medical research" onclick="selectCollege('Johns Hopkins University', 'Maryland', '3.9+', '1510-1570', '7%', 'Top medical research school', 'Research, healthcare exposure, academic excellence, intellectual curiosity, and strong commitment to medicine or science.', this)">Johns Hopkins University</button>
-
-    <button class="college-btn" data-state="other" data-keywords="duke university north carolina premed" onclick="selectCollege('Duke University', 'North Carolina', '3.9+', '1500-1570', '6%', 'Strong pre-med and research', 'Academic excellence, leadership, service, research, and strong personal character.', this)">Duke University</button>
-
-  </div>
-
-  <div class="selected-card">
-    <div>
-      <div class="selected-label">Selected</div>
-      <div class="selected-title" id="selectedName">Stanford University</div>
-      <div class="stats" id="selectedStats">
-        GPA: 3.96+ &nbsp; SAT: 1500-1570 &nbsp; Acceptance: 3.7% &nbsp; <span class="rank">#3 Medical School</span>
+      <div class="state-tabs">
+        <button class="state-btn active" onclick="filterState('all', this)">All</button>
+        <button class="state-btn" onclick="filterState('california', this)">California</button>
+        <button class="state-btn" onclick="filterState('new york', this)">New York</button>
+        <button class="state-btn" onclick="filterState('massachusetts', this)">Massachusetts</button>
+        <button class="state-btn" onclick="filterState('texas', this)">Texas</button>
+        <button class="state-btn" onclick="filterState('pennsylvania', this)">Pennsylvania</button>
+        <button class="state-btn" onclick="filterState('florida', this)">Florida</button>
+        <button class="state-btn" onclick="filterState('other', this)">Other / National</button>
       </div>
-      <div class="selected-desc" id="selectedDesc">
-        Intellectual vitality, original research, leadership, impact, and a clear spike. Strong preference for students who create something meaningful or solve a real community problem.
+
+      <div class="college-grid" id="collegeGrid">
+
+        <button class="college-btn active" data-state="california" data-keywords="stanford university california premed medical school" onclick="selectCollege('Stanford University', 'California', '3.96+', '1500-1570', '3.7%', '#3 Medical School', 'Intellectual vitality, original research, leadership, impact, and a clear spike. Strong preference for students who create something meaningful or solve a real community problem.', this)">Stanford University</button>
+
+        <button class="college-btn" data-state="california" data-keywords="uc berkeley california premed biology" onclick="selectCollege('UC Berkeley', 'California', '3.85+', 'Test Blind', '11%', 'Top public research university', 'Academic excellence, research, leadership, service, and strong fit for a competitive public university environment.', this)">UC Berkeley</button>
+
+        <button class="college-btn" data-state="california" data-keywords="ucla california premed biology medicine" onclick="selectCollege('UCLA', 'California', '3.85+', 'Test Blind', '9%', 'Top public university', 'Strong academics, service, leadership, healthcare exposure, and involvement in meaningful extracurriculars.', this)">UCLA</button>
+
+        <button class="college-btn" data-state="california" data-keywords="uc san diego ucsd california premed biology research" onclick="selectCollege('UC San Diego', 'California', '3.8+', 'Test Blind', '24%', 'Strong biology and research', 'Research interest, academic strength, STEM preparation, and consistent involvement in science or healthcare activities.', this)">UC San Diego</button>
+
+        <button class="college-btn" data-state="california" data-keywords="usc university southern california premed" onclick="selectCollege('USC', 'California', '3.8+', '1450-1550', '10%', 'Strong pre-med network', 'Leadership, service, strong essays, community impact, and strong academic performance.', this)">USC</button>
+
+        <button class="college-btn" data-state="california" data-keywords="uc irvine uci california premed" onclick="selectCollege('UC Irvine', 'California', '3.75+', 'Test Blind', '21%', 'Strong health sciences', 'Healthcare exposure, academic consistency, service, and strong fit for biomedical or public health interests.', this)">UC Irvine</button>
+
+        <button class="college-btn" data-state="california" data-keywords="caltech california science research engineering" onclick="selectCollege('Caltech', 'California', '3.95+', '1530-1580', '3%', 'Elite STEM school', 'Exceptional math/science talent, research, intellectual depth, and strong STEM achievements.', this)">Caltech</button>
+
+        <button class="college-btn" data-state="massachusetts" data-keywords="harvard university massachusetts premed ivy" onclick="selectCollege('Harvard University', 'Massachusetts', '3.95+', '1500-1580', '3%', 'Elite Ivy League', 'Academic excellence, unusual depth, leadership, initiative, impact, and a highly distinctive personal story.', this)">Harvard University</button>
+
+        <button class="college-btn" data-state="massachusetts" data-keywords="mit massachusetts institute technology science research" onclick="selectCollege('MIT', 'Massachusetts', '3.95+', '1520-1580', '4%', 'Elite STEM school', 'Deep STEM ability, problem-solving, research, creativity, and evidence of building or discovering something meaningful.', this)">MIT</button>
+
+        <button class="college-btn" data-state="new york" data-keywords="columbia university new york premed ivy" onclick="selectCollege('Columbia University', 'New York', '3.9+', '1500-1560', '4%', 'Ivy League in NYC', 'Academic excellence, intellectual curiosity, strong writing, leadership, and fit with Columbia’s Core Curriculum.', this)">Columbia University</button>
+
+        <button class="college-btn" data-state="new york" data-keywords="nyu new york university premed" onclick="selectCollege('NYU', 'New York', '3.75+', '1450-1550', '12%', 'Urban research university', 'Strong academics, clear career goals, service, independence, and fit for a fast-paced city environment.', this)">NYU</button>
+
+        <button class="college-btn" data-state="pennsylvania" data-keywords="upenn university pennsylvania premed ivy" onclick="selectCollege('University of Pennsylvania', 'Pennsylvania', '3.9+', '1500-1570', '6%', 'Ivy League', 'Leadership, academic excellence, interdisciplinary thinking, service, and strong fit with chosen program.', this)">University of Pennsylvania</button>
+
+        <button class="college-btn" data-state="texas" data-keywords="rice university texas premed" onclick="selectCollege('Rice University', 'Texas', '3.85+', '1500-1560', '8%', 'Strong STEM and pre-med', 'Academic strength, collaboration, research, service, and fit with a smaller high-achieving campus community.', this)">Rice University</button>
+
+        <button class="college-btn" data-state="florida" data-keywords="university of florida premed" onclick="selectCollege('University of Florida', 'Florida', '3.7+', '1300-1480', '24%', 'Large public research university', 'Strong grades, course rigor, leadership, service, and clear academic preparation.', this)">University of Florida</button>
+
+        <button class="college-btn" data-state="other" data-keywords="johns hopkins university maryland premed medical research" onclick="selectCollege('Johns Hopkins University', 'Maryland', '3.9+', '1510-1570', '7%', 'Top medical research school', 'Research, healthcare exposure, academic excellence, intellectual curiosity, and strong commitment to medicine or science.', this)">Johns Hopkins University</button>
+
+        <button class="college-btn" data-state="other" data-keywords="duke university north carolina premed" onclick="selectCollege('Duke University', 'North Carolina', '3.9+', '1500-1570', '6%', 'Strong pre-med and research', 'Academic excellence, leadership, service, research, and strong personal character.', this)">Duke University</button>
+
+      </div>
+
+      <div class="selected-card">
+        <div>
+          <div class="selected-label">Selected</div>
+          <div class="selected-title" id="selectedName">Stanford University</div>
+          <div class="stats" id="selectedStats">
+            GPA: 3.96+ &nbsp; SAT: 1500-1570 &nbsp; Acceptance: 3.7% &nbsp; <span class="rank">#3 Medical School</span>
+          </div>
+          <div class="selected-desc" id="selectedDesc">
+            Intellectual vitality, original research, leadership, impact, and a clear spike. Strong preference for students who create something meaningful or solve a real community problem.
+          </div>
+        </div>
+
+        <button class="analyze-btn" id="analyzeBtn" type="button" onclick="analyzeFit()">◎ ANALYZE MY FIT</button>
       </div>
     </div>
 
-    <button class="analyze-btn" onclick="analyzeFit()">◎ ANALYZE MY FIT</button>
-  </div>
-</div>
+    <div class="panel">
+      <div class="section-label">// Your student profile</div>
+      <textarea id="studentProfile" class="profile-box" placeholder="Example: 11th grade student interested in pre-med, AP Biology, AP Statistics, strong GPA, wants to become a surgeon."></textarea>
 
-<div class="analysis-panel" id="analysisPanel">
-
-  <div class="analysis-card">
-    <h3>Fit Score</h3>
-    <div class="fit-score" id="fitScore">Reach</div>
-    <p id="fitSummary">
-      This school is highly competitive. You should focus on building a clear academic and extracurricular spike.
-    </p>
-    <div class="tag-row">
-      <span class="tag">High Rigor Needed</span>
-      <span class="tag">Research Helps</span>
-      <span class="tag">Leadership Needed</span>
+      <div class="section-label">// Your activities</div>
+      <textarea id="studentActivities" class="profile-box" placeholder="Example: Temple volunteering, sports medicine, MedMentor project, healthcare workshops, research interest."></textarea>
     </div>
-  </div>
 
-  <div class="analysis-card">
-    <h3>What This College Looks For</h3>
-    <p id="looksFor">
-      Strong academics, intellectual curiosity, original projects, leadership, service, and a clear reason for why this school fits your goals.
-    </p>
-  </div>
+    <div class="analysis-panel" id="analysisPanel">
 
-  <div class="analysis-card">
-    <h3>How to Improve Your Chances</h3>
-    <ul class="action-list">
-      <li>Build one strong project related to medicine, public health, research, or AI in healthcare.</li>
-      <li>Get healthcare exposure through volunteering, shadowing, or clinic outreach.</li>
-      <li>Take rigorous classes and protect your GPA.</li>
-      <li>Create measurable impact, not just club participation.</li>
-      <li>Write essays that show maturity, curiosity, and purpose.</li>
-    </ul>
-  </div>
+      <div class="analysis-card">
+        <h3>Fit Score</h3>
+        <div class="fit-score" id="fitScore">--</div>
+        <p id="overallFit">Pick a college and click Analyze My Fit.</p>
+      </div>
 
-  <div class="analysis-card">
-    <h3>Best Application Strategy</h3>
-    <p id="strategy">
-      Apply with a clear story: a student interested in medicine who has already taken action through research, volunteering, community projects, or a meaningful health-related initiative.
-    </p>
-  </div>
+      <div class="analysis-card">
+        <h3>Overall Fit</h3>
+        <p id="fitSummary">Your AI-generated fit summary will appear here.</p>
+      </div>
 
-</div>
+      <div class="analysis-card">
+        <h3>Strengths</h3>
+        <ul class="action-list" id="strengthsList"></ul>
+      </div>
+
+      <div class="analysis-card">
+        <h3>Weaknesses / Gaps</h3>
+        <ul class="action-list" id="weaknessesList"></ul>
+      </div>
+
+      <div class="analysis-card">
+        <h3>How to Improve</h3>
+        <ul class="action-list" id="improvementsList"></ul>
+      </div>
+
+      <div class="analysis-card">
+        <h3>Application Strategy</h3>
+        <p id="strategyText">Your strategy will appear here.</p>
+      </div>
+
+      <div class="analysis-card full">
+        <h3>Essay Angle</h3>
+        <p id="essayAngleText">Your essay angle will appear here.</p>
+      </div>
+
+      <div class="analysis-card full">
+        <h3>Next Steps</h3>
+        <ul class="action-list" id="nextStepsList"></ul>
+      </div>
+
+    </div>
 
   </div>
 
@@ -617,35 +638,138 @@
       document.getElementById("collegeSearch").value = "";
     }
 
-    function analyzeFit() {
+    function listToHtml(list, elementId) {
+      const element = document.getElementById(elementId);
+      element.innerHTML = "";
+
+      if (!list || list.length === 0) {
+        const li = document.createElement("li");
+        li.innerText = "No details returned yet.";
+        element.appendChild(li);
+        return;
+      }
+
+      list.forEach(item => {
+        const li = document.createElement("li");
+        li.innerText = item;
+        element.appendChild(li);
+      });
+    }
+
+    function showLoading() {
       const panel = document.getElementById("analysisPanel");
       panel.style.display = "grid";
 
-      const acceptanceNumber = parseFloat(selectedCollege.acceptance);
+      document.getElementById("fitScore").innerText = "...";
+      document.getElementById("overallFit").innerText = "MedMentor AI is analyzing your college fit...";
+      document.getElementById("fitSummary").innerText = "Please wait while the AI reviews your selected college, profile, and activities.";
 
-      if (acceptanceNumber <= 5) {
-        document.getElementById("fitScore").innerText = "Extreme Reach";
-        document.getElementById("fitSummary").innerText =
-          selectedCollege.name + " is extremely competitive. You need top academics plus a rare, meaningful spike such as research, major community impact, or a standout project.";
-      } else if (acceptanceNumber <= 12) {
-        document.getElementById("fitScore").innerText = "Reach";
-        document.getElementById("fitSummary").innerText =
-          selectedCollege.name + " is a reach school. Strong grades, rigorous classes, leadership, and a clear personal story are very important.";
-      } else if (acceptanceNumber <= 25) {
-        document.getElementById("fitScore").innerText = "Target / Reach";
-        document.getElementById("fitSummary").innerText =
-          selectedCollege.name + " may be a target or reach depending on your GPA, rigor, extracurriculars, essays, and major choice.";
-      } else {
-        document.getElementById("fitScore").innerText = "Possible Target";
-        document.getElementById("fitSummary").innerText =
-          selectedCollege.name + " may be a possible target if your academics and activities are strong.";
+      listToHtml(["Loading strengths..."], "strengthsList");
+      listToHtml(["Loading gaps..."], "weaknessesList");
+      listToHtml(["Loading improvements..."], "improvementsList");
+      listToHtml(["Loading next steps..."], "nextStepsList");
+
+      document.getElementById("strategyText").innerText = "Building your application strategy...";
+      document.getElementById("essayAngleText").innerText = "Generating a strong essay angle...";
+    }
+
+    function showError(message) {
+      const panel = document.getElementById("analysisPanel");
+      panel.style.display = "grid";
+
+      document.getElementById("fitScore").innerText = "Error";
+      document.getElementById("overallFit").innerText = "The College Analyzer could not complete the request.";
+      document.getElementById("fitSummary").innerText = message || "Please try again in a few moments.";
+
+      listToHtml(["Check that the n8n workflow is active.", "Check that the webhook URL is correct.", "Try again after a few seconds."], "strengthsList");
+      listToHtml(["The AI response may have failed or the workflow may be temporarily unavailable."], "weaknessesList");
+      listToHtml(["Refresh the page and run the analyzer again."], "improvementsList");
+      listToHtml(["Try a shorter profile and activities description."], "nextStepsList");
+
+      document.getElementById("strategyText").innerText = "Once the webhook is working, your strategy will appear here.";
+      document.getElementById("essayAngleText").innerText = "Once the webhook is working, your essay angle will appear here.";
+    }
+
+    function renderAnalysis(data) {
+      document.getElementById("analysisPanel").style.display = "grid";
+
+      document.getElementById("fitScore").innerText = (data.fitScore || "--") + "/100";
+      document.getElementById("overallFit").innerText = data.overallFit || "No overall fit summary returned.";
+      document.getElementById("fitSummary").innerText =
+        "College analyzed: " + (data.college || selectedCollege.name);
+
+      listToHtml(data.strengths, "strengthsList");
+      listToHtml(data.weaknesses, "weaknessesList");
+      listToHtml(data.improvements, "improvementsList");
+      listToHtml(data.nextSteps, "nextStepsList");
+
+      document.getElementById("strategyText").innerText = data.strategy || "No strategy returned.";
+      document.getElementById("essayAngleText").innerText = data.essayAngle || "No essay angle returned.";
+    }
+
+    async function analyzeFit() {
+      const analyzeBtn = document.getElementById("analyzeBtn");
+      analyzeBtn.disabled = true;
+      analyzeBtn.innerText = "ANALYZING...";
+
+      showLoading();
+
+      const webhookUrl = "https://tejas400.app.n8n.cloud/webhook/college-analyzer-fresh";
+
+      const profileInput = document.getElementById("studentProfile").value.trim();
+      const activitiesInput = document.getElementById("studentActivities").value.trim();
+
+      const profile =
+        profileInput ||
+        "11th grade student interested in pre-med, healthcare, biology, and becoming a surgeon. Strong interest in college planning and building a meaningful medical passion project.";
+
+      const activities =
+        activitiesInput ||
+        "Temple volunteering, sports medicine experience, MedMentor project, interest in healthcare opportunities, research, and service.";
+
+      const fullUrl =
+        webhookUrl +
+        "?college=" + encodeURIComponent(selectedCollege.name) +
+        "&profile=" + encodeURIComponent(profile) +
+        "&activities=" + encodeURIComponent(activities);
+
+      try {
+        const response = await fetch(fullUrl);
+
+        if (!response.ok) {
+          throw new Error("Webhook returned status " + response.status);
+        }
+
+        const data = await response.json();
+        renderAnalysis(data);
+
+      } catch (error) {
+        console.log("College Analyzer error:", error);
+        showError("The system has crashed temporarily. Please wait a little and try your analysis again.");
       }
 
-      document.getElementById("looksFor").innerText = selectedCollege.description;
-
-      document.getElementById("strategy").innerText =
-        "For " + selectedCollege.name + ", your application should connect your academic interests, extracurricular choices, and future goals into one clear story. For a medical path, focus on healthcare exposure, service, leadership, research, and a project that shows initiative.";
+      analyzeBtn.disabled = false;
+      analyzeBtn.innerText = "◎ ANALYZE MY FIT";
     }
+
+    function setActiveSidebarLink() {
+      const currentPage = window.location.pathname.split("/").pop() || "index.html";
+      const menuItems = document.querySelectorAll(".menu-item");
+
+      menuItems.forEach(item => {
+        const itemPage = item.getAttribute("href");
+
+        item.classList.remove("active");
+
+        if (itemPage === currentPage) {
+          item.classList.add("active");
+        }
+      });
+    }
+
+    window.onload = function() {
+      setActiveSidebarLink();
+    };
   </script>
 
 </body>

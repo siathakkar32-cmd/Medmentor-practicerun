@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
   <title>MedMentor - My Activities</title>
@@ -85,7 +84,7 @@
     .main {
       flex: 1;
       min-height: 100vh;
-      padding: 36px 58px 30px;
+      padding: 38px 60px 30px;
       background:
         radial-gradient(circle at top right, rgba(124, 77, 255, 0.14), transparent 30%),
         #070910;
@@ -104,17 +103,32 @@
       gap: 20px;
     }
 
+    .small-label {
+      color: #8b5cf6;
+      font-size: 11px;
+      letter-spacing: 4px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
     .title {
-      font-size: 28px;
+      font-size: 48px;
       margin: 0;
+      letter-spacing: 4px;
       font-weight: 900;
-      letter-spacing: 0.3px;
+      background: linear-gradient(90deg, #ffffff, #8b5cf6, #22d3ee);
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
     .subtitle {
       color: #8d96aa;
-      font-size: 14px;
-      margin-top: 10px;
+      max-width: 840px;
+      line-height: 1.5;
+      margin-top: 8px;
+      margin-bottom: 24px;
+      font-size: 15px;
     }
 
     .add-btn {
@@ -127,6 +141,7 @@
       cursor: pointer;
       font-size: 14px;
       white-space: nowrap;
+      margin-top: 8px;
     }
 
     .add-btn:hover {
@@ -200,6 +215,7 @@
       gap: 10px;
       padding-right: 42px;
       margin-bottom: 8px;
+      flex-wrap: wrap;
     }
 
     .activity-title {
@@ -208,16 +224,18 @@
     }
 
     .activity-badge {
-      background: #b8ffd0;
-      color: #003b18;
+      background: rgba(34, 211, 238, 0.14);
+      color: #22d3ee;
+      border: 1px solid rgba(34, 211, 238, 0.35);
       border-radius: 999px;
       padding: 5px 11px;
       font-size: 11px;
       font-weight: bold;
+      text-transform: uppercase;
     }
 
     .activity-role {
-      color: #7c4dff;
+      color: #9b5cff;
       font-size: 13px;
       font-weight: bold;
       margin-bottom: 9px;
@@ -228,6 +246,15 @@
       font-size: 13px;
       line-height: 1.5;
       margin-bottom: 11px;
+    }
+
+    .activity-impact {
+      color: #d7d9e0;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 11px;
+      border-left: 2px solid #8b5cf6;
+      padding-left: 10px;
     }
 
     .activity-meta {
@@ -280,7 +307,7 @@
 
     .modal {
       width: 100%;
-      max-width: 620px;
+      max-width: 760px;
       background: #10131c;
       border: 1px solid #252b3a;
       border-radius: 16px;
@@ -298,6 +325,7 @@
       color: #8d96aa;
       font-size: 14px;
       margin-bottom: 18px;
+      line-height: 1.5;
     }
 
     .form-grid {
@@ -337,12 +365,30 @@
     textarea {
       min-height: 85px;
       resize: vertical;
+      line-height: 1.5;
     }
 
     input:focus,
     select:focus,
     textarea:focus {
       border-color: #8b5cf6;
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #0d1018;
+      border: 1px solid #202638;
+      border-radius: 10px;
+      padding: 12px;
+      color: #8d96aa;
+      font-size: 13px;
+      min-height: 44px;
+    }
+
+    .checkbox-row input {
+      width: auto;
     }
 
     .modal-actions {
@@ -395,12 +441,30 @@
         flex-direction: column;
       }
 
+      .title {
+        font-size: 34px;
+        letter-spacing: 2px;
+      }
+
+      .add-btn {
+        width: 100%;
+      }
+
       .stats-grid {
         grid-template-columns: 1fr 1fr;
       }
     }
 
     @media screen and (max-width: 520px) {
+      .main {
+        padding: 18px 14px;
+      }
+
+      .title {
+        font-size: 28px;
+        letter-spacing: 2px;
+      }
+
       .stats-grid {
         grid-template-columns: 1fr;
       }
@@ -412,9 +476,12 @@
       .field.full {
         grid-column: span 1;
       }
+
+      .modal-actions {
+        flex-direction: column;
+      }
     }
   </style>
-
 </head>
 
 <body>
@@ -428,140 +495,204 @@
       </div>
     </div>
 
-
-<a href="index.html" class="menu-item">Dashboard</a>
-<a href="profile.html" class="menu-item">My Profile</a>
-<a href="chat.html" class="menu-item">AI Mentor</a>
-<a href="career.html" class="menu-item">Career Explorer</a>
-<a href="opportunities.html" class="menu-item">Opportunities</a>
-<a href="clinic.html" class="menu-item">Clinic Finder</a>
-<a href="#" class="menu-item">Mentor Directory</a>
-<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
-<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
-<a href="my-activities.html" class="menu-item active">My Activities</a>
-<a href="course-planner.html" class="menu-item">Course Planner</a>
-<a href="resume-builder.html" class="menu-item">Resume Builder</a>
-<a href="resources.html" class="menu-item">Resources</a>
+    <a href="profile.html" class="menu-item">My Profile</a>
+    <a href="friends.html" class="menu-item">Friends / Connections</a>
+    <a href="index.html" class="menu-item">Dashboard</a>
+    <a href="chat.html" class="menu-item">AI Mentor</a>
+    <a href="career.html" class="menu-item">Career Explorer</a>
+    <a href="opportunities.html" class="menu-item">Opportunities</a>
+    <a href="clinic.html" class="menu-item">Clinic Finder</a>
+    <a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+    <a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+    <a href="my-activities.html" class="menu-item">My Activities</a>
+    <a href="course-planner.html" class="menu-item">Course Planner</a>
+    <a href="resume-builder.html" class="menu-item">Resume Builder</a>
+    <a href="resources.html" class="menu-item">Resources</a>
   </div>
 
   <div class="main">
     <div class="page-wrap">
 
-  <div class="top-row">
-    <div>
-      <h1 class="title">Extracurricular Tracker</h1>
-      <div class="subtitle">Track all your activities and experiences</div>
-    </div>
+      <div class="top-row">
+        <div>
+          <div class="small-label">// ACTIVITY TRACKER</div>
+          <h1 class="title">MY_ACTIVITIES</h1>
+          <div class="subtitle">
+            Track your activities with enough detail for the Dashboard to understand your strengths, gaps, impact, and readiness.
+          </div>
+        </div>
 
-    <button class="add-btn" onclick="openModal()">＋ Add Activity</button>
-  </div>
-
-  <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-icon purple">🎖</div>
-      <div>
-        <div class="stat-number" id="totalActivities">0</div>
-        <div class="stat-label">Total Activities</div>
+        <button class="add-btn" onclick="openModal()">＋ Add Activity</button>
       </div>
-    </div>
 
-    <div class="stat-card">
-      <div class="stat-icon cyan">◷</div>
-      <div>
-        <div class="stat-number" id="totalHours">0</div>
-        <div class="stat-label">Total Hours</div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon purple">🎖</div>
+          <div>
+            <div class="stat-number" id="totalActivities">0</div>
+            <div class="stat-label">Total Activities</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon cyan">◷</div>
+          <div>
+            <div class="stat-number" id="totalHours">0</div>
+            <div class="stat-label">Total Hours</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon purple">♙</div>
+          <div>
+            <div class="stat-number" id="leadershipRoles">0</div>
+            <div class="stat-label">Leadership Roles</div>
+          </div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon pink">♡</div>
+          <div>
+            <div class="stat-number" id="serviceHours">0</div>
+            <div class="stat-label">Service Hours</div>
+          </div>
+        </div>
       </div>
+
+      <div class="activity-list" id="activityList"></div>
+
     </div>
-
-    <div class="stat-card">
-      <div class="stat-icon purple">♙</div>
-      <div>
-        <div class="stat-number" id="leadershipRoles">0</div>
-        <div class="stat-label">Leadership Roles</div>
-      </div>
-    </div>
-
-    <div class="stat-card">
-      <div class="stat-icon pink">♡</div>
-      <div>
-        <div class="stat-number" id="serviceHours">0</div>
-        <div class="stat-label">Service Hours</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="activity-list" id="activityList"></div>
-
-</div>
-
-
   </div>
 
   <div class="modal-bg" id="activityModal">
     <div class="modal">
       <h2>Add Activity</h2>
-      <p>Add a volunteer experience, club, leadership role, internship, research, award, or project.</p>
+      <p>
+        Add the activity with category, role, hours, impact, and evidence. This helps the dashboard give a more accurate readiness diagnosis.
+      </p>
 
+      <div class="form-grid">
+        <div class="field full">
+          <label>Activity Name</label>
+          <input type="text" id="activityName" placeholder="Example: Church volunteer, Student Council, Sports">
+        </div>
 
-  <div class="form-grid">
-    <div class="field full">
-      <label>Activity Name</label>
-      <input type="text" id="activityName" placeholder="Example: Volunteer At Temple">
+        <div class="field">
+          <label>Category</label>
+          <select id="activityType">
+            <option value="volunteer">Volunteering / Service</option>
+            <option value="clinical">Clinical / Healthcare</option>
+            <option value="leadership">Leadership</option>
+            <option value="research">Research</option>
+            <option value="project">Project / Passion Project</option>
+            <option value="competition">Competition</option>
+            <option value="award">Award / Honor</option>
+            <option value="internship">Internship</option>
+            <option value="club">Club</option>
+            <option value="academic">Academic</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Organization</label>
+          <input type="text" id="activityOrganization" placeholder="Example: school, hospital, nonprofit">
+        </div>
+
+        <div class="field">
+          <label>Role / Position</label>
+          <input type="text" id="activityRole" placeholder="Example: Volunteer, Officer, Researcher">
+        </div>
+
+        <div class="field">
+          <label>Total Hours</label>
+          <input type="number" id="activityHours" placeholder="Example: 180">
+        </div>
+
+        <div class="field">
+          <label>Service Hours</label>
+          <input type="number" id="activityServiceHours" placeholder="Example: 120">
+        </div>
+
+        <div class="field">
+          <label>Start Date</label>
+          <input type="date" id="startDate">
+        </div>
+
+        <div class="field">
+          <label>End Date</label>
+          <input type="date" id="endDate">
+        </div>
+
+        <div class="field">
+          <label>Frequency</label>
+          <select id="activityFrequency">
+            <option value="">Select frequency</option>
+            <option>One-time</option>
+            <option>Weekly</option>
+            <option>Monthly</option>
+            <option>Seasonal</option>
+            <option>Ongoing</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Grade Level</label>
+          <select id="activityGrade">
+            <option value="">Select grade</option>
+            <option>9th Grade</option>
+            <option>10th Grade</option>
+            <option>11th Grade</option>
+            <option>12th Grade</option>
+            <option>Multiple Years</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Impact Level</label>
+          <select id="impactLevel">
+            <option value="">Select impact</option>
+            <option>Low - participated only</option>
+            <option>Medium - helped organize or support</option>
+            <option>High - led, created, taught, mentored, or reached people</option>
+            <option>Very High - measurable impact, awards, major leadership, or public result</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Public Link / Proof</label>
+          <input type="text" id="proofLink" placeholder="Website, article, certificate, project link, optional">
+        </div>
+
+        <div class="field full">
+          <label>Patient-Facing / People-Facing?</label>
+          <div class="checkbox-row">
+            <input type="checkbox" id="patientFacing">
+            <span>This involved helping, teaching, guiding, serving, shadowing, or interacting with real people/patients.</span>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label>Description</label>
+          <textarea id="activityDescription" placeholder="What did you do? Be specific. Example: I helped organize weekly events, guided families, and supported community service activities."></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Impact / Result</label>
+          <textarea id="activityImpact" placeholder="What changed because of your work? Example: completed 120 service hours, helped 50+ families, launched a website, led 10 students, created a resource, won an award."></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Skills Built</label>
+          <textarea id="skillsBuilt" placeholder="Example: communication, leadership, empathy, research, teamwork, public speaking, patient interaction, coding."></textarea>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="modal-btn cancel-btn" onclick="closeModal()">Cancel</button>
+        <button class="modal-btn save-btn" onclick="saveActivity()">Save Activity</button>
+      </div>
     </div>
-
-    <div class="field">
-      <label>Type</label>
-      <select id="activityType">
-        <option value="volunteer">volunteer</option>
-        <option value="clinical">clinical</option>
-        <option value="leadership">leadership</option>
-        <option value="research">research</option>
-        <option value="club">club</option>
-        <option value="competition">competition</option>
-        <option value="award">award</option>
-        <option value="internship">internship</option>
-        <option value="project">project</option>
-      </select>
-    </div>
-
-    <div class="field">
-      <label>Role / Position</label>
-      <input type="text" id="activityRole" placeholder="Example: Tour Guide">
-    </div>
-
-    <div class="field">
-      <label>Total Hours</label>
-      <input type="number" id="activityHours" placeholder="Example: 180">
-    </div>
-
-    <div class="field">
-      <label>Service Hours</label>
-      <input type="number" id="activityServiceHours" placeholder="Example: 180">
-    </div>
-
-    <div class="field">
-      <label>Start Date</label>
-      <input type="date" id="startDate">
-    </div>
-
-    <div class="field">
-      <label>End Date</label>
-      <input type="date" id="endDate">
-    </div>
-
-    <div class="field full">
-      <label>Description</label>
-      <textarea id="activityDescription" placeholder="Example: Touring visitors around the temple and greeting people..."></textarea>
-    </div>
-  </div>
-
-  <div class="modal-actions">
-    <button class="modal-btn cancel-btn" onclick="closeModal()">Cancel</button>
-    <button class="modal-btn save-btn" onclick="saveActivity()">Save Activity</button>
-  </div>
-</div>
-
-
   </div>
 
   <script>
@@ -579,23 +710,39 @@
     function clearForm() {
       document.getElementById("activityName").value = "";
       document.getElementById("activityType").value = "volunteer";
+      document.getElementById("activityOrganization").value = "";
       document.getElementById("activityRole").value = "";
       document.getElementById("activityHours").value = "";
       document.getElementById("activityServiceHours").value = "";
       document.getElementById("startDate").value = "";
       document.getElementById("endDate").value = "";
+      document.getElementById("activityFrequency").value = "";
+      document.getElementById("activityGrade").value = "";
+      document.getElementById("impactLevel").value = "";
+      document.getElementById("proofLink").value = "";
+      document.getElementById("patientFacing").checked = false;
       document.getElementById("activityDescription").value = "";
+      document.getElementById("activityImpact").value = "";
+      document.getElementById("skillsBuilt").value = "";
     }
 
     function saveActivity() {
       const name = document.getElementById("activityName").value.trim();
       const type = document.getElementById("activityType").value;
+      const organization = document.getElementById("activityOrganization").value.trim();
       const role = document.getElementById("activityRole").value.trim();
       const hours = Number(document.getElementById("activityHours").value) || 0;
       const serviceHours = Number(document.getElementById("activityServiceHours").value) || 0;
       const startDate = document.getElementById("startDate").value;
       const endDate = document.getElementById("endDate").value;
+      const frequency = document.getElementById("activityFrequency").value;
+      const grade = document.getElementById("activityGrade").value;
+      const impactLevel = document.getElementById("impactLevel").value;
+      const proofLink = document.getElementById("proofLink").value.trim();
+      const patientFacing = document.getElementById("patientFacing").checked;
       const description = document.getElementById("activityDescription").value.trim();
+      const impact = document.getElementById("activityImpact").value.trim();
+      const skillsBuilt = document.getElementById("skillsBuilt").value.trim();
 
       if (!name) {
         alert("Please enter an activity name.");
@@ -605,13 +752,27 @@
       const activity = {
         id: Date.now(),
         name: name,
+        title: name,
         type: type,
+        activity_type: type,
+        organization: organization,
         role: role,
+        position: role,
         hours: hours,
         serviceHours: serviceHours,
+        service_hours: serviceHours,
         startDate: startDate,
         endDate: endDate,
-        description: description
+        frequency: frequency,
+        grade: grade,
+        impactLevel: impactLevel,
+        proofLink: proofLink,
+        patientFacing: patientFacing,
+        description: description,
+        impact: impact,
+        result: impact,
+        skillsBuilt: skillsBuilt,
+        savedAt: new Date().toISOString()
       };
 
       activities.push(activity);
@@ -622,6 +783,7 @@
 
     function deleteActivity(id) {
       const confirmDelete = confirm("Delete this activity?");
+
       if (!confirmDelete) {
         return;
       }
@@ -640,7 +802,7 @@
         list.innerHTML = `
           <div class="empty-card">
             <h3>No activities yet</h3>
-            <p>Click “Add Activity” to start tracking your extracurriculars, service hours, leadership, and experiences.</p>
+            <p>Click “Add Activity” to start tracking your extracurriculars, service hours, leadership, clinical exposure, research, projects, and awards.</p>
           </div>
         `;
         return;
@@ -649,22 +811,34 @@
       list.innerHTML = activities.map(activity => {
         return `
           <div class="activity-card">
-            <button class="delete-btn" onclick="deleteActivity(${activity.id})">♲</button>
+            <button class="delete-btn" onclick="deleteActivity(${activity.id})">✕</button>
 
             <div class="activity-title-row">
-              <div class="activity-title">${escapeHtml(activity.name)}</div>
-              <div class="activity-badge">${escapeHtml(activity.type)}</div>
+              <div class="activity-title">${escapeHtml(activity.name || activity.title)}</div>
+              <div class="activity-badge">${escapeHtml(activity.type || activity.activity_type)}</div>
             </div>
 
-            <div class="activity-role">${escapeHtml(activity.role || "Role not entered")}</div>
+            <div class="activity-role">
+              ${escapeHtml(activity.role || activity.position || "Role not entered")}
+              ${activity.organization ? " • " + escapeHtml(activity.organization) : ""}
+            </div>
 
             <div class="activity-desc">
               ${escapeHtml(activity.description || "No description entered.")}
             </div>
 
+            ${
+              activity.impact
+                ? `<div class="activity-impact"><strong>Impact:</strong> ${escapeHtml(activity.impact)}</div>`
+                : ""
+            }
+
             <div class="activity-meta">
-              <span>◷ ${activity.hours || 0} hours</span>
+              <span>◷ ${activity.hours || 0} total hours</span>
+              <span>♡ ${activity.serviceHours || activity.service_hours || 0} service hours</span>
               <span>${formatDates(activity.startDate, activity.endDate)}</span>
+              ${activity.frequency ? `<span>${escapeHtml(activity.frequency)}</span>` : ""}
+              ${activity.patientFacing ? `<span>People-facing</span>` : ""}
             </div>
           </div>
         `;
@@ -674,18 +848,31 @@
     function updateStats() {
       const totalActivities = activities.length;
       const totalHours = activities.reduce((sum, activity) => sum + (Number(activity.hours) || 0), 0);
-      const serviceHours = activities.reduce((sum, activity) => sum + (Number(activity.serviceHours) || 0), 0);
+      const serviceHours = activities.reduce((sum, activity) => sum + (Number(activity.serviceHours || activity.service_hours) || 0), 0);
 
       const leadershipRoles = activities.filter(activity => {
-        const text = (activity.role + " " + activity.type).toLowerCase();
+        const combinedText = (
+          (activity.role || "") + " " +
+          (activity.position || "") + " " +
+          (activity.type || "") + " " +
+          (activity.activity_type || "") + " " +
+          (activity.impactLevel || "") + " " +
+          (activity.description || "") + " " +
+          (activity.impact || "")
+        ).toLowerCase();
+
         return (
-          text.includes("president") ||
-          text.includes("vice president") ||
-          text.includes("founder") ||
-          text.includes("captain") ||
-          text.includes("officer") ||
-          text.includes("leader") ||
-          text.includes("leadership")
+          combinedText.includes("president") ||
+          combinedText.includes("vice president") ||
+          combinedText.includes("founder") ||
+          combinedText.includes("captain") ||
+          combinedText.includes("officer") ||
+          combinedText.includes("leader") ||
+          combinedText.includes("leadership") ||
+          combinedText.includes("led") ||
+          combinedText.includes("created") ||
+          combinedText.includes("organized") ||
+          combinedText.includes("mentored")
         );
       }).length;
 
@@ -720,7 +907,23 @@
         .replace(/'/g, "&#039;");
     }
 
+    function setActiveSidebarLink() {
+      const currentPage = window.location.pathname.split("/").pop() || "index.html";
+      const menuItems = document.querySelectorAll(".menu-item");
+
+      menuItems.forEach(item => {
+        const itemPage = item.getAttribute("href");
+
+        item.classList.remove("active");
+
+        if (itemPage === currentPage) {
+          item.classList.add("active");
+        }
+      });
+    }
+
     window.onload = function() {
+      setActiveSidebarLink();
       renderActivities();
     };
   </script>

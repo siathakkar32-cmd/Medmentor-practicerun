@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
   <title>MedMentor - Resources</title>
@@ -85,7 +84,7 @@
     .main {
       flex: 1;
       min-height: 100vh;
-      padding: 34px 58px 40px;
+      padding: 38px 60px 40px;
       background:
         radial-gradient(circle at top right, rgba(124, 77, 255, 0.14), transparent 30%),
         #070910;
@@ -96,46 +95,68 @@
       margin: 0 auto;
     }
 
+    .small-label {
+      color: #8b5cf6;
+      font-size: 11px;
+      letter-spacing: 4px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
     .title {
-      font-size: 30px;
+      font-size: 48px;
       margin: 0;
+      letter-spacing: 4px;
       font-weight: 900;
-      letter-spacing: 0.3px;
+      background: linear-gradient(90deg, #ffffff, #8b5cf6, #22d3ee);
+      -webkit-background-clip: text;
+      color: transparent;
     }
 
     .subtitle {
       color: #8d96aa;
-      font-size: 14px;
-      margin-top: 12px;
-      margin-bottom: 28px;
+      max-width: 840px;
+      line-height: 1.5;
+      margin-top: 8px;
+      margin-bottom: 24px;
+      font-size: 15px;
+    }
+
+    .divider {
+      height: 1px;
+      background: #1d2230;
+      margin-bottom: 24px;
+      max-width: 1120px;
     }
 
     .tabs {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
-      gap: 18px;
+      gap: 10px;
       margin-bottom: 26px;
     }
 
     .tab {
       background: transparent;
-      border: none;
+      border: 1px solid #202638;
       color: #8d96aa;
       padding: 11px 14px;
       border-radius: 999px;
       cursor: pointer;
       font-weight: bold;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     .tab.active {
       background: linear-gradient(90deg, #7c4dff, #9b5cff);
       color: white;
+      border-color: #8b5cf6;
     }
 
     .tab:hover {
       color: white;
+      border-color: #8b5cf6;
     }
 
     .resource-grid {
@@ -233,9 +254,23 @@
       .main {
         padding: 24px 18px;
       }
+
+      .title {
+        font-size: 34px;
+        letter-spacing: 2px;
+      }
     }
 
     @media screen and (max-width: 600px) {
+      .main {
+        padding: 18px 14px;
+      }
+
+      .title {
+        font-size: 28px;
+        letter-spacing: 2px;
+      }
+
       .resource-grid {
         grid-template-columns: 1fr;
       }
@@ -254,7 +289,6 @@
       }
     }
   </style>
-
 </head>
 
 <body>
@@ -268,47 +302,47 @@
       </div>
     </div>
 
-
-<a href="index.html" class="menu-item">Dashboard</a>
-<a href="profile.html" class="menu-item">My Profile</a>
-<a href="chat.html" class="menu-item">AI Mentor</a>
-<a href="career.html" class="menu-item">Career Explorer</a>
-<a href="opportunities.html" class="menu-item">Opportunities</a>
-<a href="clinic.html" class="menu-item">Clinic Finder</a>
-<a href="#" class="menu-item">Mentor Directory</a>
-<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
-<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
-<a href="my-activities.html" class="menu-item">My Activities</a>
-<a href="course-planner.html" class="menu-item">Course Planner</a>
-<a href="resume-builder.html" class="menu-item">Resume Builder</a>
-<a href="resources.html" class="menu-item active">Resources</a>
-
+    <a href="profile.html" class="menu-item">My Profile</a>
+    <a href="friends.html" class="menu-item">Friends / Connections</a>
+    <a href="index.html" class="menu-item">Dashboard</a>
+    <a href="chat.html" class="menu-item">AI Mentor</a>
+    <a href="career.html" class="menu-item">Career Explorer</a>
+    <a href="opportunities.html" class="menu-item">Opportunities</a>
+    <a href="clinic.html" class="menu-item">Clinic Finder</a>
+    <a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+    <a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+    <a href="my-activities.html" class="menu-item">My Activities</a>
+    <a href="course-planner.html" class="menu-item">Course Planner</a>
+    <a href="resume-builder.html" class="menu-item">Resume Builder</a>
+    <a href="resources.html" class="menu-item">Resources</a>
   </div>
 
   <div class="main">
     <div class="page-wrap">
 
+      <div class="small-label">// RESOURCE LIBRARY</div>
+      <h1 class="title">RESOURCES</h1>
+      <p class="subtitle">
+        Curated resources for your healthcare, pre-med, research, volunteering, scholarship, and college admissions journey.
+      </p>
 
-  <h1 class="title">Resource Library</h1>
-  <div class="subtitle">Curated resources for your healthcare journey</div>
+      <div class="divider"></div>
 
-  <div class="tabs">
-    <button class="tab active" onclick="filterResources('all', this)">All</button>
-    <button class="tab" onclick="filterResources('pre-med', this)">Pre-Med</button>
-    <button class="tab" onclick="filterResources('admissions', this)">Admissions</button>
-    <button class="tab" onclick="filterResources('research', this)">Research</button>
-    <button class="tab" onclick="filterResources('shadowing', this)">Shadowing</button>
-    <button class="tab" onclick="filterResources('scholarships', this)">Scholarships</button>
-    <button class="tab" onclick="filterResources('stem', this)">STEM</button>
-    <button class="tab" onclick="filterResources('careers', this)">Careers</button>
-    <button class="tab" onclick="filterResources('volunteer', this)">Volunteer</button>
-  </div>
+      <div class="tabs">
+        <button class="tab active" onclick="filterResources('all', this)">All</button>
+        <button class="tab" onclick="filterResources('pre-med', this)">Pre-Med</button>
+        <button class="tab" onclick="filterResources('admissions', this)">Admissions</button>
+        <button class="tab" onclick="filterResources('research', this)">Research</button>
+        <button class="tab" onclick="filterResources('shadowing', this)">Shadowing</button>
+        <button class="tab" onclick="filterResources('scholarships', this)">Scholarships</button>
+        <button class="tab" onclick="filterResources('stem', this)">STEM</button>
+        <button class="tab" onclick="filterResources('careers', this)">Careers</button>
+        <button class="tab" onclick="filterResources('volunteer', this)">Volunteer</button>
+      </div>
 
-  <div class="resource-grid" id="resourceGrid"></div>
+      <div class="resource-grid" id="resourceGrid"></div>
 
-</div>
-
-
+    </div>
   </div>
 
   <script>
@@ -321,11 +355,11 @@
         url: "https://students-residents.aamc.org/choosing-medical-career/medical-careers"
       },
       {
-        title: "Khan Academy MCAT Prep",
+        title: "Khan Academy SAT Prep",
         category: "pre-med",
         tag: "Pre Med",
-        desc: "Free, comprehensive MCAT preparation materials covering all exam sections.",
-        url: "https://www.khanacademy.org/test-prep/mcat"
+        desc: "Free, comprehensive SAT preparation materials covering all exam sections.",
+        url: "https://www.khanacademy.org/digital-sat"
       },
       {
         title: "Common App Guide",
@@ -480,9 +514,26 @@
       }
     }
 
+    function setActiveSidebarLink() {
+      const currentPage = window.location.pathname.split("/").pop() || "index.html";
+      const menuItems = document.querySelectorAll(".menu-item");
+
+      menuItems.forEach(item => {
+        const itemPage = item.getAttribute("href");
+
+        item.classList.remove("active");
+
+        if (itemPage === currentPage) {
+          item.classList.add("active");
+        }
+      });
+    }
+
     window.onload = function() {
+      setActiveSidebarLink();
       renderResources(resources);
     };
+	
   </script>
 
 </body>

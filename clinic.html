@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
   <title>MedMentor - Clinic Finder</title>
@@ -19,7 +18,6 @@
       min-height: 100vh;
     }
 
-    /* SIDEBAR */
     .sidebar {
       width: 240px;
       min-height: 100vh;
@@ -83,11 +81,10 @@
       color: white;
     }
 
-    /* MAIN */
     .main {
       flex: 1;
       min-height: 100vh;
-      padding: 34px 58px 30px;
+      padding: 38px 60px 30px;
       background:
         radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
         #070910;
@@ -99,6 +96,7 @@
       letter-spacing: 4px;
       font-weight: bold;
       margin-bottom: 10px;
+      text-transform: uppercase;
     }
 
     .title {
@@ -113,7 +111,7 @@
 
     .subtitle {
       color: #8d96aa;
-      max-width: 760px;
+      max-width: 840px;
       line-height: 1.5;
       margin-top: 8px;
       margin-bottom: 24px;
@@ -340,7 +338,6 @@
       display: none;
     }
 
-    /* EMAIL TEMPLATE MODAL */
     .modal-bg {
       display: none;
       position: fixed;
@@ -412,7 +409,6 @@
       color: #8d96aa;
     }
 
-    /* MOBILE */
     @media screen and (max-width: 900px) {
       body {
         flex-direction: column;
@@ -435,6 +431,7 @@
 
       .title {
         font-size: 34px;
+        letter-spacing: 2px;
       }
 
       .search-row {
@@ -456,6 +453,10 @@
     }
 
     @media screen and (max-width: 480px) {
+      .main {
+        padding: 18px 14px;
+      }
+
       .title {
         font-size: 28px;
         letter-spacing: 2px;
@@ -470,7 +471,6 @@
       }
     }
   </style>
-
 </head>
 
 <body>
@@ -484,79 +484,77 @@
       </div>
     </div>
 
-<a href="index.html" class="menu-item">Dashboard</a>
-<a href="profile.html" class="menu-item">My Profile</a>
-<a href="chat.html" class="menu-item">AI Mentor</a>
-<a href="career.html" class="menu-item">Career Explorer</a>
-<a href="opportunities.html" class="menu-item">Opportunities</a>
-<a href="clinic.html" class="menu-item active">Clinic Finder</a>
-<a href="#" class="menu-item">Mentor Directory</a>
-<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
-<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
-<a href="my-activities.html" class="menu-item">My Activities</a>
-<a href="course-planner.html" class="menu-item">Course Planner</a>
-<a href="resume-builder.html" class="menu-item">Resume Builder</a>
-<a href="resources.html" class="menu-item">Resources</a>
-
+    <a href="profile.html" class="menu-item">My Profile</a>
+    <a href="friends.html" class="menu-item">Friends / Connections</a>
+    <a href="index.html" class="menu-item">Dashboard</a>
+    <a href="chat.html" class="menu-item">AI Mentor</a>
+    <a href="career.html" class="menu-item">Career Explorer</a>
+    <a href="opportunities.html" class="menu-item">Opportunities</a>
+    <a href="clinic.html" class="menu-item">Clinic Finder</a>
+    <a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+    <a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+    <a href="my-activities.html" class="menu-item">My Activities</a>
+    <a href="course-planner.html" class="menu-item">Course Planner</a>
+    <a href="resume-builder.html" class="menu-item">Resume Builder</a>
+    <a href="resources.html" class="menu-item">Resources</a>
   </div>
 
   <div class="main">
 
+    <div class="small-label">// LOCAL OPPORTUNITIES</div>
+    <h1 class="title">CLINIC_FINDER</h1>
+    <p class="subtitle">
+      Find real clinics, hospitals, and labs near you. Get a ready-to-send email to inquire about shadowing or volunteering.
+    </p>
 
-<div class="small-label">// LOCAL OPPORTUNITIES</div>
-<h1 class="title">CLINIC_FINDER</h1>
-<p class="subtitle">
-  Find real clinics, hospitals, and labs near you. Get a ready-to-send email to inquire about shadowing or volunteering.
-</p>
+    <div class="divider"></div>
 
-<div class="divider"></div>
+    <div class="search-panel">
+      <div class="search-label">// Search by location</div>
 
-<div class="search-panel">
-  <div class="search-label">// Search by location</div>
+      <div class="search-row">
+        <div class="location-box">
+          📍
+          <input type="text" id="locationInput" placeholder="Enter your city or ZIP code">
+        </div>
 
-  <div class="search-row">
-    <div class="location-box">
-      📍
-<input type="text" id="locationInput" placeholder="Enter your city or ZIP code">
+        <button class="find-btn" onclick="findClinics()">✦ FIND CLINICS</button>
+      </div>
+
+      <div class="search-note">// AI will generate card results near your entered location</div>
     </div>
 
-    <button class="find-btn" onclick="findClinics()">✦ FIND CLINICS</button>
-  </div>
+    <div class="filter-row">
+      <div class="category-tabs">
+        <button class="tab active" onclick="filterCategory('all', this)">All</button>
+        <button class="tab" onclick="filterCategory('hospital', this)">Hospital</button>
+        <button class="tab" onclick="filterCategory('free clinic', this)">Free Clinic</button>
+        <button class="tab" onclick="filterCategory('private practice', this)">Private Practice</button>
+        <button class="tab" onclick="filterCategory('urgent care', this)">Urgent Care</button>
+        <button class="tab" onclick="filterCategory('nursing home', this)">Nursing Home</button>
+        <button class="tab" onclick="filterCategory('research lab', this)">Research Lab</button>
+        <button class="tab" onclick="filterCategory('community health', this)">Community Health</button>
+        <button class="tab" onclick="filterCategory('dental clinic', this)">Dental Clinic</button>
+        <button class="tab" onclick="filterCategory('physical therapy', this)">Physical Therapy</button>
+        <button class="tab" onclick="filterCategory('public health', this)">Public Health</button>
+        <button class="tab" onclick="filterCategory('medical nonprofit', this)">Medical Nonprofit</button>
+      </div>
 
-  <div class="search-note">// AI will generate card results near your entered location</div>
-</div>
-
-<div class="filter-row">
- <div class="category-tabs">
-  <button class="tab active" onclick="filterCategory('all', this)">All</button>
-  <button class="tab" onclick="filterCategory('hospital', this)">Hospital</button>
-  <button class="tab" onclick="filterCategory('free clinic', this)">Free Clinic</button>
-  <button class="tab" onclick="filterCategory('private practice', this)">Private Practice</button>
-  <button class="tab" onclick="filterCategory('urgent care', this)">Urgent Care</button>
-  <button class="tab" onclick="filterCategory('nursing home', this)">Nursing Home</button>
-  <button class="tab" onclick="filterCategory('research lab', this)">Research Lab</button>
-  <button class="tab" onclick="filterCategory('community health', this)">Community Health</button>
-  <button class="tab" onclick="filterCategory('dental clinic', this)">Dental Clinic</button>
-  <button class="tab" onclick="filterCategory('physical therapy', this)">Physical Therapy</button>
-  <button class="tab" onclick="filterCategory('public health', this)">Public Health</button>
-  <button class="tab" onclick="filterCategory('medical nonprofit', this)">Medical Nonprofit</button>
-</div>
-
-  <div class="small-search">
-    🔍
-    <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchClinics()">
-  </div>
-</div>
-
-<div class="clinic-grid" id="clinicGrid">
-  <div class="clinic-card">
-    <div class="clinic-type">Ready</div>
-    <div class="clinic-name">Enter a location to begin</div>
-    <div class="clinic-desc">
-      Type your city or ZIP code above, then click FIND CLINICS to generate AI-powered clinic and healthcare opportunity cards.
+      <div class="small-search">
+        🔍
+        <input type="text" id="searchInput" placeholder="Search..." onkeyup="searchClinics()">
+      </div>
     </div>
-  </div>
-</div>
+
+    <div class="clinic-grid" id="clinicGrid">
+      <div class="clinic-card">
+        <div class="clinic-type">Ready</div>
+        <div class="clinic-name">Enter a location to begin</div>
+        <div class="clinic-desc">
+          Type your city or ZIP code above, then click FIND CLINICS to generate AI-powered clinic and healthcare opportunity cards.
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -564,13 +562,14 @@
     <div class="modal">
       <h2>Email Template</h2>
       <p>Use this as a starting point. Edit it with your name, grade, school, and availability.</p>
-  <div class="email-template" id="emailText"></div>
 
-  <div class="modal-actions">
-    <button class="modal-btn close-btn" onclick="closeEmailTemplate()">Close</button>
-    <button class="modal-btn copy-btn" onclick="copyEmail()">Copy Email</button>
-  </div>
-</div>
+      <div class="email-template" id="emailText"></div>
+
+      <div class="modal-actions">
+        <button class="modal-btn close-btn" onclick="closeEmailTemplate()">Close</button>
+        <button class="modal-btn copy-btn" onclick="copyEmail()">Copy Email</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -581,6 +580,7 @@
       if (value === null || value === undefined) {
         return "";
       }
+
       return String(value);
     }
 
@@ -591,10 +591,6 @@
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-    }
-
-    function escapeJsString(value) {
-      return safeText(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
     }
 
     function filterCategory(category, button) {
@@ -622,8 +618,14 @@
         const titleElement = card.querySelector(".clinic-name");
         const title = titleElement ? titleElement.innerText.toLowerCase() : "";
 
-        const matchesCategory = selectedCategory === "all" || category.includes(selectedCategory);
-        const matchesSearch = searchValue === "" || keywords.includes(searchValue) || title.includes(searchValue);
+        const matchesCategory =
+          selectedCategory === "all" ||
+          category.includes(selectedCategory);
+
+        const matchesSearch =
+          searchValue === "" ||
+          keywords.includes(searchValue) ||
+          title.includes(searchValue);
 
         if (matchesCategory && matchesSearch) {
           card.classList.remove("hidden");
@@ -705,8 +707,13 @@
           }).join("");
 
           selectedCategory = "all";
-          document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+
+          document.querySelectorAll(".tab").forEach(tab => {
+            tab.classList.remove("active");
+          });
+
           const firstTab = document.querySelector(".tab");
+
           if (firstTab) {
             firstTab.classList.add("active");
           }
@@ -730,6 +737,7 @@
       const clinic = lastClinicResults[index];
       const clinicName = clinic && clinic.name ? clinic.name : "this healthcare organization";
       const emailTip = clinic && clinic.emailTip ? clinic.emailTip : "Ask about volunteer, shadowing, student observation, or internship opportunities.";
+
       openEmailTemplate(clinicName, emailTip);
     }
 
@@ -774,6 +782,25 @@ Sincerely,
       navigator.clipboard.writeText(text);
       alert("Email template copied!");
     }
+
+    function setActiveSidebarLink() {
+      const currentPage = window.location.pathname.split("/").pop() || "index.html";
+      const menuItems = document.querySelectorAll(".menu-item");
+
+      menuItems.forEach(item => {
+        const itemPage = item.getAttribute("href");
+
+        item.classList.remove("active");
+
+        if (itemPage === currentPage) {
+          item.classList.add("active");
+        }
+      });
+    }
+
+    window.onload = function() {
+      setActiveSidebarLink();
+    };
   </script>
 
 </body>

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
   <title>MedMentor - Opportunities</title>
@@ -85,7 +84,7 @@
     .main {
       flex: 1;
       min-height: 100vh;
-      padding: 34px 58px 30px;
+      padding: 38px 60px 30px;
       background:
         radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
         #070910;
@@ -112,7 +111,7 @@
 
     .subtitle {
       color: #8d96aa;
-      max-width: 760px;
+      max-width: 840px;
       line-height: 1.5;
       margin-top: 8px;
       margin-bottom: 24px;
@@ -147,6 +146,7 @@
       cursor: pointer;
       box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
       white-space: nowrap;
+      margin-top: 8px;
     }
 
     .ai-match-btn:hover {
@@ -340,6 +340,7 @@
 
       .title {
         font-size: 34px;
+        letter-spacing: 2px;
       }
 
       .top-row {
@@ -362,13 +363,16 @@
     }
 
     @media screen and (max-width: 480px) {
+      .main {
+        padding: 18px 14px;
+      }
+
       .title {
         font-size: 28px;
         letter-spacing: 2px;
       }
     }
   </style>
-
 </head>
 
 <body>
@@ -382,83 +386,78 @@
       </div>
     </div>
 
-```
-<a href="index.html" class="menu-item">Dashboard</a>
-<a href="profile.html" class="menu-item">My Profile</a>
-<a href="chat.html" class="menu-item">AI Mentor</a>
-<a href="career.html" class="menu-item">Career Explorer</a>
-<a href="opportunities.html" class="menu-item active">Opportunities</a>
-<a href="clinic.html" class="menu-item">Clinic Finder</a>
-<a href="#" class="menu-item">Mentor Directory</a>
-<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
-<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
-<a href="my-activities.html" class="menu-item">My Activities</a>
-<a href="course-planner.html" class="menu-item">Course Planner</a>
-<a href="resume-builder.html" class="menu-item">Resume Builder</a>
-<a href="resources.html" class="menu-item">Resources</a>
-```
-
+    <a href="profile.html" class="menu-item">My Profile</a>
+    <a href="friends.html" class="menu-item">Friends / Connections</a>
+    <a href="index.html" class="menu-item">Dashboard</a>
+    <a href="chat.html" class="menu-item">AI Mentor</a>
+    <a href="career.html" class="menu-item">Career Explorer</a>
+    <a href="opportunities.html" class="menu-item">Opportunities</a>
+    <a href="clinic.html" class="menu-item">Clinic Finder</a>
+    <a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+    <a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+    <a href="my-activities.html" class="menu-item">My Activities</a>
+    <a href="course-planner.html" class="menu-item">Course Planner</a>
+    <a href="resume-builder.html" class="menu-item">Resume Builder</a>
+    <a href="resources.html" class="menu-item">Resources</a>
   </div>
 
   <div class="main">
 
-```
-<div class="top-row">
-  <div>
-    <div class="small-label">// Opportunity Matching</div>
-    <h1 class="title">OPPORTUNITIES</h1>
-    <p class="subtitle">
-      Discover healthcare, research, clinical, volunteer, and internship opportunities that match your pre-med goals.
-    </p>
-  </div>
-
-  <button class="ai-match-btn" onclick="runAiMatch()">✦ AI MATCH</button>
-</div>
-
-<div class="divider"></div>
-
-<div class="search-row">
-  <div class="search-box">
-    🔍
-    <input type="text" id="searchInput" placeholder="Enter your city, ZIP code, or interest..." onkeyup="filterOpportunities()">
-  </div>
-
-  <div class="filter-box">
-    <select id="categoryFilter" onchange="filterOpportunities()">
-      <option value="all">All Categories</option>
-      <option value="research">Research</option>
-      <option value="volunteer">Volunteer</option>
-      <option value="internship">Internship</option>
-      <option value="program">Program</option>
-      <option value="clinical">Clinical</option>
-    </select>
-  </div>
-</div>
-
-<div class="recommend-card">
-  <div class="section-title">
-    <span class="section-icon">✣</span>
-    AI Recommended for You
-  </div>
-
-  <div class="opportunity-grid" id="opportunityGrid">
-
-    <div class="opportunity-card">
-      <div class="fit-badge">Ready</div>
-      <div class="opportunity-title">Enter a location or interest to begin</div>
-      <div class="opportunity-desc">
-        Type your city, ZIP code, or healthcare interest above, then click AI MATCH to generate personalized opportunity cards.
+    <div class="top-row">
+      <div>
+        <div class="small-label">// OPPORTUNITY MATCHING</div>
+        <h1 class="title">OPPORTUNITIES</h1>
+        <p class="subtitle">
+          Discover healthcare, research, clinical, volunteer, and internship opportunities that match your pre-med goals.
+        </p>
       </div>
-      <div class="why">Why: MedMentor will search based on your exact input.</div>
-      <div class="benefit">Benefit: Results will appear here as cards.</div>
-      <div class="category-row">
-        <span class="category-tag">Ready</span>
+
+      <button class="ai-match-btn" onclick="runAiMatch()">✦ AI MATCH</button>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="search-row">
+      <div class="search-box">
+        🔍
+        <input type="text" id="searchInput" placeholder="Enter your city, ZIP code, or interest..." onkeyup="filterOpportunities()">
+      </div>
+
+      <div class="filter-box">
+        <select id="categoryFilter" onchange="filterOpportunities()">
+          <option value="all">All Categories</option>
+          <option value="research">Research</option>
+          <option value="volunteer">Volunteer</option>
+          <option value="internship">Internship</option>
+          <option value="program">Program</option>
+          <option value="clinical">Clinical</option>
+        </select>
       </div>
     </div>
 
-  </div>
-</div>
-```
+    <div class="recommend-card">
+      <div class="section-title">
+        <span class="section-icon">✣</span>
+        AI Recommended for You
+      </div>
+
+      <div class="opportunity-grid" id="opportunityGrid">
+
+        <div class="opportunity-card">
+          <div class="fit-badge">Ready</div>
+          <div class="opportunity-title">Enter a location or interest to begin</div>
+          <div class="opportunity-desc">
+            Type your city, ZIP code, or healthcare interest above, then click AI MATCH to generate personalized opportunity cards.
+          </div>
+          <div class="why">Why: MedMentor will search based on your exact input.</div>
+          <div class="benefit">Benefit: Results will appear here as cards.</div>
+          <div class="category-row">
+            <span class="category-tag">Ready</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
 
   </div>
 
@@ -467,6 +466,7 @@
       if (value === null || value === undefined) {
         return "";
       }
+
       return String(value);
     }
 
@@ -622,6 +622,25 @@
           `;
         });
     }
+
+    function setActiveSidebarLink() {
+      const currentPage = window.location.pathname.split("/").pop() || "index.html";
+      const menuItems = document.querySelectorAll(".menu-item");
+
+      menuItems.forEach(item => {
+        const itemPage = item.getAttribute("href");
+
+        item.classList.remove("active");
+
+        if (itemPage === currentPage) {
+          item.classList.add("active");
+        }
+      });
+    }
+
+    window.onload = function() {
+      setActiveSidebarLink();
+    };
   </script>
 
 </body>

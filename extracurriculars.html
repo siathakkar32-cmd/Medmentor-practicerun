@@ -19,7 +19,6 @@
       min-height: 100vh;
     }
 
-    /* SIDEBAR */
     .sidebar {
       width: 240px;
       min-height: 100vh;
@@ -83,7 +82,6 @@
       color: white;
     }
 
-    /* MAIN */
     .main {
       flex: 1;
       min-height: 100vh;
@@ -127,18 +125,13 @@
       max-width: 1120px;
     }
 
-    .strategy-panel {
+    .panel {
       max-width: 1120px;
       background: rgba(16, 19, 28, 0.88);
       border: 1px solid #252b3a;
-      border-left: 1px solid #8b5cf6;
       border-radius: 14px;
       padding: 20px;
-      margin-bottom: 24px;
-      display: grid;
-      grid-template-columns: 1fr 220px;
-      gap: 18px;
-      align-items: center;
+      margin-bottom: 22px;
     }
 
     .section-label {
@@ -150,25 +143,63 @@
       font-weight: bold;
     }
 
-    .strategy-text {
+    .ai-intro {
+      display: grid;
+      grid-template-columns: 1fr 240px;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .ai-title {
+      font-size: 20px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+
+    .ai-desc {
       color: #8d96aa;
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.6;
+      margin: 0;
+    }
+
+    .source-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .source-tag {
+      background: #0d1018;
+      border: 1px solid #202638;
+      color: #8d96aa;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 11px;
     }
 
     .strategy-btn {
       background: linear-gradient(90deg, #7c4dff, #9b5cff);
       border: none;
       color: white;
-      height: 46px;
+      min-height: 48px;
       border-radius: 10px;
       font-weight: bold;
       letter-spacing: 1.5px;
       cursor: pointer;
+      width: 100%;
+      padding: 14px;
     }
 
     .strategy-btn:hover {
       opacity: 0.9;
+    }
+
+    .strategy-btn:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
     }
 
     .content-layout {
@@ -176,10 +207,6 @@
       display: grid;
       grid-template-columns: 290px 1fr;
       gap: 18px;
-    }
-
-    .category-panel {
-      background: transparent;
     }
 
     .browse-label {
@@ -219,10 +246,6 @@
     .category-btn:hover {
       border-color: #8b5cf6;
       color: white;
-    }
-
-    .activities-panel {
-      min-width: 0;
     }
 
     .activities-header {
@@ -277,7 +300,8 @@
       color: #8d96aa;
     }
 
-    .activity-card {
+    .activity-card,
+    .ai-card {
       background: rgba(16, 19, 28, 0.88);
       border: 1px solid #252b3a;
       border-radius: 12px;
@@ -286,13 +310,15 @@
       transition: 0.2s;
     }
 
-    .activity-card:hover {
+    .activity-card:hover,
+    .ai-card:hover {
       border-color: #8b5cf6;
       transform: translateY(-2px);
       box-shadow: 0 0 20px rgba(139, 92, 246, 0.12);
     }
 
-    .activity-name {
+    .activity-name,
+    .ai-card-title {
       font-size: 16px;
       font-weight: 900;
       margin-bottom: 8px;
@@ -328,7 +354,8 @@
       color: #8d96aa;
     }
 
-    .activity-desc {
+    .activity-desc,
+    .ai-card-text {
       color: #8d96aa;
       font-size: 13px;
       line-height: 1.6;
@@ -350,33 +377,33 @@
       font-size: 11px;
     }
 
-    .ai-panel {
+    .ai-results {
       max-width: 1120px;
       display: none;
-      margin-top: 22px;
-      background: rgba(16, 19, 28, 0.9);
-      border: 1px solid #8b5cf6;
-      border-radius: 14px;
-      padding: 20px;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 24px;
     }
 
-    .ai-panel h2 {
-      margin: 0 0 10px;
-      font-size: 22px;
+    .ai-card.full {
+      grid-column: span 2;
     }
 
-    .ai-panel p {
+    .profile-level {
+      font-size: 38px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #8b5cf6, #22d3ee);
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 8px;
+    }
+
+    .action-list {
+      margin: 0;
+      padding-left: 18px;
       color: #8d96aa;
-      line-height: 1.6;
-      font-size: 14px;
-      margin: 0 0 12px;
-    }
-
-    .roadmap-list {
-      color: #8d96aa;
-      line-height: 1.8;
-      font-size: 14px;
-      padding-left: 20px;
+      font-size: 13px;
+      line-height: 1.7;
     }
 
     @media screen and (max-width: 900px) {
@@ -403,12 +430,14 @@
         font-size: 34px;
       }
 
-      .strategy-panel {
+      .content-layout,
+      .ai-results,
+      .ai-intro {
         grid-template-columns: 1fr;
       }
 
-      .content-layout {
-        grid-template-columns: 1fr;
+      .ai-card.full {
+        grid-column: span 1;
       }
 
       .activities-header {
@@ -427,6 +456,84 @@
         letter-spacing: 2px;
       }
     }
+.strategy-panel {
+max-width: 1120px;
+background: rgba(16, 19, 28, 0.88);
+border: 1px solid #252b3a;
+border-left: 1px solid #8b5cf6;
+border-radius: 8px;
+padding: 18px 20px;
+margin-bottom: 24px;
+display: grid;
+grid-template-columns: 1fr 190px;
+gap: 18px;
+align-items: center;
+}
+
+.strategy-text {
+color: #8d96aa;
+font-size: 13px;
+line-height: 1.5;
+}
+
+.strategy-btn {
+background: linear-gradient(90deg, #7c4dff, #9b5cff);
+border: none;
+color: white;
+height: 38px;
+border-radius: 8px;
+font-weight: bold;
+letter-spacing: 1px;
+cursor: pointer;
+font-size: 12px;
+}
+
+.strategy-btn:hover {
+opacity: 0.9;
+}
+
+.strategy-btn:disabled {
+opacity: 0.55;
+cursor: not-allowed;
+}
+.input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.select-box,
+.input-box {
+  width: 100%;
+  background: #0d1018;
+  border: 1px solid #202638;
+  color: white;
+  padding: 13px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  outline: none;
+  font-family: Arial, sans-serif;
+}
+
+.select-box:focus,
+.input-box:focus {
+  border-color: #8b5cf6;
+}
+
+.input-box {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+@media screen and (max-width: 900px) {
+  .input-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
   </style>
 
 </head>
@@ -442,19 +549,21 @@
       </div>
     </div>
 
-<a href="index.html" class="menu-item">Dashboard</a>
+
 <a href="profile.html" class="menu-item">My Profile</a>
+<a href="friends.html" class="menu-item">Friends / Connections</a>
+<a href="index.html" class="menu-item">Dashboard</a>
 <a href="chat.html" class="menu-item">AI Mentor</a>
 <a href="career.html" class="menu-item">Career Explorer</a>
 <a href="opportunities.html" class="menu-item">Opportunities</a>
 <a href="clinic.html" class="menu-item">Clinic Finder</a>
-<a href="#" class="menu-item">Mentor Directory</a>
 <a href="college-analyzer.html" class="menu-item">College Analyzer</a>
-<a href="extracurriculars.html" class="menu-item active">Extracurriculars</a>
+<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
 <a href="my-activities.html" class="menu-item">My Activities</a>
 <a href="course-planner.html" class="menu-item">Course Planner</a>
 <a href="resume-builder.html" class="menu-item">Resume Builder</a>
 <a href="resources.html" class="menu-item">Resources</a>
+
   </div>
 
   <div class="main">
@@ -470,13 +579,125 @@
 
 <div class="strategy-panel">
   <div>
-    <div class="section-label">// AI Personalized Strategy</div>
+    <div class="section-label">// AI PERSONALIZED STRATEGY</div>
     <div class="strategy-text">
-      Get a custom extracurricular roadmap for your grade level, interests, and current experience.
+      Get a custom EC roadmap for your profile.
     </div>
   </div>
 
-  <button class="strategy-btn" onclick="showStrategy()">✣ GET MY STRATEGY</button>
+<button class="strategy-btn" id="strategyBtn" type="button" onclick="getAiStrategy()">✣ GET MY STRATEGY</button>
+
+</div>
+
+<div class="panel" id="strategyForm" style="display: none;">
+  <div class="input-grid">
+    <div>
+      <div class="section-label">// Career goal</div>
+      <select id="goalInput" class="select-box">
+        <option value="surgeon">Surgeon</option>
+        <option value="doctor">Doctor / Physician</option>
+        <option value="researcher">Medical Researcher</option>
+        <option value="public health">Public Health</option>
+        <option value="AI in healthcare">AI in Healthcare</option>
+        <option value="undecided pre-med">Undecided Pre-Med</option>
+      </select>
+    </div>
+
+
+<div>
+  <div class="section-label">// Main weakness</div>
+  <select id="weaknessInput" class="select-box">
+    <option value="research">Research</option>
+    <option value="clinical exposure">Clinical Exposure</option>
+    <option value="leadership">Leadership</option>
+    <option value="volunteering">Volunteering</option>
+    <option value="competitions or awards">Competitions / Awards</option>
+    <option value="not sure">Not Sure</option>
+  </select>
+</div>
+
+
+  </div>
+
+  <div class="input-grid">
+    <div>
+      <div class="section-label">// Experience level</div>
+      <select id="levelInput" class="select-box">
+        <option value="beginner">Beginner</option>
+        <option value="some experience" selected>Some Experience</option>
+        <option value="strong profile">Strong Profile</option>
+      </select>
+    </div>
+
+
+<div>
+  <div class="section-label">// Time available</div>
+  <select id="timeInput" class="select-box">
+    <option value="1-2 hours per week">1-2 hours/week</option>
+    <option value="3 hours per week" selected>3 hours/week</option>
+    <option value="5 hours per week">5 hours/week</option>
+    <option value="weekends only">Weekends Only</option>
+    <option value="summer only">Summer Only</option>
+  </select>
+</div>
+
+  </div>
+
+  <div class="section-label">// Current activities</div>
+  <textarea id="activitiesInput" class="input-box" placeholder="Example: Temple volunteering, sports medicine, MedMentor project, biology club, tutoring."></textarea>
+
+<button class="strategy-btn" type="button" onclick="getAiStrategy()">GENERATE STRATEGY</button>
+
+</div>
+
+<div class="ai-results" id="aiResults">
+
+  <div class="ai-card">
+    <div class="ai-card-title">Profile Level</div>
+    <div class="profile-level" id="profileLevel">--</div>
+    <div class="ai-card-text" id="overallStrategy">Your AI strategy will appear here.</div>
+  </div>
+
+  <div class="ai-card">
+    <div class="ai-card-title">Strongest Activity</div>
+    <div class="ai-card-text" id="strongestActivity">Your strongest activity will appear here.</div>
+  </div>
+
+  <div class="ai-card">
+    <div class="ai-card-title">Biggest Gap</div>
+    <div class="ai-card-text" id="biggestGap">Your biggest missing area will appear here.</div>
+  </div>
+
+  <div class="ai-card">
+    <div class="ai-card-title">Leadership Idea</div>
+    <div class="ai-card-text" id="leadershipIdea">Your leadership idea will appear here.</div>
+  </div>
+
+  <div class="ai-card">
+    <div class="ai-card-title">Research / Project Idea</div>
+    <div class="ai-card-text" id="researchIdea">Your research idea will appear here.</div>
+  </div>
+
+  <div class="ai-card">
+    <div class="ai-card-title">Competition Idea</div>
+    <div class="ai-card-text" id="competitionIdea">Your competition idea will appear here.</div>
+  </div>
+
+  <div class="ai-card full">
+    <div class="ai-card-title">Recommended Activities</div>
+    <div id="recommendedActivities"></div>
+  </div>
+
+  <div class="ai-card">
+    <div class="ai-card-title">30-Day Plan</div>
+    <ul class="action-list" id="thirtyDayPlan"></ul>
+  </div>
+
+  <div class="ai-card">
+    <div class="ai-card-title">90-Day Plan</div>
+    <ul class="action-list" id="ninetyDayPlan"></ul>
+  </div>
+
 </div>
 
 <div class="content-layout">
@@ -526,22 +747,6 @@
 
 </div>
 
-<div class="ai-panel" id="aiPanel">
-  <h2>Your Starter EC Strategy</h2>
-  <p>
-    For a pre-med focused applicant, the goal is not to do random clubs. The goal is to build a clear story:
-    healthcare interest, service, leadership, research or learning, and real community impact.
-  </p>
-
-  <ol class="roadmap-list">
-    <li><strong>Start with service:</strong> volunteer at a hospital, clinic, nursing home, blood drive, or health nonprofit.</li>
-    <li><strong>Add leadership:</strong> become an officer, start a chapter, organize a health event, or lead a fundraiser.</li>
-    <li><strong>Create impact:</strong> build something measurable like a health workshop, awareness campaign, tutoring program, or AI health education tool.</li>
-    <li><strong>Go deeper:</strong> add research, science competitions, certifications, or a summer program when possible.</li>
-    <li><strong>Track everything:</strong> record hours, responsibilities, results, awards, and personal reflections.</li>
-  </ol>
-</div>
-
 
   </div>
 
@@ -577,20 +782,6 @@
             level: "high",
             desc: "Organize blood drives, CPR awareness, disaster relief education, or service events. Great if you lead projects.",
             tags: ["Service", "Health", "Community"]
-          },
-          {
-            name: "Anatomy & Physiology Club",
-            impact: "Moderate",
-            level: "moderate",
-            desc: "Shows interest in biology and medicine. Stronger if connected to projects, tutoring, competitions, or outreach.",
-            tags: ["Biology", "Learning", "School Club"]
-          },
-          {
-            name: "Debate / Medical Ethics Club",
-            impact: "High",
-            level: "high",
-            desc: "Shows communication, critical thinking, and maturity. Strong for medicine when connected to healthcare ethics.",
-            tags: ["Communication", "Ethics", "Leadership"]
           }
         ]
       },
@@ -620,25 +811,11 @@
             tags: ["Patient Interaction", "Service", "Compassion"]
           },
           {
-            name: "Shadowing a Doctor",
-            impact: "High",
-            level: "high",
-            desc: "Good for career exploration, but hard for minors. Always follow rules, parent permission, and privacy requirements.",
-            tags: ["Career Exploration", "Observation", "Medicine"]
-          },
-          {
             name: "Health Education Workshops",
             impact: "Very High",
             level: "very",
             desc: "Teach younger students or community members about nutrition, CPR basics, mental health awareness, or disease prevention.",
             tags: ["Leadership", "Teaching", "Impact"]
-          },
-          {
-            name: "Blood Drive Organizer",
-            impact: "High",
-            level: "high",
-            desc: "Organizing a blood drive shows leadership, logistics, public health awareness, and measurable impact.",
-            tags: ["Leadership", "Health", "Measurable Impact"]
           }
         ]
       },
@@ -666,13 +843,6 @@
             level: "very",
             desc: "Analyze a community health problem, survey data, or health education issue. Great for students interested in medicine and impact.",
             tags: ["Public Health", "Data", "Community"]
-          },
-          {
-            name: "Research Paper or Literature Review",
-            impact: "High",
-            level: "high",
-            desc: "A structured paper on a medical topic can show curiosity, especially if paired with mentorship, presentation, or publication.",
-            tags: ["Writing", "Academic", "Medicine"]
           },
           {
             name: "Data Science / AI Health Project",
@@ -707,13 +877,6 @@
             level: "very",
             desc: "Run a campaign around mental health, nutrition, first aid, sleep, hygiene, chronic disease, or health equity.",
             tags: ["Public Health", "Awareness", "Impact"]
-          },
-          {
-            name: "Mentor Younger Students",
-            impact: "High",
-            level: "high",
-            desc: "Tutor biology, chemistry, math, or help younger students learn about medicine and careers.",
-            tags: ["Mentorship", "Teaching", "Service"]
           },
           {
             name: "Nonprofit or Student Organization",
@@ -755,13 +918,6 @@
             level: "high",
             desc: "Shows focused interest in medicine and disease knowledge. Stronger with high placement or leadership.",
             tags: ["Medicine", "Competition", "Pre-Med"]
-          },
-          {
-            name: "Research Poster Competition",
-            impact: "High",
-            level: "high",
-            desc: "Presenting your work publicly shows communication, research ability, and academic maturity.",
-            tags: ["Presentation", "Research", "Communication"]
           }
         ]
       },
@@ -784,13 +940,6 @@
             tags: ["Course", "Healthcare", "Skill"]
           },
           {
-            name: "EMT Explorer / Cadet Program",
-            impact: "Very High",
-            level: "very",
-            desc: "If available for your age, this can give strong emergency medicine exposure and service experience.",
-            tags: ["Emergency Medicine", "Service", "Hands-On"]
-          },
-          {
             name: "Data Analysis / Coding Skill",
             impact: "High",
             level: "high",
@@ -807,6 +956,167 @@
         ]
       }
     };
+
+    function safeParseStorage(key, fallback) {
+      try {
+        const item = localStorage.getItem(key);
+        if (!item) {
+          return fallback;
+        }
+        return JSON.parse(item);
+      } catch (error) {
+        return fallback;
+      }
+    }
+
+    function getSavedProfileText() {
+      const possibleKeys = [
+        "medmentorProfile",
+        "profileData",
+        "studentProfile",
+        "medmentorStudentProfile",
+        "medmentorProfileData"
+      ];
+
+      let profile = {};
+
+      for (let i = 0; i < possibleKeys.length; i++) {
+        const saved = safeParseStorage(possibleKeys[i], null);
+        if (saved && typeof saved === "object") {
+          profile = saved;
+          break;
+        }
+      }
+
+      const parts = [];
+
+      Object.keys(profile).forEach(key => {
+        if (profile[key]) {
+          parts.push(key + ": " + profile[key]);
+        }
+      });
+
+      if (parts.length === 0) {
+        return "Student interested in pre-med, healthcare, biology, service, and becoming a doctor or surgeon. Profile details are not fully saved yet.";
+      }
+
+      return parts.join("; ");
+    }
+
+    function getSavedActivitiesText() {
+      const savedActivities = safeParseStorage("medmentorActivities", []);
+
+      if (!Array.isArray(savedActivities) || savedActivities.length === 0) {
+        return "No saved activities found yet. Possible interests include temple volunteering, sports medicine, MedMentor project, healthcare, research, leadership, and service.";
+      }
+
+      return savedActivities.map(activity => {
+        if (typeof activity === "string") {
+          return activity;
+        }
+
+        const name =
+          activity.activityName ||
+          activity.name ||
+          activity.title ||
+          activity.activity_name ||
+          "Activity";
+
+        const type =
+          activity.activityType ||
+          activity.type ||
+          activity.category ||
+          activity.activity_type ||
+          "";
+
+        const role =
+          activity.role ||
+          activity.roleTitle ||
+          activity.position ||
+          activity.role_title ||
+          "";
+
+        const description =
+          activity.description ||
+          activity.desc ||
+          activity.details ||
+          "";
+
+        const hours =
+          activity.hours ||
+          activity.serviceHours ||
+          activity.service_hours ||
+          "";
+
+        return [name, type, role, description, hours ? hours + " hours" : ""]
+          .filter(Boolean)
+          .join(" - ");
+      }).join("; ");
+    }
+
+    function getGoalFromProfileText(profileText) {
+      const text = profileText.toLowerCase();
+
+      if (text.includes("surgeon") || text.includes("surgery")) {
+        return "surgeon";
+      }
+
+      if (text.includes("doctor") || text.includes("physician") || text.includes("medicine")) {
+        return "doctor";
+      }
+
+      if (text.includes("research")) {
+        return "medical researcher";
+      }
+
+      if (text.includes("public health")) {
+        return "public health";
+      }
+
+      if (text.includes("ai") || text.includes("technology") || text.includes("health tech")) {
+        return "AI in healthcare";
+      }
+
+      return "pre-med student";
+    }
+
+    function estimateLevel(activitiesText) {
+      const text = activitiesText.toLowerCase();
+
+      let score = 0;
+
+      if (text.includes("volunteer") || text.includes("service")) score++;
+      if (text.includes("sports medicine") || text.includes("clinical") || text.includes("hospital") || text.includes("clinic")) score++;
+      if (text.includes("research")) score++;
+      if (text.includes("leader") || text.includes("president") || text.includes("founder") || text.includes("project")) score++;
+      if (text.includes("competition") || text.includes("award") || text.includes("hosa") || text.includes("science fair")) score++;
+
+      if (score >= 4) return "strong profile";
+      if (score >= 2) return "some experience";
+      return "beginner";
+    }
+
+    function estimateWeakness(activitiesText) {
+      const text = activitiesText.toLowerCase();
+
+      if (!text.includes("research")) return "research";
+      if (!text.includes("clinical") && !text.includes("hospital") && !text.includes("clinic") && !text.includes("sports medicine")) return "clinical exposure";
+      if (!text.includes("leader") && !text.includes("president") && !text.includes("founder")) return "leadership";
+      if (!text.includes("competition") && !text.includes("award") && !text.includes("hosa") && !text.includes("science fair")) return "competitions or awards";
+
+      return "not sure";
+    }
+
+    function updateSourceTags() {
+      const savedActivities = safeParseStorage("medmentorActivities", []);
+      const profileText = getSavedProfileText();
+
+      const hasProfile = !profileText.includes("Profile details are not fully saved yet");
+      const hasActivities = Array.isArray(savedActivities) && savedActivities.length > 0;
+
+      document.getElementById("profileSourceTag").innerText = hasProfile ? "Profile: found" : "Profile: default";
+      document.getElementById("activitySourceTag").innerText = hasActivities ? "Activities: " + savedActivities.length + " found" : "Activities: default";
+    }
 
     function showCategory(categoryKey, button) {
       document.querySelectorAll(".category-btn").forEach(btn => {
@@ -836,16 +1146,160 @@
       }).join("");
     }
 
-    function showStrategy() {
-      const panel = document.getElementById("aiPanel");
-      panel.style.display = "block";
-      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    function listToHtml(list, elementId) {
+      const element = document.getElementById(elementId);
+      element.innerHTML = "";
+
+      if (!list || list.length === 0) {
+        const li = document.createElement("li");
+        li.innerText = "No details returned yet.";
+        element.appendChild(li);
+        return;
+      }
+
+      list.forEach(item => {
+        const li = document.createElement("li");
+        li.innerText = item;
+        element.appendChild(li);
+      });
     }
 
-    window.onload = function() {
-      const firstButton = document.querySelector(".category-btn");
-      showCategory("medical", firstButton);
-    };
+    function renderRecommendedActivities(items) {
+      const container = document.getElementById("recommendedActivities");
+      container.innerHTML = "";
+
+      if (!items || items.length === 0) {
+        container.innerHTML = "<div class='ai-card-text'>No recommended activities returned yet.</div>";
+        return;
+      }
+
+      items.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "activity-card";
+        card.innerHTML = `
+          <div class="activity-name">
+            ${item.title || "Activity Idea"}
+            <span class="impact-badge very">${item.type || "Recommended"}</span>
+          </div>
+          <div class="activity-desc"><strong>Why it helps:</strong> ${item.whyItHelps || "This can strengthen your profile."}</div>
+          <div class="activity-desc"><strong>How to start:</strong> ${item.howToStart || "Start with one small action this week."}</div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function showLoading() {
+      document.getElementById("aiResults").style.display = "grid";
+      document.getElementById("profileLevel").innerText = "...";
+      document.getElementById("overallStrategy").innerText = "MedMentor AI is building your extracurricular strategy from your saved profile and activities...";
+      document.getElementById("strongestActivity").innerText = "Analyzing your current activities...";
+      document.getElementById("biggestGap").innerText = "Finding your biggest gap...";
+      document.getElementById("leadershipIdea").innerText = "Generating leadership idea...";
+      document.getElementById("researchIdea").innerText = "Generating research idea...";
+      document.getElementById("competitionIdea").innerText = "Generating competition idea...";
+      document.getElementById("recommendedActivities").innerHTML = "<div class='ai-card-text'>Loading recommended activities...</div>";
+      listToHtml(["Loading 30-day plan..."], "thirtyDayPlan");
+      listToHtml(["Loading 90-day plan..."], "ninetyDayPlan");
+      document.getElementById("aiResults").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function showError(message) {
+      document.getElementById("aiResults").style.display = "grid";
+      document.getElementById("profileLevel").innerText = "Error";
+      document.getElementById("overallStrategy").innerText = message || "The AI strategy could not be generated.";
+      document.getElementById("strongestActivity").innerText = "Check that the n8n workflow is active.";
+      document.getElementById("biggestGap").innerText = "The webhook may be unavailable temporarily.";
+      document.getElementById("leadershipIdea").innerText = "Try again in a few moments.";
+      document.getElementById("researchIdea").innerText = "Try a shorter saved activity description.";
+      document.getElementById("competitionIdea").innerText = "Refresh and run again.";
+      document.getElementById("recommendedActivities").innerHTML = "<div class='ai-card-text'>The system has crashed temporarily. Please wait a little and try again.</div>";
+      listToHtml(["Check the workflow.", "Refresh the page.", "Try again."], "thirtyDayPlan");
+      listToHtml(["Try again later.", "Keep the workflow active.", "Confirm the webhook URL."], "ninetyDayPlan");
+    }
+
+    function renderAiStrategy(data) {
+      document.getElementById("aiResults").style.display = "grid";
+
+      document.getElementById("profileLevel").innerText = data.profileLevel || "Developing";
+      document.getElementById("overallStrategy").innerText = data.overallStrategy || "No strategy returned.";
+      document.getElementById("strongestActivity").innerText = data.strongestActivity || "No strongest activity returned.";
+      document.getElementById("biggestGap").innerText = data.biggestGap || "No gap returned.";
+      document.getElementById("leadershipIdea").innerText = data.leadershipIdea || "No leadership idea returned.";
+      document.getElementById("researchIdea").innerText = data.researchIdea || "No research idea returned.";
+      document.getElementById("competitionIdea").innerText = data.competitionIdea || "No competition idea returned.";
+
+      renderRecommendedActivities(data.recommendedActivities);
+      listToHtml(data.thirtyDayPlan, "thirtyDayPlan");
+      listToHtml(data.ninetyDayPlan, "ninetyDayPlan");
+
+      document.getElementById("aiResults").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    async function getAiStrategy() {
+      const button = document.getElementById("strategyBtn");
+      button.disabled = true;
+      button.innerText = "GENERATING...";
+
+      showLoading();
+
+      const webhookUrl = "https://tejas400.app.n8n.cloud/webhook/extracurriculars-ai";
+
+      const profileText = getSavedProfileText();
+      const activitiesText = getSavedActivitiesText();
+
+      const goal = getGoalFromProfileText(profileText);
+      const level = estimateLevel(activitiesText);
+      const weakness = estimateWeakness(activitiesText);
+      const time = "3 hours per week or flexible schedule";
+
+      const fullUrl =
+        webhookUrl +
+        "?goal=" + encodeURIComponent(goal) +
+        "&activities=" + encodeURIComponent(activitiesText) +
+        "&level=" + encodeURIComponent(level) +
+        "&time=" + encodeURIComponent(time) +
+        "&weakness=" + encodeURIComponent(weakness) +
+        "&profile=" + encodeURIComponent(profileText);
+
+      try {
+        const response = await fetch(fullUrl);
+
+        if (!response.ok) {
+          throw new Error("Webhook returned status " + response.status);
+        }
+
+        const data = await response.json();
+        renderAiStrategy(data);
+
+      } catch (error) {
+        console.log("Extracurriculars AI error:", error);
+        showError("The system has crashed temporarily. Please wait a little and try your strategy again.");
+      }
+
+      button.disabled = false;
+      button.innerText = "✣ GET MY STRATEGY";
+    }
+
+   function setActiveSidebarLink() {
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  const menuItems = document.querySelectorAll(".menu-item");
+
+  menuItems.forEach(item => {
+    const itemPage = item.getAttribute("href");
+
+    item.classList.remove("active");
+
+    if (itemPage === currentPage) {
+      item.classList.add("active");
+    }
+  });
+}
+
+window.onload = function() {
+  const firstButton = document.querySelector(".category-btn");
+  showCategory("medical", firstButton);
+  setActiveSidebarLink();
+};
   </script>
 
 </body>

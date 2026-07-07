@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 <head>
   <title>MedMentor - Career Explorer</title>
@@ -19,7 +18,6 @@
       min-height: 100vh;
     }
 
-    /* SIDEBAR */
     .sidebar {
       width: 240px;
       min-height: 100vh;
@@ -83,11 +81,10 @@
       color: white;
     }
 
-    /* MAIN */
     .main {
       flex: 1;
       min-height: 100vh;
-      padding: 34px 58px 30px;
+      padding: 38px 60px 30px;
       background:
         radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
         #070910;
@@ -99,6 +96,7 @@
       letter-spacing: 4px;
       font-weight: bold;
       margin-bottom: 10px;
+      text-transform: uppercase;
     }
 
     .title {
@@ -113,7 +111,7 @@
 
     .subtitle {
       color: #8d96aa;
-      max-width: 680px;
+      max-width: 840px;
       line-height: 1.5;
       margin-top: 8px;
       margin-bottom: 24px;
@@ -319,7 +317,6 @@
       color: #ffffff;
     }
 
-    /* MOBILE */
     @media screen and (max-width: 900px) {
       body {
         flex-direction: column;
@@ -342,6 +339,7 @@
 
       .title {
         font-size: 34px;
+        letter-spacing: 2px;
       }
 
       .career-layout {
@@ -354,6 +352,10 @@
     }
 
     @media screen and (max-width: 480px) {
+      .main {
+        padding: 18px 14px;
+      }
+
       .title {
         font-size: 28px;
         letter-spacing: 2px;
@@ -369,7 +371,6 @@
       }
     }
   </style>
-
 </head>
 
 <body>
@@ -383,164 +384,162 @@
       </div>
     </div>
 
-
-<a href="index.html" class="menu-item">Dashboard</a>
-<a href="profile.html" class="menu-item">My Profile</a>
-<a href="chat.html" class="menu-item">AI Mentor</a>
-<a href="career.html" class="menu-item active">Career Explorer</a>
-<a href="opportunities.html" class="menu-item">Opportunities</a>
-<a href="clinic.html" class="menu-item">Clinic Finder</a>
-<a href="#" class="menu-item">Mentor Directory</a>
-<a href="college-analyzer.html" class="menu-item">College Analyzer</a>
-<a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
-<a href="my-activities.html" class="menu-item">My Activities</a>
-<a href="course-planner.html" class="menu-item">Course Planner</a>
-<a href="resume-builder.html" class="menu-item">Resume Builder</a>
-<a href="resources.html" class="menu-item">Resources</a>
+    <a href="profile.html" class="menu-item">My Profile</a>
+    <a href="friends.html" class="menu-item">Friends / Connections</a>
+    <a href="index.html" class="menu-item">Dashboard</a>
+    <a href="chat.html" class="menu-item">AI Mentor</a>
+    <a href="career.html" class="menu-item">Career Explorer</a>
+    <a href="opportunities.html" class="menu-item">Opportunities</a>
+    <a href="clinic.html" class="menu-item">Clinic Finder</a>
+    <a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+    <a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+    <a href="my-activities.html" class="menu-item">My Activities</a>
+    <a href="course-planner.html" class="menu-item">Course Planner</a>
+    <a href="resume-builder.html" class="menu-item">Resume Builder</a>
+    <a href="resources.html" class="menu-item">Resources</a>
   </div>
 
   <div class="main">
 
-<div class="small-label">// CAREER EXPLORATION</div>
-<h1 class="title">CAREER_EXPLORER</h1>
-<p class="subtitle">
-  Explore medical careers and specialties. Click any career to see what the role does, what classes help, and how to start preparing in high school.
-</p>
+    <div class="small-label">// CAREER EXPLORATION</div>
+    <h1 class="title">CAREER_EXPLORER</h1>
+    <p class="subtitle">
+      Explore medical careers and specialties. Click any career to see what the role does, what classes help, and how to start preparing in high school.
+    </p>
 
-<div class="divider"></div>
+    <div class="divider"></div>
 
-<div class="career-layout">
+    <div class="career-layout">
 
-  <div class="career-list">
+      <div class="career-list">
 
-    <div class="career-card" onclick="showCareer('doctor', this)">
-      <div class="career-icon">⚕</div>
-      <div>
-        <div class="career-name">Physician / Doctor</div>
-        <div class="career-meta">$208k+ • Long training path</div>
-        <div class="tag-row">
-          <span class="tag purple">High Demand</span>
-          <span class="tag">10+ Specialties</span>
+        <div class="career-card" onclick="showCareer('doctor', this)">
+          <div class="career-icon">⚕</div>
+          <div>
+            <div class="career-name">Physician / Doctor</div>
+            <div class="career-meta">$208k+ • Long training path</div>
+            <div class="tag-row">
+              <span class="tag purple">High Demand</span>
+              <span class="tag">10+ Specialties</span>
+            </div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+
+        <div class="career-card" onclick="showCareer('surgeon', this)">
+          <div class="career-icon">✂</div>
+          <div>
+            <div class="career-name">Surgeon</div>
+            <div class="career-meta">$300k+ • Very competitive</div>
+            <div class="tag-row">
+              <span class="tag purple">High Demand</span>
+              <span class="tag">Hands-on</span>
+            </div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+
+        <div class="career-card" onclick="showCareer('nurse', this)">
+          <div class="career-icon">♡</div>
+          <div>
+            <div class="career-name">Nurse / Nurse Practitioner</div>
+            <div class="career-meta">$75k–$160k • Patient-centered</div>
+            <div class="tag-row">
+              <span class="tag green">Very High Demand</span>
+              <span class="tag">Flexible Path</span>
+            </div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+
+        <div class="career-card" onclick="showCareer('pa', this)">
+          <div class="career-icon">♙</div>
+          <div>
+            <div class="career-name">Physician Assistant (PA)</div>
+            <div class="career-meta">$115k–$150k • Team-based care</div>
+            <div class="tag-row">
+              <span class="tag green">Very High Demand</span>
+              <span class="tag">Shorter Path</span>
+            </div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+
+        <div class="career-card" onclick="showCareer('researcher', this)">
+          <div class="career-icon">⌬</div>
+          <div>
+            <div class="career-name">Medical Researcher</div>
+            <div class="career-meta">$65k–$130k+ • Lab and discovery</div>
+            <div class="tag-row">
+              <span class="tag purple">Research</span>
+              <span class="tag">Science Heavy</span>
+            </div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+
+        <div class="career-card" onclick="showCareer('dentist', this)">
+          <div class="career-icon">◌</div>
+          <div>
+            <div class="career-name">Dentist</div>
+            <div class="career-meta">$160k–$250k • Procedural care</div>
+            <div class="tag-row">
+              <span class="tag">Specialties</span>
+              <span class="tag purple">Hands-on</span>
+            </div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+
+        <div class="career-card" onclick="showCareer('pharmacist', this)">
+          <div class="career-icon">◇</div>
+          <div>
+            <div class="career-name">Pharmacist</div>
+            <div class="career-meta">$120k–$160k • Medication expert</div>
+            <div class="tag-row">
+              <span class="tag purple">Chemistry</span>
+              <span class="tag">Patient Care</span>
+            </div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+
+        <div class="career-card" onclick="showCareer('therapist', this)">
+          <div class="career-icon">☊</div>
+          <div>
+            <div class="career-name">Therapist / Psychologist</div>
+            <div class="career-meta">$60k–$140k • Mental health</div>
+            <div class="tag-row">
+              <span class="tag green">Very High Demand</span>
+              <span class="tag">Human Behavior</span>
+            </div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+
+        <div class="career-card" onclick="showCareer('biomed', this)">
+          <div class="career-icon">⌁</div>
+          <div>
+            <div class="career-name">Biomedical Engineer</div>
+            <div class="career-meta">$75k–$130k • Tech + medicine</div>
+            <div class="tag-row">
+              <span class="tag purple">STEM</span>
+              <span class="tag">Innovation</span>
+            </div>
+          </div>
+          <div class="arrow">›</div>
+        </div>
+
+      </div>
+
+      <div class="detail-panel" id="detailPanel">
+        <div class="empty-state">
+          <div class="empty-icon">⚕</div>
+          <p>Select a career to explore</p>
         </div>
       </div>
-      <div class="arrow">›</div>
+
     </div>
-
-    <div class="career-card" onclick="showCareer('surgeon', this)">
-      <div class="career-icon">✂</div>
-      <div>
-        <div class="career-name">Surgeon</div>
-        <div class="career-meta">$300k+ • Very competitive</div>
-        <div class="tag-row">
-          <span class="tag purple">High Demand</span>
-          <span class="tag">Hands-on</span>
-        </div>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-
-    <div class="career-card" onclick="showCareer('nurse', this)">
-      <div class="career-icon">♡</div>
-      <div>
-        <div class="career-name">Nurse / Nurse Practitioner</div>
-        <div class="career-meta">$75k–$160k • Patient-centered</div>
-        <div class="tag-row">
-          <span class="tag green">Very High Demand</span>
-          <span class="tag">Flexible Path</span>
-        </div>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-
-    <div class="career-card" onclick="showCareer('pa', this)">
-      <div class="career-icon">♙</div>
-      <div>
-        <div class="career-name">Physician Assistant (PA)</div>
-        <div class="career-meta">$115k–$150k • Team-based care</div>
-        <div class="tag-row">
-          <span class="tag green">Very High Demand</span>
-          <span class="tag">Shorter Path</span>
-        </div>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-
-    <div class="career-card" onclick="showCareer('researcher', this)">
-      <div class="career-icon">⌬</div>
-      <div>
-        <div class="career-name">Medical Researcher</div>
-        <div class="career-meta">$65k–$130k+ • Lab and discovery</div>
-        <div class="tag-row">
-          <span class="tag purple">Research</span>
-          <span class="tag">Science Heavy</span>
-        </div>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-
-    <div class="career-card" onclick="showCareer('dentist', this)">
-      <div class="career-icon">◌</div>
-      <div>
-        <div class="career-name">Dentist</div>
-        <div class="career-meta">$160k–$250k • Procedural care</div>
-        <div class="tag-row">
-          <span class="tag">Specialties</span>
-          <span class="tag purple">Hands-on</span>
-        </div>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-
-    <div class="career-card" onclick="showCareer('pharmacist', this)">
-      <div class="career-icon">◇</div>
-      <div>
-        <div class="career-name">Pharmacist</div>
-        <div class="career-meta">$120k–$160k • Medication expert</div>
-        <div class="tag-row">
-          <span class="tag purple">Chemistry</span>
-          <span class="tag">Patient Care</span>
-        </div>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-
-    <div class="career-card" onclick="showCareer('therapist', this)">
-      <div class="career-icon">☊</div>
-      <div>
-        <div class="career-name">Therapist / Psychologist</div>
-        <div class="career-meta">$60k–$140k • Mental health</div>
-        <div class="tag-row">
-          <span class="tag green">Very High Demand</span>
-          <span class="tag">Human Behavior</span>
-        </div>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-
-    <div class="career-card" onclick="showCareer('biomed', this)">
-      <div class="career-icon">⌁</div>
-      <div>
-        <div class="career-name">Biomedical Engineer</div>
-        <div class="career-meta">$75k–$130k • Tech + medicine</div>
-        <div class="tag-row">
-          <span class="tag purple">STEM</span>
-          <span class="tag">Innovation</span>
-        </div>
-      </div>
-      <div class="arrow">›</div>
-    </div>
-
-  </div>
-
-  <div class="detail-panel" id="detailPanel">
-    <div class="empty-state">
-      <div class="empty-icon">⚕</div>
-      <p>Select a career to explore</p>
-    </div>
-  </div>
-
-</div>
-```
 
   </div>
 
@@ -681,6 +680,25 @@
         </div>
       `;
     }
+
+    function setActiveSidebarLink() {
+      const currentPage = window.location.pathname.split("/").pop() || "index.html";
+      const menuItems = document.querySelectorAll(".menu-item");
+
+      menuItems.forEach(item => {
+        const itemPage = item.getAttribute("href");
+
+        item.classList.remove("active");
+
+        if (itemPage === currentPage) {
+          item.classList.add("active");
+        }
+      });
+    }
+
+    window.onload = function() {
+      setActiveSidebarLink();
+    };
   </script>
 
 </body>

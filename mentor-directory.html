@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MedMentor - Mentor Directory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #070910;
+      color: white;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 240px;
+      min-height: 100vh;
+      background: #0d1018;
+      border-right: 1px solid #1d2230;
+      padding: 20px 14px;
+      overflow-y: auto;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 35px;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #7c4dff, #28d9ff);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .logo-text h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .logo-text p {
+      margin: 0;
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: #22d3ee;
+    }
+
+    .menu-item {
+      display: block;
+      padding: 14px 16px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      color: #8d96aa;
+      font-size: 15px;
+      text-decoration: none;
+    }
+
+    .menu-item.active {
+      background: linear-gradient(90deg, #6d4aff, #8b5cf6);
+      color: white;
+      font-weight: bold;
+    }
+
+    .menu-item:hover {
+      background: #171b26;
+      color: white;
+    }
+
+    .main {
+      flex: 1;
+      min-height: 100vh;
+      padding: 36px 58px 34px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
+        #070910;
+    }
+
+    .page-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .page-label {
+      color: #8b5cf6;
+      font-size: 11px;
+      letter-spacing: 4px;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .page-title {
+      font-size: 44px;
+      margin: 0 0 8px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      background: linear-gradient(90deg, #ffffff, #8b5cf6, #22d3ee);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .page-subtitle {
+      color: #8d96aa;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 26px;
+      max-width: 850px;
+    }
+
+    .search-card {
+      background:
+        linear-gradient(135deg, rgba(139, 92, 246, 0.22), rgba(34, 211, 238, 0.08)),
+        #10131c;
+      border: 1px solid #252b3a;
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .search-title {
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .search-text {
+      color: #8d96aa;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .search-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr auto;
+      gap: 14px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      color: #8d96aa;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      background: #0d1018;
+      border: 1px solid #202638;
+      color: white;
+      padding: 13px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      outline: none;
+      font-family: Arial, sans-serif;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #8b5cf6;
+    }
+
+    .search-btn {
+      background: linear-gradient(90deg, #7c4dff, #22d3ee);
+      color: white;
+      border: none;
+      padding: 14px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .search-btn:hover {
+      opacity: 0.9;
+    }
+
+    .status-box {
+      background: #10131c;
+      border: 1px solid #222838;
+      border-radius: 14px;
+      padding: 16px;
+      color: #8d96aa;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 22px;
+      display: none;
+    }
+
+    .status-box strong {
+      color: #22d3ee;
+    }
+
+    .section-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 26px 0 14px;
+      gap: 12px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 900;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    .section-note {
+      color: #8d96aa;
+      font-size: 13px;
+    }
+
+    .mentor-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .mentor-card {
+      background: #10131c;
+      border: 1px solid #222838;
+      border-radius: 16px;
+      padding: 20px;
+      min-height: 330px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.28);
+    }
+
+    .mentor-top {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .mentor-avatar {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #7c4dff, #22d3ee);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 20px;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .mentor-name {
+      font-size: 17px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .mentor-meta {
+      color: #8d96aa;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .fit-score {
+      color: #22d3ee;
+      font-weight: bold;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
+
+    .mentor-bio {
+      color: #d7d9e0;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 14px;
+    }
+
+    .tag {
+      background: rgba(139, 92, 246, 0.14);
+      color: #c4b5fd;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      border-radius: 999px;
+      padding: 6px 9px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .contact-box {
+      background: #0d1018;
+      border: 1px solid #202638;
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 14px;
+      color: #8d96aa;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .contact-box strong {
+      color: white;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: auto;
+    }
+
+    .action-btn {
+      flex: 1;
+      background: linear-gradient(90deg, #7c4dff, #22d3ee);
+      border: none;
+      color: white;
+      border-radius: 10px;
+      padding: 11px 12px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .outline-btn {
+      flex: 1;
+      background: #0d1018;
+      border: 1px solid #252b3a;
+      color: #d7d9e0;
+      border-radius: 10px;
+      padding: 11px 12px;
+      font-size: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .action-btn:hover,
+    .outline-btn:hover {
+      opacity: 0.9;
+      border-color: #8b5cf6;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .info-card {
+      background: #10131c;
+      border: 1px solid #222838;
+      border-radius: 16px;
+      padding: 20px;
+    }
+
+    .info-title {
+      color: #22d3ee;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .info-text {
+      color: #8d96aa;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .email-modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      z-index: 20;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .email-modal {
+      width: 100%;
+      max-width: 680px;
+      background: #10131c;
+      border: 1px solid #252b3a;
+      border-radius: 16px;
+      padding: 24px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+    }
+
+    .email-modal h2 {
+      margin: 0 0 10px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 240px;
+      background: #0d1018;
+      border: 1px solid #202638;
+      color: white;
+      border-radius: 12px;
+      padding: 14px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.5;
+      resize: vertical;
+      margin-top: 14px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .modal-btn {
+      border: none;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .copy-btn {
+      background: linear-gradient(90deg, #7c4dff, #22d3ee);
+      color: white;
+    }
+
+    .close-btn {
+      background: #0d1018;
+      border: 1px solid #252b3a;
+      color: #8d96aa;
+    }
+
+    @media screen and (max-width: 1100px) {
+      .mentor-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .search-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media screen and (max-width: 820px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid #1d2230;
+      }
+
+      .menu-item {
+        text-align: center;
+      }
+
+      .main {
+        padding: 26px 18px;
+      }
+
+      .mentor-grid,
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .page-title {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-icon">⚕</div>
+      <div class="logo-text">
+        <h2>MedMentor</h2>
+        <p>AI PLATFORM</p>
+      </div>
+    </div>
+
+    <a href="profile.html" class="menu-item">My Profile</a>
+    <a href="friends.html" class="menu-item">Friends / Connections</a>
+    <a href="index.html" class="menu-item">Dashboard</a>
+    <a href="chat.html" class="menu-item">AI Mentor</a>
+    <a href="career.html" class="menu-item">Career Explorer</a>
+    <a href="opportunities.html" class="menu-item">Opportunities</a>
+    <a href="clinic.html" class="menu-item">Clinic Finder</a>
+    <a href="mentor-directory.html" class="menu-item active">Mentor Directory</a>
+    <a href="college-analyzer.html" class="menu-item">College Analyzer</a>
+    <a href="extracurriculars.html" class="menu-item">Extracurriculars</a>
+    <a href="my-activities.html" class="menu-item">My Activities</a>
+    <a href="course-planner.html" class="menu-item">Course Planner</a>
+    <a href="resume-builder.html" class="menu-item">Resume Builder</a>
+    <a href="resources.html" class="menu-item">Resources</a>
+  </div>
+
+  <div class="main">
+    <div class="page-wrap">
+
+      <div class="page-label">// MEDICAL PROFESSIONAL NETWORK</div>
+      <h1 class="page-title">MENTOR_DIRECTORY</h1>
+      <div class="page-subtitle">
+        Search for medical professionals near your area and learn who may be helpful for shadowing, informational interviews, career questions, or healthcare exposure.
+      </div>
+
+      <div class="search-card">
+        <div class="search-title">Find Medical Professionals Near You</div>
+        <div class="search-text">
+          Enter a city or ZIP code, choose a specialty, and MedMentor will show mentor-style cards. This is a front-end demo right now. Later, this can connect to real public clinic or hospital directories.
+        </div>
+
+        <div class="search-grid">
+          <div>
+            <label>Location</label>
+            <input id="locationInput" type="text" placeholder="Example: Irvine, CA or 92620">
+          </div>
+
+          <div>
+            <label>Professional Type</label>
+            <select id="typeFilter">
+              <option value="">All Types</option>
+              <option value="doctor">Doctor</option>
+              <option value="surgeon">Surgeon</option>
+              <option value="nurse">Nurse</option>
+              <option value="physician assistant">Physician Assistant</option>
+              <option value="dentist">Dentist</option>
+              <option value="researcher">Researcher</option>
+              <option value="public health">Public Health</option>
+            </select>
+          </div>
+
+          <div>
+            <label>Specialty</label>
+            <select id="specialtyFilter">
+              <option value="">All Specialties</option>
+              <option value="family medicine">Family Medicine</option>
+              <option value="pediatrics">Pediatrics</option>
+              <option value="surgery">Surgery</option>
+              <option value="dermatology">Dermatology</option>
+              <option value="emergency">Emergency Medicine</option>
+              <option value="cardiology">Cardiology</option>
+              <option value="research">Research</option>
+            </select>
+          </div>
+
+          <button class="search-btn" onclick="findMentors()">Find Mentors</button>
+        </div>
+      </div>
+
+      <div class="status-box" id="statusBox"></div>
+
+      <div class="section-row">
+        <h2 class="section-title">Suggested Medical Professionals</h2>
+        <div class="section-note" id="resultCount">0 results</div>
+      </div>
+
+      <div class="mentor-grid" id="mentorGrid"></div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-title">How to Use This</div>
+          <div class="info-text">
+            Start with public office phone numbers or official clinic websites. Ask politely about shadowing, student volunteering, or informational interviews. Some offices may not allow minors to shadow due to privacy rules.
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-title">Safety & Privacy</div>
+          <div class="info-text">
+            Do not contact private personal accounts. Use public office contact information only. Students should involve a parent or guardian before arranging any in-person visit.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="email-modal-bg" id="emailModal">
+    <div class="email-modal">
+      <h2>Outreach Message</h2>
+      <div class="info-text">
+        Copy this message and customize it before sending through a public office email/contact form.
+      </div>
+
+      <textarea id="emailText"></textarea>
+
+      <div class="modal-actions">
+        <button class="modal-btn close-btn" onclick="closeEmailModal()">Close</button>
+        <button class="modal-btn copy-btn" onclick="copyEmail()">Copy Message</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sampleMentors = [
+      {
+        id: 1,
+        name: "Dr. Maya Patel",
+        type: "Doctor",
+        specialty: "Family Medicine",
+        location: "Irvine, CA",
+        organization: "Irvine Community Health Clinic",
+        bio: "Primary care physician who works with families and preventive health.",
+        tags: ["Family Medicine", "Primary Care", "Patient Care"],
+        phone: "(949) 555-0142",
+        website: "Public clinic website",
+        fit: 93
+      },
+      {
+        id: 2,
+        name: "Dr. Alan Chen",
+        type: "Surgeon",
+        specialty: "General Surgery",
+        location: "Orange County, CA",
+        organization: "Orange County Surgical Group",
+        bio: "General surgeon with experience in operating room care and surgical education.",
+        tags: ["Surgery", "Operating Room", "Shadowing Questions"],
+        phone: "(714) 555-0188",
+        website: "Hospital profile page",
+        fit: 91
+      },
+      {
+        id: 3,
+        name: "Nurse Elena Rodriguez",
+        type: "Nurse",
+        specialty: "Emergency Medicine",
+        location: "Irvine, CA",
+        organization: "Regional Medical Center",
+        bio: "Emergency department nurse who works with fast-paced patient care teams.",
+        tags: ["Nursing", "Emergency Medicine", "Patient Interaction"],
+        phone: "(949) 555-0177",
+        website: "Hospital department page",
+        fit: 86
+      },
+      {
+        id: 4,
+        name: "Dr. Sarah Kim",
+        type: "Doctor",
+        specialty: "Pediatrics",
+        location: "San Diego, CA",
+        organization: "Children's Health Pediatrics",
+        bio: "Pediatrician focused on child health, communication, and preventive care.",
+        tags: ["Pediatrics", "Children", "Clinical Exposure"],
+        phone: "(858) 555-0115",
+        website: "Clinic profile page",
+        fit: 84
+      },
+      {
+        id: 5,
+        name: "Jordan Lee, PA-C",
+        type: "Physician Assistant",
+        specialty: "Dermatology",
+        location: "Orange County, CA",
+        organization: "Coastal Dermatology Center",
+        bio: "Physician assistant working in dermatology and outpatient patient care.",
+        tags: ["Dermatology", "PA Career", "Outpatient Care"],
+        phone: "(949) 555-0164",
+        website: "Office contact page",
+        fit: 79
+      },
+      {
+        id: 6,
+        name: "Dr. Nina Shah",
+        type: "Researcher",
+        specialty: "Medical Research",
+        location: "Los Angeles, CA",
+        organization: "Health Sciences Research Lab",
+        bio: "Researcher focused on health data, clinical research, and student science projects.",
+        tags: ["Research", "Health Data", "Science Fair"],
+        phone: "(323) 555-0199",
+        website: "University lab page",
+        fit: 88
+      }
+    ];
+
+    let currentMentors = sampleMentors;
+
+    function findMentors() {
+      const location = document.getElementById("locationInput").value.trim().toLowerCase();
+      const type = document.getElementById("typeFilter").value.toLowerCase();
+      const specialty = document.getElementById("specialtyFilter").value.toLowerCase();
+
+      const statusBox = document.getElementById("statusBox");
+      statusBox.style.display = "block";
+
+      if (!location && !type && !specialty) {
+        statusBox.innerHTML = "<strong>Showing demo mentors.</strong> Enter a location or choose filters to narrow results.";
+      } else {
+        statusBox.innerHTML = "<strong>Searching near you...</strong> Showing mentor-style demo results based on your filters.";
+      }
+
+      currentMentors = sampleMentors.filter(mentor => {
+        const mentorText = (
+          mentor.name + " " +
+          mentor.type + " " +
+          mentor.specialty + " " +
+          mentor.location + " " +
+          mentor.organization + " " +
+          mentor.bio + " " +
+          mentor.tags.join(" ")
+        ).toLowerCase();
+
+        const locationMatch = !location || mentorText.includes(location) || location.includes("irvine") && mentorText.includes("irvine") || location.includes("926") && mentorText.includes("irvine");
+        const typeMatch = !type || mentorText.includes(type);
+        const specialtyMatch = !specialty || mentorText.includes(specialty);
+
+        return locationMatch && typeMatch && specialtyMatch;
+      });
+
+      renderMentors();
+    }
+
+    function renderMentors() {
+      const grid = document.getElementById("mentorGrid");
+
+      document.getElementById("resultCount").innerText = currentMentors.length + " results";
+
+      if (currentMentors.length === 0) {
+        grid.innerHTML = `
+          <div class="info-card">
+            <div class="info-title">No Results</div>
+            <div class="info-text">Try a broader location, choose All Types, or search a different specialty.</div>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = currentMentors.map(mentor => {
+        return `
+          <div class="mentor-card">
+            <div>
+              <div class="mentor-top">
+                <div class="mentor-avatar">${mentor.name.replace("Dr. ", "").charAt(0)}</div>
+                <div>
+                  <div class="mentor-name">${escapeHtml(mentor.name)}</div>
+                  <div class="mentor-meta">${escapeHtml(mentor.type)} • ${escapeHtml(mentor.specialty)}</div>
+                  <div class="mentor-meta">${escapeHtml(mentor.location)}</div>
+                </div>
+              </div>
+
+              <div class="fit-score">${mentor.fit}% possible fit</div>
+
+              <div class="mentor-bio">${escapeHtml(mentor.bio)}</div>
+
+              <div class="tag-row">
+                ${mentor.tags.map(tag => `<div class="tag">${escapeHtml(tag)}</div>`).join("")}
+              </div>
+
+              <div class="contact-box">
+                <div><strong>Organization:</strong> ${escapeHtml(mentor.organization)}</div>
+                <div><strong>Public phone:</strong> ${escapeHtml(mentor.phone)}</div>
+                <div><strong>Public link:</strong> ${escapeHtml(mentor.website)}</div>
+              </div>
+            </div>
+
+            <div class="card-actions">
+              <button class="action-btn" onclick="createOutreachMessage(${mentor.id})">Outreach Script</button>
+              <button class="outline-btn" onclick="saveMentor(${mentor.id})">Save</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function createOutreachMessage(mentorId) {
+      const mentor = sampleMentors.find(item => item.id === mentorId);
+
+      if (!mentor) {
+        return;
+      }
+
+      const message =
+`Hello ${mentor.name},
+
+My name is [Your Name], and I am a high school student interested in medicine and healthcare. I found your public profile through ${mentor.organization}, and I am very interested in learning more about ${mentor.specialty}.
+
+I wanted to ask if your office allows high school students to do any of the following:
+
+- Shadowing or observation
+- Volunteering
+- Informational interview
+- Short career advice conversation
+- Any student-friendly healthcare exposure opportunities
+
+I understand that privacy rules may limit what is possible, and I would be happy to follow any requirements your office has. A parent or guardian can also be involved if needed.
+
+Thank you for your time and for the work you do.
+
+Sincerely,
+[Your Name]`;
+
+      document.getElementById("emailText").value = message;
+      document.getElementById("emailModal").style.display = "flex";
+    }
+
+    function closeEmailModal() {
+      document.getElementById("emailModal").style.display = "none";
+    }
+
+    function copyEmail() {
+      const text = document.getElementById("emailText");
+      text.select();
+      document.execCommand("copy");
+      alert("Message copied.");
+    }
+
+    function saveMentor(mentorId) {
+      const saved = JSON.parse(localStorage.getItem("medmentorSavedMentors")) || [];
+      const mentor = sampleMentors.find(item => item.id === mentorId);
+
+      if (!mentor) {
+        return;
+      }
+
+      const alreadySaved = saved.some(item => item.id === mentorId);
+
+      if (!alreadySaved) {
+        saved.push(mentor);
+        localStorage.setItem("medmentorSavedMentors", JSON.stringify(saved));
+      }
+
+      alert("Mentor saved.");
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    window.onload = function() {
+      currentMentors = sampleMentors;
+      renderMentors();
+    };
+  </script>
+
+</body>
+</html>
