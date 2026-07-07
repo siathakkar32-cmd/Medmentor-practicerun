@@ -1,27 +1,30 @@
-
 <!DOCTYPE html>
 
 <html>
 <head>
-  <title>MedMentor Dashboard</title>
+  <title>MedMentor - My Profile</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: #070910;
       color: white;
       display: flex;
+      min-height: 100vh;
     }
 
     .sidebar {
       width: 240px;
       min-height: 100vh;
-      background: #0b0e15;
-      border-right: 1px solid #171c28;
+      background: #0d1018;
+      border-right: 1px solid #1d2230;
       padding: 18px 14px;
-      box-sizing: border-box;
       overflow-y: auto;
     }
 
@@ -36,10 +39,10 @@
       width: 36px;
       height: 36px;
       border-radius: 10px;
-      background: linear-gradient(135deg, #7c4dff, #22d3ee);
+      background: linear-gradient(135deg, #7c4dff, #28d9ff);
       display: flex;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       font-weight: bold;
       font-size: 18px;
     }
@@ -47,7 +50,6 @@
     .logo-text h2 {
       margin: 0;
       font-size: 18px;
-      letter-spacing: 0.5px;
     }
 
     .logo-text p {
@@ -55,19 +57,17 @@
       font-size: 9px;
       letter-spacing: 2px;
       color: #22d3ee;
-      font-weight: bold;
     }
 
     .menu-item {
-      display: block;
-      padding: 13px 14px;
-      margin-bottom: 7px;
-      border-radius: 11px;
-      color: #8d96aa;
-      font-size: 14px;
-      cursor: pointer;
-      text-decoration: none;
-    }
+  display: block;
+  padding: 13px 14px;
+  margin-bottom: 7px;
+  border-radius: 11px;
+  color: #8d96aa;
+  font-size: 14px;
+  text-decoration: none;
+}
 
     .menu-item.active {
       background: linear-gradient(90deg, #6d4aff, #8b5cf6);
@@ -76,479 +76,321 @@
     }
 
     .menu-item:hover {
-      background: #151a26;
+      background: #171b26;
       color: white;
     }
 
     .main {
       flex: 1;
-      padding: 38px 60px;
-      box-sizing: border-box;
-      background:
-        radial-gradient(circle at top right, rgba(124, 77, 255, 0.18), transparent 25%),
-        #070910;
       min-height: 100vh;
+      padding: 36px 58px 34px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 77, 255, 0.16), transparent 30%),
+        #070910;
     }
 
-    .top-row {
+    .page-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .page-label {
+  color: #8b5cf6;
+  font-size: 11px;
+  letter-spacing: 4px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+    .page-title {
+  font-size: 48px;
+  margin: 0;
+  letter-spacing: 4px;
+  font-weight: 900;
+  background: linear-gradient(90deg, #ffffff, #8b5cf6, #22d3ee);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+.page-subtitle {
+  color: #8d96aa;
+  max-width: 800px;
+  line-height: 1.5;
+  margin-top: 8px;
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+    .profile-hero {
+      background:
+        linear-gradient(135deg, rgba(139, 92, 246, 0.22), rgba(34, 211, 238, 0.08)),
+        #10131c;
+      border: 1px solid #252b3a;
+      border-radius: 18px;
+      padding: 26px;
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .avatar-box {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
       align-items: center;
-      gap: 18px;
+      gap: 12px;
     }
 
-    .small-label {
-      color: #8b5cf6;
-      font-size: 11px;
-      letter-spacing: 4px;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-
-    .title {
-      font-size: 48px;
-      margin: 12px 0 30px;
-      letter-spacing: 4px;
+    .avatar {
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      background: #0d1018;
+      border: 2px solid #8b5cf6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 46px;
       font-weight: 900;
-      background: linear-gradient(90deg, #ffffff, #8b5cf6, #22d3ee);
-      -webkit-background-clip: text;
-      color: transparent;
+      color: #22d3ee;
     }
 
-    .mentor-button {
-      background: linear-gradient(90deg, #7c4dff, #9b5cff);
-      border: none;
-      color: white;
-      padding: 16px 28px;
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .upload-label {
+      background: #0d1018;
+      border: 1px solid #252b3a;
+      color: #d7d9e0;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 12px;
       font-weight: bold;
-      letter-spacing: 1px;
       cursor: pointer;
-      text-decoration: none;
-      display: inline-block;
+      text-align: center;
+    }
+
+    .upload-label:hover {
+      border-color: #8b5cf6;
+      color: white;
+    }
+
+    #profilePictureInput {
+      display: none;
+    }
+
+    .hero-main {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-name {
+      font-size: 30px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .hero-line {
+      color: #8d96aa;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      background: rgba(139, 92, 246, 0.14);
+      color: #c4b5fd;
+      border: 1px solid rgba(139, 92, 246, 0.35);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 12px;
+      font-weight: bold;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 1fr 1fr;
       gap: 22px;
       margin-bottom: 22px;
-    }
-
-    .grid-bottom {
-      display: grid;
-      grid-template-columns: 1.35fr 1fr;
-      gap: 22px;
     }
 
     .card {
       background: #10131c;
       border: 1px solid #222838;
-      border-radius: 10px;
+      border-radius: 16px;
       padding: 24px;
-      box-sizing: border-box;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.28);
     }
 
-    .card h2 {
-      margin-top: 0;
-      font-size: 20px;
-      letter-spacing: 2px;
+    .card.full {
+      grid-column: span 2;
     }
 
-    .score-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 280px;
-      text-align: center;
-    }
-
-    .circle {
-      width: 145px;
-      height: 145px;
-      border-radius: 50%;
-      background: conic-gradient(#22d3ee 0deg, #202536 0deg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 18px 0;
-      position: relative;
-    }
-
-    .circle::before {
-      content: "";
-      width: 112px;
-      height: 112px;
-      border-radius: 50%;
-      background: #10131c;
-      position: absolute;
-    }
-
-    .score {
-      font-size: 46px;
-      color: #ffbd22;
+    .card-title {
+      margin: 0 0 18px;
+      font-size: 18px;
+      letter-spacing: 1px;
       font-weight: 900;
-      z-index: 1;
-    }
-
-    .status {
-      color: #ffbd22;
-      font-weight: bold;
-      letter-spacing: 1px;
-      margin-top: 8px;
-      text-transform: uppercase;
-    }
-
-    .tiny {
-      font-size: 10px;
-      color: #536078;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      line-height: 1.5;
-    }
-
-    .readiness-note {
-      color: #8d96aa;
-      font-size: 12px;
-      line-height: 1.5;
-      max-width: 260px;
-      margin-top: 12px;
-    }
-
-    .bar-row {
-      display: grid;
-      grid-template-columns: 140px 1fr 35px;
-      align-items: center;
-      gap: 12px;
-      margin: 15px 0;
-      font-size: 12px;
-      color: #7b849a;
-    }
-
-    .bar-bg {
-      height: 4px;
-      background: #1d2230;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-
-    .bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #8b5cf6, #22d3ee);
-      width: 0%;
-      transition: width 0.4s ease;
-    }
-
-    .num {
-      color: #8b5cf6;
-      font-weight: bold;
-      text-align: right;
-    }
-
-    .num.good {
-      color: #22d3ee;
-    }
-
-    .num.bad {
-      color: #ff4d6d;
-    }
-
-    .num.warn {
-      color: #ffbd22;
-    }
-
-    .next-card {
-      margin-top: 18px;
-      border-top: 1px solid #202638;
-      padding-top: 16px;
-    }
-
-    .next-card-title {
-      font-size: 13px;
-      color: #22d3ee;
-      font-weight: bold;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-
-    .next-card-text {
-      color: #8d96aa;
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .ai-section {
-      margin-bottom: 22px;
-    }
-
-    .ai-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 18px;
-      margin-bottom: 18px;
+      gap: 8px;
     }
 
-    .ai-label {
-      color: #8b5cf6;
+    .card-title span {
+      color: #22d3ee;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-grid.three {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .field.full {
+      grid-column: span 2;
+    }
+
+    .form-grid.three .field.full {
+      grid-column: span 3;
+    }
+
+    label {
+      display: block;
+      color: #8d96aa;
       font-size: 11px;
-      letter-spacing: 3px;
       font-weight: bold;
+      letter-spacing: 1px;
       text-transform: uppercase;
+      margin-bottom: 7px;
     }
 
-    .ai-button {
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: #0d1018;
+      border: 1px solid #202638;
+      color: white;
+      padding: 13px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      outline: none;
+      font-family: Arial, sans-serif;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #8b5cf6;
+    }
+
+    textarea {
+      min-height: 94px;
+      resize: vertical;
+      line-height: 1.5;
+    }
+
+    .helper {
+      color: #536078;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    .privacy-box {
+      background: #0d1018;
+      border: 1px solid #202638;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #8d96aa;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .privacy-box input {
+      width: auto;
+    }
+
+    .save-area {
+      background: #10131c;
+      border: 1px solid #222838;
+      border-radius: 16px;
+      padding: 22px;
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .save-button {
       background: linear-gradient(90deg, #7c4dff, #22d3ee);
       color: white;
       border: none;
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-size: 12px;
+      padding: 15px 28px;
+      border-radius: 12px;
       font-weight: bold;
-      letter-spacing: 1px;
       cursor: pointer;
+      font-size: 14px;
+      letter-spacing: 1px;
     }
 
-    .ai-button:hover {
+    .clear-button {
+      background: transparent;
+      color: #8d96aa;
+      border: 1px solid #242a38;
+      padding: 15px 20px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 8px;
+    }
+
+    .clear-button:hover,
+    .save-button:hover {
       opacity: 0.9;
     }
 
-    .ai-button:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-    }
-
-    .ai-summary {
-      color: #d7d9e0;
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 20px;
-    }
-
-    .ai-mini-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-
-    .ai-mini-card {
-      background: #0d1018;
-      border: 1px solid #202638;
-      border-radius: 10px;
-      padding: 16px;
-    }
-
-    .ai-mini-title {
-      color: #22d3ee;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-    }
-
-    .ai-list {
-      margin: 0;
-      padding-left: 18px;
+    .save-note {
       color: #8d96aa;
       font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .tool-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 18px;
-      margin-bottom: 18px;
-    }
-
-    .tool-card {
-      background: #0d1018;
-      border: 1px solid #202638;
-      border-radius: 10px;
-      padding: 16px;
-      text-decoration: none;
-      display: block;
-      transition: 0.2s ease;
-    }
-
-    .tool-card:hover {
-      border-color: #8b5cf6;
-      transform: translateY(-2px);
-    }
-
-    .tool-title {
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 8px;
-    }
-
-    .tool-reason {
-      color: #8d96aa;
-      font-size: 12px;
       line-height: 1.5;
-      margin-bottom: 12px;
+      max-width: 560px;
     }
 
-    .tool-link {
+    .success {
       color: #22d3ee;
-      font-size: 11px;
       font-weight: bold;
-      letter-spacing: 1px;
-      text-transform: uppercase;
     }
 
-    .feedback-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .feedback-card {
-      background: #0d1018;
-      border: 1px solid #202638;
-      border-radius: 10px;
-      padding: 16px;
-    }
-
-    .feedback-category {
-      color: white;
-      font-size: 14px;
+    .warning {
+      color: #ffbd22;
       font-weight: bold;
-      margin-bottom: 8px;
     }
 
-    .feedback-status {
-      display: inline-block;
-      padding: 4px 8px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      background: rgba(139, 92, 246, 0.16);
-      color: #c4b5fd;
-    }
-
-    .feedback-reason {
-      color: #8d96aa;
-      font-size: 12px;
-      line-height: 1.5;
-      margin-bottom: 10px;
-    }
-
-    .feedback-next {
-      color: #22d3ee;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    .plan-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .mentor-advice {
-      margin-top: 18px;
-      border-top: 1px solid #202638;
-      padding-top: 16px;
-      color: #d7d9e0;
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .quick-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .quick-box {
-      border: 1px solid #202638;
-      padding: 16px;
-      color: #8da2c0;
-      font-size: 14px;
-      background: #0d1018;
-      text-decoration: none;
-      display: block;
-    }
-
-    .quick-box:hover {
-      border-color: #8b5cf6;
-      color: white;
-    }
-
-    .quick-box span {
-      display: block;
-      color: #38435a;
-      font-size: 10px;
-      margin-bottom: 8px;
-    }
-
-    .activity-item {
-      margin-top: 22px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-
-    .dot {
-      width: 8px;
-      height: 8px;
-      background: #8b5cf6;
-      margin-top: 6px;
-      flex-shrink: 0;
-    }
-
-    .activity-title {
-      font-weight: bold;
-      font-size: 14px;
-    }
-
-    .activity-sub {
-      color: #6d768a;
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
-    .hours {
-      margin-left: auto;
-      color: #22d3ee;
-      font-size: 12px;
-      font-weight: bold;
-      white-space: nowrap;
-    }
-
-    .footer {
-      text-align: center;
-      color: #283246;
-      font-size: 9px;
-      letter-spacing: 2px;
-      margin-top: 35px;
-    }
-
-    @media screen and (max-width: 900px) {
-      .feedback-grid,
-      .tool-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .ai-mini-grid,
-      .plan-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media screen and (max-width: 900px) {
+    @media screen and (max-width: 980px) {
       body {
         flex-direction: column;
       }
@@ -557,91 +399,59 @@
         width: 100%;
         min-height: auto;
         border-right: none;
-        border-bottom: 1px solid #171c28;
-        overflow-y: visible;
-      }
-
-      .main {
-        padding: 24px;
-      }
-
-      .top-row {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .title {
-        font-size: 38px;
-        letter-spacing: 2px;
-      }
-
-      .mentor-button {
-        width: 100%;
-        margin-bottom: 25px;
-        text-align: center;
-      }
-
-      .grid,
-      .grid-bottom {
-        grid-template-columns: 1fr;
-      }
-
-      .quick-grid {
-        grid-template-columns: 1fr;
+        border-bottom: 1px solid #1d2230;
       }
 
       .menu-item {
         text-align: center;
       }
 
-      .bar-row {
-        grid-template-columns: 120px 1fr 35px;
+      .main {
+        padding: 26px 18px;
       }
 
-      .ai-header {
-        flex-direction: column;
-        align-items: flex-start;
+      .profile-hero {
+        grid-template-columns: 1fr;
+        text-align: center;
       }
 
-      .ai-button {
-        width: 100%;
+      .tag-row {
+        justify-content: center;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card.full {
+        grid-column: span 1;
+      }
+
+      .form-grid,
+      .form-grid.three {
+        grid-template-columns: 1fr;
+      }
+
+      .field.full,
+      .form-grid.three .field.full {
+        grid-column: span 1;
+      }
+
+      .page-title {
+        font-size: 34px;
       }
     }
 
-    @media screen and (max-width: 480px) {
-      .main {
-        padding: 16px;
+    @media screen and (max-width: 520px) {
+      .save-area {
+        display: block;
       }
 
-      .title {
-        font-size: 32px;
-      }
-
-      .card {
-        padding: 16px;
-      }
-
-      .circle {
-        width: 120px;
-        height: 120px;
-      }
-
-      .circle::before {
-        width: 92px;
-        height: 92px;
-      }
-
-      .score {
-        font-size: 36px;
-      }
-
-      .bar-row {
-        grid-template-columns: 1fr;
-        gap: 6px;
-      }
-
-      .num {
-        text-align: left;
+      .save-button,
+      .clear-button {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 10px;
       }
     }
   </style>
@@ -658,9 +468,9 @@
         <p>AI PLATFORM</p>
       </div>
     </div>
-<a href="profile.html" class="menu-item">My Profile</a>
+<a href="index.html" class="menu-item">My Profile</a>
 <a href="friends.html" class="menu-item">Friends / Connections</a>
-<a href="index.html" class="menu-item">Dashboard</a>
+<a href="dashboard.html" class="menu-item">Dashboard</a>
 <a href="chat.html" class="menu-item">AI Mentor</a>
 <a href="career.html" class="menu-item">Career Explorer</a>
 <a href="opportunities.html" class="menu-item">Opportunities</a>
@@ -672,1204 +482,673 @@
 <a href="resume-builder.html" class="menu-item">Resume Builder</a>
 <a href="resources.html" class="menu-item">Resources</a>
 
+
+
   </div>
 
   <div class="main">
-<div class="top-row">
-  <div>
-    <div class="small-label" id="studentTrack">// STUDENT PROFILE • COLLEGE TRACK</div>
-    <h1 class="title" id="studentGreeting">HEY, STUDENT_</h1>
+    <div class="page-wrap">
+
+  <div class="page-label">// STUDENT COMMUNITY PROFILE</div>
+  <h1 class="page-title">MY_PROFILE</h1>
+  <div class="page-subtitle">
+    Build a profile that introduces you to other students while also helping MedMentor personalize your dashboard, college planning, and AI advice.
   </div>
 
-  <a href="chat.html" class="mentor-button">ASK AI MENTOR ↗</a>
-</div>
-
-<div class="grid">
-
-  <div class="card score-card">
-    <div class="tiny">// READINESS</div>
-
-    <div class="circle" id="readinessCircle">
-      <div class="score" id="overallScore">0</div>
+  <div class="profile-hero">
+    <div class="avatar-box">
+      <div class="avatar" id="profileAvatar">S</div>
+      <label class="upload-label" for="profilePictureInput">Upload Photo</label>
+      <input id="profilePictureInput" type="file" accept="image/*" onchange="handleProfilePicture(event)">
     </div>
 
-    <div class="status" id="readinessStatus">STARTING</div>
-    <div class="tiny">OVERALL SCORE</div>
-    <div class="readiness-note" id="readinessNote">
-      Fill out your profile and activities to calculate your readiness score.
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>BREAKDOWN</h2>
-
-    <div class="bar-row">
-      <div>ACADEMICS</div>
-      <div class="bar-bg"><div class="bar-fill" id="academicsBar"></div></div>
-      <div class="num" id="academicsNum">0</div>
-    </div>
-
-    <div class="bar-row">
-      <div>COURSE RIGOR</div>
-      <div class="bar-bg"><div class="bar-fill" id="courseRigorBar"></div></div>
-      <div class="num" id="courseRigorNum">0</div>
-    </div>
-
-    <div class="bar-row">
-      <div>LEADERSHIP</div>
-      <div class="bar-bg"><div class="bar-fill" id="leadershipBar"></div></div>
-      <div class="num" id="leadershipNum">0</div>
-    </div>
-
-    <div class="bar-row">
-      <div>VOLUNTEERING</div>
-      <div class="bar-bg"><div class="bar-fill" id="volunteeringBar"></div></div>
-      <div class="num" id="volunteeringNum">0</div>
-    </div>
-
-    <div class="bar-row">
-      <div>CLINICAL</div>
-      <div class="bar-bg"><div class="bar-fill" id="clinicalBar"></div></div>
-      <div class="num" id="clinicalNum">0</div>
-    </div>
-
-    <div class="bar-row">
-      <div>RESEARCH</div>
-      <div class="bar-bg"><div class="bar-fill" id="researchBar"></div></div>
-      <div class="num" id="researchNum">0</div>
-    </div>
-
-    <div class="bar-row">
-      <div>AWARDS</div>
-      <div class="bar-bg"><div class="bar-fill" id="awardsBar"></div></div>
-      <div class="num" id="awardsNum">0</div>
-    </div>
-
-    <div class="bar-row">
-      <div>PROJECTS</div>
-      <div class="bar-bg"><div class="bar-fill" id="projectsBar"></div></div>
-      <div class="num" id="projectsNum">0</div>
-    </div>
-
-    <div class="bar-row">
-      <div>COLLEGE PLAN</div>
-      <div class="bar-bg"><div class="bar-fill" id="collegePlanBar"></div></div>
-      <div class="num" id="collegePlanNum">0</div>
-    </div>
-
-    <div class="next-card">
-      <div class="next-card-title">Next Focus</div>
-      <div class="next-card-text" id="nextFocusText">
-        Complete your profile to get a personalized next step.
+    <div class="hero-main">
+      <div class="hero-name" id="previewName">Your Name</div>
+      <div class="hero-line" id="previewLine">
+        Grade • School • City • Career Interest
+      </div>
+      <div class="hero-line" id="previewBio">
+        Add a short bio and fun fact so other students can understand who you are and what you care about.
+      </div>
+      <div class="tag-row" id="previewTags">
+        <div class="tag">Pre-Med</div>
+        <div class="tag">Research</div>
+        <div class="tag">Volunteering</div>
       </div>
     </div>
   </div>
 
-</div>
+  <div class="grid">
 
-<div class="card ai-section">
-  <div class="ai-header">
+    <div class="card full">
+      <h2 class="card-title"><span>◇</span> Public Profile</h2>
+
+      <div class="form-grid three">
+        <div class="field">
+          <label>Display Name *</label>
+          <input id="fullName" type="text" placeholder="Example: John Smith " oninput="updatePreview()">
+        </div>
+
+        <div class="field">
+          <label>Grade Level *</label>
+          <select id="grade" onchange="updatePreview()">
+            <option value="">Select grade</option>
+            <option>9th Grade</option>
+            <option>10th Grade</option>
+            <option>11th Grade</option>
+            <option>12th Grade</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Graduation Year</label>
+          <input id="graduationYear" type="text" placeholder="Example: 2028">
+        </div>
+
+        <div class="field">
+          <label>School</label>
+          <input id="school" type="text" placeholder="Example: Cupertino High School" oninput="updatePreview()">
+        </div>
+
+        <div class="field">
+          <label>City / General Area</label>
+          <input id="city" type="text" placeholder="Example: Cupertino " oninput="updatePreview()">
+        </div>
+
+        <div class="field">
+          <label>State</label>
+          <select id="state">
+            <option value="">Select state</option>
+            <option>CA</option>
+            <option>NY</option>
+            <option>TX</option>
+            <option>FL</option>
+            <option>MA</option>
+            <option>PA</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Career Interest</label>
+          <select id="careerGoal" onchange="updatePreview()">
+            <option value="">Select career</option>
+            <option>Surgeon</option>
+            <option>Doctor</option>
+            <option>Nurse</option>
+            <option>Physician Assistant</option>
+            <option>Dentist</option>
+            <option>Researcher</option>
+            <option>Public Health</option>
+            <option>AI in Healthcare</option>
+            <option>Undecided</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Intended Major</label>
+          <input id="intendedMajor" type="text" placeholder="Biology, Neuroscience, Public Health" oninput="updatePreview()">
+        </div>
+
+        <div class="field">
+          <label>ZIP Code</label>
+          <input id="zipCode" type="text" placeholder="Private - used later for nearby matching">
+          <div class="helper">Keep this private. Later it can help match nearby students without showing exact location.</div>
+        </div>
+
+        <div class="field full">
+          <label>Short Bio</label>
+          <textarea id="shortBio" placeholder="Example: Hello! I am a high school student interested in medicine wand looking connect with some local friends." oninput="updatePreview()"></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Fun Fact</label>
+          <input id="funFact" type="text" placeholder="Example: I play volleyball and love building websites.">
+        </div>
+
+        <div class="field full">
+          <label>Interests</label>
+          <input id="interests" type="text" placeholder="Example: Surgery, biology, AI in healthcare, research, volunteering, volleyball" oninput="updatePreview()">
+          <div class="helper">Separate interests with commas. These become tags on your profile.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title"><span>✦</span> Looking For</h2>
+
+      <div class="form-grid">
+        <div class="field full">
+          <label>Connection Goals</label>
+          <textarea id="lookingFor" placeholder="Example: study buddy, research partner, volunteering partner, HOSA teammate, project collaborator, mentor"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Preferred Connection Type</label>
+          <select id="connectionType">
+            <option value="">Select one</option>
+            <option>Study Buddy</option>
+            <option>Volunteering Partner</option>
+            <option>Research Partner</option>
+            <option>Project Collaborator</option>
+            <option>College Application Buddy</option>
+            <option>Mentor / Advice</option>
+            <option>Any</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Availability</label>
+          <select id="availability">
+            <option value="">Select one</option>
+            <option>Weekdays</option>
+            <option>Weekends</option>
+            <option>After school</option>
+            <option>Summer only</option>
+            <option>Flexible</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2 class="card-title"><span>▣</span> My Goals</h2>
+
+      <div class="form-grid">
+        <div class="field full">
+          <label>Dream Colleges</label>
+          <textarea id="dreamColleges" placeholder="Example: UCLA, Stanford, UC Irvine, Johns Hopkins"></textarea>
+        </div>
+
+        <div class="field full">
+          <label>College Goals / Notes</label>
+          <textarea id="collegeGoals" placeholder="Example: I want strong pre-med advising, research access, hospitals nearby, and good biology/neuroscience programs."></textarea>
+        </div>
+
+        <div class="field">
+          <label>Biggest Weakness</label>
+          <select id="biggestWeakness">
+            <option value="">Select weakness</option>
+            <option>Research</option>
+            <option>Clinical Exposure</option>
+            <option>Leadership</option>
+            <option>Volunteering</option>
+            <option>Awards / Competitions</option>
+            <option>Course Rigor</option>
+            <option>College Planning</option>
+            <option>Not Sure</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Current 30-Day Focus</label>
+          <input id="currentFocus" type="text" placeholder="Example: finding research, improving SAT, building MedMentor">
+        </div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2 class="card-title"><span>▱</span> Private Academic Profile</h2>
+
+      <div class="form-grid three">
+        <div class="field">
+          <label>GPA Weighted</label>
+          <input id="gpaWeighted" type="text" placeholder="Example: 4.2">
+        </div>
+
+        <div class="field">
+          <label>GPA Unweighted</label>
+          <input id="gpaUnweighted" type="text" placeholder="Example: 3.8">
+        </div>
+
+        <div class="field">
+          <label>Class Rank</label>
+          <input id="classRank" type="text" placeholder="Example: 100/658">
+        </div>
+
+        <div class="field">
+          <label>SAT Score</label>
+          <input id="satScore" type="text" placeholder="Enter SAT score">
+        </div>
+
+        <div class="field">
+          <label>Target SAT Score</label>
+          <input id="targetSatScore" type="text" placeholder="Example: 1550">
+        </div>
+
+        <div class="field">
+          <label>ACT Score</label>
+          <input id="actScore" type="text" placeholder="Enter ACT score">
+        </div>
+
+        <div class="field">
+          <label>Course Rigor Level</label>
+          <select id="courseRigorLevel">
+            <option value="">Select level</option>
+            <option>Regular</option>
+            <option>Honors</option>
+            <option>AP</option>
+            <option>Dual Enrollment</option>
+            <option>Mixed</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Strongest Subject</label>
+          <input id="strongestSubject" type="text" placeholder="Example: Biology">
+        </div>
+
+        <div class="field">
+          <label>Weakest Subject</label>
+          <input id="weakestSubject" type="text" placeholder="Example: Math, physics, writing">
+        </div>
+
+        <div class="field full">
+          <label>AP Courses</label>
+          <textarea id="apClasses" placeholder="Example: AP Biology, AP Statistics, APUSH, AP Calculus AB"></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Honors Courses</label>
+          <textarea id="honorsCourses" placeholder="List honors courses here"></textarea>
+        </div>
+
+        <div class="field full">
+          <label>Dual Enrollment Courses</label>
+          <textarea id="dualEnrollmentCourses" placeholder="List dual enrollment courses here"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2 class="card-title"><span>⚕</span> Private Readiness Details</h2>
+
+      <div class="form-grid">
+        <div class="field">
+          <label>Volunteer Experience</label>
+          <textarea id="volunteerExperience" placeholder="Example: Volunteering, food bank, tutoring, nonprofit service"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Leadership Experience</label>
+          <textarea id="leadershipExperience" placeholder="Example: Founder, officer, team captain, project lead, mentor"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Clinical Experience</label>
+          <textarea id="clinicalExperience" placeholder="Example: Hospital volunteering, clinic work, shadowing"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Research Experience</label>
+          <textarea id="researchExperience" placeholder="Example: Science fair, lab project, independent research, health data project"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Awards</label>
+          <textarea id="awards" placeholder="Example: HOSA, Olympiad, science fair, school awards, certificates"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Projects / Passion Projects</label>
+          <textarea id="projects" placeholder="Example: Health education campaign, Blood drive CLub "></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="card full">
+      <h2 class="card-title"><span>◇</span> Privacy & Discovery Settings</h2>
+
+      <div class="privacy-box">
+        <input type="checkbox" id="showSchool" checked>
+        <span>Show my school on my public profile.</span>
+      </div>
+
+      <div class="privacy-box">
+        <input type="checkbox" id="showCity" checked>
+        <span>Show my city/general area on my public profile.</span>
+      </div>
+
+      <div class="privacy-box">
+        <input type="checkbox" id="showGrade" checked>
+        <span>Show my grade level on my public profile.</span>
+      </div>
+
+      <div class="privacy-box">
+        <input type="checkbox" id="allowFriendRequests" checked>
+        <span>Allow other students to send me friend/connect requests.</span>
+      </div>
+
+      <div class="privacy-box">
+        <input type="checkbox" id="allowNearbyMatching" checked>
+        <span>Allow MedMentor to recommend students near me using general location only.</span>
+      </div>
+
+      <div class="helper">
+        <span class="warning">Safety note:</span> This app should not display exact addresses, phone numbers, or private contact information. Use friend requests instead of showing direct contact details.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="save-area">
+    <div class="save-note" id="saveStatus">
+      Your profile saves in this browser using localStorage. After saving, go to Dashboard to see your readiness score update.
+    </div>
+
     <div>
-      <div class="ai-label">// AI READINESS DIAGNOSIS</div>
-      <h2>WHAT YOU NEED TO WORK ON</h2>
+      <button class="save-button" type="button" onclick="saveProfile()">SAVE PROFILE</button>
+      <button class="clear-button" type="button" onclick="clearProfile()">CLEAR</button>
     </div>
-
-    <button class="ai-button" id="aiRefreshBtn" type="button" onclick="runDashboardAI()">
-      REFRESH AI FEEDBACK
-    </button>
-  </div>
-
-  <div class="ai-summary" id="aiReadinessSummary">
-    Save your profile first, then click refresh to get a personalized readiness diagnosis.
-  </div>
-
-  <div class="ai-mini-grid">
-    <div class="ai-mini-card">
-      <div class="ai-mini-title">Strongest Areas</div>
-      <ul class="ai-list" id="aiStrongestAreas">
-        <li>Waiting for AI feedback...</li>
-      </ul>
-    </div>
-
-    <div class="ai-mini-card">
-      <div class="ai-mini-title">Weakest Areas</div>
-      <ul class="ai-list" id="aiWeakestAreas">
-        <li>Waiting for AI feedback...</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="ai-mini-card">
-    <div class="ai-mini-title">Top Priorities</div>
-    <ul class="ai-list" id="aiTopPriorities">
-      <li>Waiting for AI feedback...</li>
-    </ul>
-  </div>
-
-  <div class="ai-mini-title" style="margin-top: 20px;">Recommended Tools</div>
-  <div class="tool-grid" id="recommendedTools">
-    <a class="tool-card" href="profile.html">
-      <div class="tool-title">Complete Profile</div>
-      <div class="tool-reason">Add more details so your readiness score becomes more accurate.</div>
-      <div class="tool-link">Open Tool →</div>
-    </a>
-  </div>
-
-  <div class="feedback-grid" id="aiCategoryFeedback"></div>
-
-  <div class="plan-grid">
-    <div class="ai-mini-card">
-      <div class="ai-mini-title">30-Day Plan</div>
-      <ul class="ai-list" id="aiThirtyDayPlan">
-        <li>Waiting for AI feedback...</li>
-      </ul>
-    </div>
-
-    <div class="ai-mini-card">
-      <div class="ai-mini-title">90-Day Plan</div>
-      <ul class="ai-list" id="aiNinetyDayPlan">
-        <li>Waiting for AI feedback...</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="mentor-advice" id="aiMentorAdvice">
-    AI mentor advice will appear here.
-  </div>
-</div>
-
-<div class="grid-bottom">
-
-  <div class="card">
-    <h2>QUICK ACCESS</h2>
-
-    <div class="quick-grid">
-      <a class="quick-box" href="chat.html"><span>01</span>AI Mentor</a>
-      <a class="quick-box" href="career.html"><span>02</span>Career Explorer</a>
-      <a class="quick-box" href="clinic.html"><span>03</span>Clinic Finder</a>
-      <a class="quick-box" href="college-analyzer.html"><span>04</span>Colleges</a>
-      <a class="quick-box" href="course-planner.html"><span>05</span>Course Planner</a>
-      <a class="quick-box" href="resume-builder.html"><span>06</span>Resume Builder</a>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>ACTIVITY LOG</h2>
-    <div id="activityLog"></div>
   </div>
 
 </div>
+```
 
-<div class="footer">
-  MEDMENTOR DOES NOT PROVIDE MEDICAL ADVICE // EDUCATION & CAREER GUIDANCE ONLY
-</div>
   </div>
 
   <script>
-    function setActiveSidebarLink() {
-      const currentPage = window.location.pathname.split("/").pop() || "index.html";
-      const menuItems = document.querySelectorAll(".menu-item");
-
-      menuItems.forEach(item => {
-        const itemPage = item.getAttribute("href");
-
-        item.classList.remove("active");
-
-        if (itemPage === currentPage) {
-          item.classList.add("active");
-        }
-      });
-    }
-
-    function safeJsonParse(value, fallback) {
-      try {
-        return JSON.parse(value);
-      } catch (error) {
-        return fallback;
-      }
-    }
-
-    function getStoredObject(keys) {
-      for (let key of keys) {
-        const raw = localStorage.getItem(key);
-        if (raw) {
-          const parsed = safeJsonParse(raw, null);
-          if (parsed) return parsed;
-        }
-      }
-      return {};
-    }
-
-    function getStoredArray(keys) {
-      for (let key of keys) {
-        const raw = localStorage.getItem(key);
-        if (raw) {
-          const parsed = safeJsonParse(raw, []);
-          if (Array.isArray(parsed)) return parsed;
-        }
-      }
-      return [];
-    }
-
-    function text(value) {
-      return String(value || "").toLowerCase();
-    }
-
-    function hasValue(value) {
-      return String(value || "").trim().length > 0;
-    }
-
-    function clamp(score) {
-      return Math.max(0, Math.min(100, Math.round(score)));
-    }
-
-    function keywordPoints(fieldText, keywords, pointsPerKeyword, maxPoints) {
-      let score = 0;
-
-      keywords.forEach(keyword => {
-        if (fieldText.includes(keyword.toLowerCase())) {
-          score += pointsPerKeyword;
-        }
-      });
-
-      return Math.min(score, maxPoints);
-    }
-
-    function getNumberFromText(value) {
-      const match = String(value || "").match(/[0-9]+(\.[0-9]+)?/);
-      return match ? parseFloat(match[0]) : 0;
-    }
-
-    function calculateAcademics(profile) {
-      let score = 0;
-
-      const weighted = getNumberFromText(profile.gpaWeighted || profile.gpa_weighted);
-      const unweighted = getNumberFromText(profile.gpaUnweighted || profile.gpa_unweighted);
-      const sat = getNumberFromText(profile.satScore || profile.sat_score);
-      const act = getNumberFromText(profile.actScore || profile.act_score);
-      const rank = text(profile.classRank || profile.class_rank);
-
-      if (weighted >= 4.5 || unweighted >= 3.95) score += 45;
-      else if (weighted >= 4.2 || unweighted >= 3.8) score += 38;
-      else if (weighted >= 4.0 || unweighted >= 3.6) score += 32;
-      else if (weighted > 0 || unweighted > 0) score += 24;
-
-      if (sat >= 1550 || act >= 35) score += 25;
-      else if (sat >= 1450 || act >= 33) score += 20;
-      else if (sat >= 1350 || act >= 30) score += 15;
-      else if (sat > 0 || act > 0) score += 8;
-
-      if (rank.includes("/")) {
-        const parts = rank.split("/");
-        const rankNum = parseFloat(parts[0]);
-        const totalNum = parseFloat(parts[1]);
-
-        if (rankNum && totalNum) {
-          const percentile = rankNum / totalNum;
-
-          if (percentile <= 0.05) score += 25;
-          else if (percentile <= 0.10) score += 20;
-          else if (percentile <= 0.20) score += 14;
-          else score += 8;
-        }
-      } else if (hasValue(rank)) {
-        score += 8;
-      }
-
-      if (!weighted && !unweighted && !sat && !act && !hasValue(rank)) {
-        score = 0;
-      }
-
-      return clamp(score);
-    }
-
-    function calculateCourseRigor(profile) {
-      let score = 0;
-
-      const rigor = text(profile.courseRigorLevel);
-      const ap = text(profile.apClasses || profile.ap_classes);
-      const honors = text(profile.honorsCourses || profile.honors_courses);
-      const dual = text(profile.dualEnrollmentCourses || profile.dual_enrollment_courses);
-
-      if (rigor.includes("ap")) score += 25;
-      if (rigor.includes("honors")) score += 15;
-      if (rigor.includes("dual")) score += 15;
-      if (rigor.includes("mixed")) score += 20;
-
-      const allCourses = ap + " " + honors + " " + dual;
-
-      if (ap.includes("ap")) score += 20;
-      score += keywordPoints(allCourses, ["biology", "bio", "chemistry", "chem", "physics", "calculus", "calc", "statistics", "stat"], 7, 42);
-
-      if (honors.length > 5) score += 10;
-      if (dual.length > 5) score += 10;
-
-      return clamp(score);
-    }
-
-    function calculateFieldScore(fieldValue, keywords, baseIfFilled, maxKeywordPoints) {
-      const field = text(fieldValue);
-      let score = 0;
-
-      if (field.length > 5) score += baseIfFilled;
-      if (field.length > 80) score += 15;
-      if (field.length > 180) score += 15;
-
-      score += keywordPoints(field, keywords, 12, maxKeywordPoints);
-
-      return clamp(score);
-    }
-
-    function getActivityText(activity) {
-      return text(
-        (activity.name || "") + " " +
-        (activity.title || "") + " " +
-        (activity.type || "") + " " +
-        (activity.activity_type || "") + " " +
-        (activity.organization || "") + " " +
-        (activity.role || "") + " " +
-        (activity.position || "") + " " +
-        (activity.description || "") + " " +
-        (activity.impact || "") + " " +
-        (activity.result || "") + " " +
-        (activity.skillsBuilt || "") + " " +
-        (activity.impactLevel || "") + " " +
-        (activity.proofLink || "")
-      );
-    }
-
-    function getActivityType(activity) {
-      return text(activity.type || activity.activity_type);
-    }
-
-    function getActivityHours(activity) {
-      return Number(activity.hours || 0);
-    }
-
-    function getServiceHours(activity) {
-      return Number(activity.serviceHours || activity.service_hours || 0);
-    }
-
-    function hasStrongImpact(activity) {
-      const impact = text(activity.impact || activity.result || activity.impactLevel || "");
-      return (
-        impact.includes("high") ||
-        impact.includes("very high") ||
-        impact.includes("led") ||
-        impact.includes("created") ||
-        impact.includes("launched") ||
-        impact.includes("founded") ||
-        impact.includes("organized") ||
-        impact.includes("taught") ||
-        impact.includes("mentored") ||
-        impact.includes("reached") ||
-        impact.includes("students") ||
-        impact.includes("families") ||
-        impact.includes("hours") ||
-        impact.includes("+")
-      );
-    }
-
-    function hasProof(activity) {
-      return hasValue(activity.proofLink);
-    }
-
-    function calculateVolunteering(profile, activities) {
-      let score = calculateFieldScore(
-        profile.volunteerExperience || profile.volunteer_experience,
-        ["volunteer", "service", "temple", "community", "nonprofit", "tutor", "fundraiser", "blood drive", "outreach"],
-        25,
-        35
-      );
-
-      activities.forEach(activity => {
-        const activityType = getActivityType(activity);
-        const activityText = getActivityText(activity);
-        const hours = getActivityHours(activity);
-        const serviceHours = getServiceHours(activity);
-
-        if (
-          activityType.includes("volunteer") ||
-          activityText.includes("volunteer") ||
-          activityText.includes("service") ||
-          activityText.includes("temple") ||
-          activityText.includes("community")
-        ) {
-          score = Math.max(score, 40);
-        }
-
-        if (serviceHours >= 200) score = Math.max(score, 100);
-        else if (serviceHours >= 150) score = Math.max(score, 92);
-        else if (serviceHours >= 100) score = Math.max(score, 85);
-        else if (serviceHours >= 50) score = Math.max(score, 70);
-        else if (serviceHours >= 20) score = Math.max(score, 55);
-        else if (serviceHours > 0) score = Math.max(score, 38);
-
-        if (hours >= 100 && activityType.includes("volunteer")) {
-          score = Math.max(score, 80);
-        }
-
-        if (hasStrongImpact(activity) && (activityType.includes("volunteer") || activityText.includes("service"))) {
-          score = Math.max(score, 88);
-        }
-
-        if (activity.frequency === "Weekly" || activity.frequency === "Ongoing") {
-          if (activityType.includes("volunteer") || activityText.includes("service")) {
-            score = Math.max(score, 75);
-          }
-        }
-      });
-
-      return clamp(score);
-    }
-
-    function calculateClinical(profile, activities) {
-      let score = calculateFieldScore(
-        profile.clinicalExperience || profile.clinical_experience,
-        ["clinical", "clinic", "hospital", "shadow", "doctor", "physician", "patient", "sports medicine", "cpr", "first aid", "nursing", "healthcare"],
-        25,
-        40
-      );
-
-      activities.forEach(activity => {
-        const activityType = getActivityType(activity);
-        const activityText = getActivityText(activity);
-        const hours = getActivityHours(activity);
-
-        if (activityType.includes("clinical")) {
-          score = Math.max(score, 55);
-        }
-
-        if (
-          activityText.includes("hospital") ||
-          activityText.includes("clinic") ||
-          activityText.includes("sports medicine") ||
-          activityText.includes("doctor") ||
-          activityText.includes("physician") ||
-          activityText.includes("healthcare")
-        ) {
-          score = Math.max(score, 60);
-        }
-
-        if (activity.patientFacing === true || activityText.includes("patient-facing") || activityText.includes("patient")) {
-          score = Math.max(score, 72);
-        }
-
-        if (activityText.includes("shadow")) {
-          score = Math.max(score, 76);
-        }
-
-        if (activityText.includes("cpr") || activityText.includes("first aid")) {
-          score = Math.max(score, 50);
-        }
-
-        if (hours >= 100 && activityType.includes("clinical")) score = Math.max(score, 90);
-        else if (hours >= 50 && activityType.includes("clinical")) score = Math.max(score, 78);
-        else if (hours >= 20 && activityType.includes("clinical")) score = Math.max(score, 65);
-      });
-
-      return clamp(score);
-    }
-
-    function calculateLeadership(profile, activities) {
-      let score = calculateFieldScore(
-        profile.leadershipExperience || profile.leadership_experience,
-        ["leader", "leadership", "founder", "president", "officer", "captain", "organizer", "mentor", "created", "started", "director", "coordinator"],
-        25,
-        40
-      );
-
-      activities.forEach(activity => {
-        const activityType = getActivityType(activity);
-        const activityText = getActivityText(activity);
-        const role = text(activity.role || activity.position);
-        const impactLevel = text(activity.impactLevel);
-
-        if (activityType.includes("leadership")) {
-          score = Math.max(score, 55);
-        }
-
-        if (
-          role.includes("founder") ||
-          role.includes("president") ||
-          role.includes("captain") ||
-          role.includes("director")
-        ) {
-          score = Math.max(score, 85);
-        } else if (
-          role.includes("officer") ||
-          role.includes("leader") ||
-          role.includes("coordinator") ||
-          role.includes("mentor")
-        ) {
-          score = Math.max(score, 70);
-        }
-
-        if (
-          activityText.includes("led") ||
-          activityText.includes("created") ||
-          activityText.includes("organized") ||
-          activityText.includes("mentored") ||
-          activityText.includes("taught")
-        ) {
-          score = Math.max(score, 70);
-        }
-
-        if (impactLevel.includes("very high")) score = Math.max(score, 92);
-        else if (impactLevel.includes("high")) score = Math.max(score, 82);
-
-        if (hasStrongImpact(activity) && (activityType.includes("leadership") || activityType.includes("project"))) {
-          score = Math.max(score, 86);
-        }
-      });
-
-      return clamp(score);
-    }
-
-    function calculateResearch(profile, activities) {
-      let score = calculateFieldScore(
-        profile.researchExperience || profile.research_experience,
-        ["research", "lab", "science fair", "experiment", "study", "paper", "poster", "data", "publication", "isef", "abstract"],
-        20,
-        45
-      );
-
-      activities.forEach(activity => {
-        const activityType = getActivityType(activity);
-        const activityText = getActivityText(activity);
-        const hours = getActivityHours(activity);
-
-        if (activityType.includes("research")) {
-          score = Math.max(score, 55);
-        }
-
-        if (
-          activityText.includes("lab") ||
-          activityText.includes("science fair") ||
-          activityText.includes("experiment") ||
-          activityText.includes("data") ||
-          activityText.includes("study")
-        ) {
-          score = Math.max(score, 65);
-        }
-
-        if (activityText.includes("poster") || activityText.includes("abstract") || activityText.includes("paper")) {
-          score = Math.max(score, 78);
-        }
-
-        if (activityText.includes("publication") || activityText.includes("isef")) {
-          score = Math.max(score, 95);
-        }
-
-        if (hours >= 100 && activityType.includes("research")) score = Math.max(score, 88);
-        else if (hours >= 50 && activityType.includes("research")) score = Math.max(score, 76);
-        else if (hours >= 20 && activityType.includes("research")) score = Math.max(score, 62);
-
-        if (hasProof(activity) && activityType.includes("research")) {
-          score = Math.max(score, 72);
-        }
-      });
-
-      return clamp(score);
-    }
-
-    function calculateAwards(profile, activities) {
-      let score = calculateFieldScore(
-        profile.awards,
-        ["award", "honor", "competition", "hosa", "olympiad", "science fair", "medal", "winner", "finalist", "certificate", "placed"],
-        20,
-        45
-      );
-
-      activities.forEach(activity => {
-        const activityType = getActivityType(activity);
-        const activityText = getActivityText(activity);
-
-        if (activityType.includes("award")) {
-          score = Math.max(score, 60);
-        }
-
-        if (activityType.includes("competition")) {
-          score = Math.max(score, 45);
-        }
-
-        if (
-          activityText.includes("winner") ||
-          activityText.includes("finalist") ||
-          activityText.includes("placed") ||
-          activityText.includes("medal") ||
-          activityText.includes("national") ||
-          activityText.includes("state")
-        ) {
-          score = Math.max(score, 80);
-        }
-
-        if (activityText.includes("hosa") || activityText.includes("olympiad") || activityText.includes("science fair")) {
-          score = Math.max(score, 65);
-        }
-
-        if (hasProof(activity) && (activityType.includes("award") || activityType.includes("competition"))) {
-          score = Math.max(score, 75);
-        }
-      });
-
-      return clamp(score);
-    }
-
-    function calculateProjects(profile, activities, resumeData) {
-      let score = calculateFieldScore(
-        profile.projects,
-        ["project", "medmentor", "website", "app", "ai", "platform", "initiative", "campaign", "nonprofit", "dashboard", "founder", "launched"],
-        25,
-        45
-      );
-
-      const resumeText = text(JSON.stringify(resumeData));
-
-      if (resumeText.includes("medmentor") || resumeText.includes("project")) {
-        score = Math.max(score, 60);
-      }
-
-      activities.forEach(activity => {
-        const activityType = getActivityType(activity);
-        const activityText = getActivityText(activity);
-        const hours = getActivityHours(activity);
-
-        if (activityType.includes("project")) {
-          score = Math.max(score, 55);
-        }
-
-        if (
-          activityText.includes("medmentor") ||
-          activityText.includes("website") ||
-          activityText.includes("app") ||
-          activityText.includes("ai") ||
-          activityText.includes("platform") ||
-          activityText.includes("initiative")
-        ) {
-          score = Math.max(score, 70);
-        }
-
-        if (activityText.includes("launched") || activityText.includes("users") || activityText.includes("workshop") || activityText.includes("campaign")) {
-          score = Math.max(score, 82);
-        }
-
-        if (hasStrongImpact(activity) && activityType.includes("project")) {
-          score = Math.max(score, 88);
-        }
-
-        if (hasProof(activity) && activityType.includes("project")) {
-          score = Math.max(score, 78);
-        }
-
-        if (hours >= 100 && activityType.includes("project")) {
-          score = Math.max(score, 85);
-        }
-      });
-
-      return clamp(score);
-    }
-
-    function calculateCollegePlan(profile, resumeData) {
-      let score = 0;
-
-      if (hasValue(profile.careerGoal || profile.career_goal)) score += 18;
-      if (hasValue(profile.intendedMajor || profile.intended_major)) score += 14;
-      if (hasValue(profile.dreamColleges || profile.dream_colleges)) score += 22;
-      if (hasValue(profile.collegeGoals || profile.college_goals)) score += 18;
-      if (hasValue(profile.biggestWeakness)) score += 10;
-      if (hasValue(profile.currentFocus)) score += 10;
-
-      if (Object.keys(resumeData || {}).length > 0) score += 8;
-
-      return clamp(score);
-    }
-
-    function calculateReadiness() {
-      const profile = getStoredObject([
-        "medmentorProfile",
-        "profileData",
-        "studentProfile",
-        "medmentorUserProfile",
-        "userProfile",
-        "profile"
-      ]);
-
-      const activities = getStoredArray([
-        "medmentorActivities",
-        "activities",
-        "studentActivities",
-        "myActivities"
-      ]);
-
-      const resumeData = getStoredObject([
-        "medmentorResumeData",
-        "resumeData",
-        "studentResume"
-      ]);
-
-      const academics = calculateAcademics(profile);
-      const courseRigor = calculateCourseRigor(profile);
-      const leadership = calculateLeadership(profile, activities);
-      const volunteering = calculateVolunteering(profile, activities);
-      const clinical = calculateClinical(profile, activities);
-      const research = calculateResearch(profile, activities);
-      const awards = calculateAwards(profile, activities);
-      const projects = calculateProjects(profile, activities, resumeData);
-      const collegePlan = calculateCollegePlan(profile, resumeData);
-
-      const scores = {
-        academics,
-        courseRigor,
-        leadership,
-        volunteering,
-        clinical,
-        research,
-        awards,
-        projects,
-        collegePlan
-      };
-
-      const overall = Math.round(
-        academics * 0.18 +
-        courseRigor * 0.14 +
-        leadership * 0.12 +
-        volunteering * 0.12 +
-        clinical * 0.12 +
-        research * 0.12 +
-        awards * 0.08 +
-        projects * 0.12 +
-        collegePlan * 0.10
-      );
-
-      return {
-        profile,
-        activities,
-        resumeData,
-        scores,
-        overall
-      };
-    }
-
-    function getStatus(score) {
-      if (score >= 85) return "HIGHLY READY";
-      if (score >= 70) return "COMPETITIVE";
-      if (score >= 55) return "DEVELOPING";
-      if (score >= 35) return "BUILDING";
-      return "STARTING";
-    }
-
-    function getScoreClass(score) {
-      if (score >= 75) return "good";
-      if (score >= 45) return "warn";
-      return "bad";
-    }
-
-    function updateBar(idBase, value) {
-      const bar = document.getElementById(idBase + "Bar");
-      const num = document.getElementById(idBase + "Num");
-
-      bar.style.width = value + "%";
-      num.innerText = value;
-      num.className = "num " + getScoreClass(value);
-    }
-
-    function getNextFocus(scores) {
-      const labels = {
-        academics: "academics",
-        courseRigor: "course rigor",
-        leadership: "leadership",
-        volunteering: "volunteering/service",
-        clinical: "clinical exposure",
-        research: "research",
-        awards: "awards/competitions",
-        projects: "projects/impact",
-        collegePlan: "college planning"
-      };
-
-      const advice = {
-        academics: "Add GPA, rank, SAT/ACT if available, and academic details in your profile.",
-        courseRigor: "Add AP, honors, math, science, and planned courses so MedMentor can assess rigor.",
-        leadership: "Build one leadership role, such as officer, founder, organizer, mentor, or project lead.",
-        volunteering: "Add consistent service hours and describe your impact, not just the activity name.",
-        clinical: "Add healthcare exposure like clinic volunteering, hospital volunteering, sports medicine, CPR, first aid, or shadowing.",
-        research: "Start a research-style project, lab outreach, science fair idea, or health data project.",
-        awards: "Add competitions, honors, HOSA, science fair, Olympiad, or school/community awards.",
-        projects: "Build one measurable project like MedMentor, a health workshop, an AI tool, or a community campaign.",
-        collegePlan: "Add dream colleges, career goal, course plan, and resume details to make your plan stronger."
-      };
-
-      let lowestKey = "academics";
-      let lowestValue = 101;
-
-      Object.keys(scores).forEach(key => {
-        if (scores[key] < lowestValue) {
-          lowestValue = scores[key];
-          lowestKey = key;
-        }
-      });
-
-      return "Your weakest area is " + labels[lowestKey] + ". " + advice[lowestKey];
-    }
-
-    function getReadinessNote(score) {
-      if (score >= 85) {
-        return "Your profile is very strong. Focus on refining essays, awards, and measurable impact.";
-      }
-
-      if (score >= 70) {
-        return "You are building a competitive profile. Focus on depth, leadership, and stronger proof of impact.";
-      }
-
-      if (score >= 55) {
-        return "You have a solid start. Add more clinical exposure, research, leadership, and organized college planning.";
-      }
-
-      if (score >= 35) {
-        return "You are in the building stage. Some areas are started, but your profile still needs more depth.";
-      }
-
-      return "Start by completing your profile and adding activities. Your score will update automatically.";
-    }
-
-    function findProfileValue(profile, possibleNames) {
-      const keys = Object.keys(profile || {});
-
-      for (let name of possibleNames) {
-        for (let key of keys) {
-          if (key.toLowerCase().includes(name.toLowerCase())) {
-            return profile[key];
-          }
-        }
-      }
-
-      return "";
-    }
-
-    function updateHeader(profile) {
-      const name =
-        findProfileValue(profile, ["full_name", "fullName", "name"]) ||
-        "STUDENT";
-
-      const grade =
-        findProfileValue(profile, ["grade"]) ||
-        "STUDENT";
-
-      const goal =
-        findProfileValue(profile, ["career_goal", "careerGoal", "goal", "intended_major"]) ||
-        "COLLEGE";
-
-      const firstName = String(name).split(" ")[0].toUpperCase();
-
-      document.getElementById("studentGreeting").innerText = "HEY, " + firstName + "_";
-      document.getElementById("studentTrack").innerText =
-        "// " + String(grade).toUpperCase() + " • " + String(goal).toUpperCase() + " TRACK";
-    }
-
-    function updateActivityLog(activities) {
-      const log = document.getElementById("activityLog");
-      log.innerHTML = "";
-
-      if (!activities || activities.length === 0) {
-        log.innerHTML = `
-          <div class="activity-item">
-            <div class="dot"></div>
-            <div>
-              <div class="activity-title">No activities saved yet</div>
-              <div class="activity-sub">Add activities in My Activities to improve your readiness score.</div>
-            </div>
-          </div>
-        `;
+    let profilePictureData = "";
+
+    const profileFields = [
+      "fullName",
+      "grade",
+      "school",
+      "city",
+      "state",
+      "zipCode",
+      "careerGoal",
+      "intendedMajor",
+      "graduationYear",
+      "shortBio",
+      "funFact",
+      "interests",
+      "lookingFor",
+      "connectionType",
+      "availability",
+      "gpaWeighted",
+      "gpaUnweighted",
+      "classRank",
+      "satScore",
+      "targetSatScore",
+      "actScore",
+      "courseRigorLevel",
+      "strongestSubject",
+      "weakestSubject",
+      "apClasses",
+      "honorsCourses",
+      "dualEnrollmentCourses",
+      "volunteerExperience",
+      "leadershipExperience",
+      "clinicalExperience",
+      "researchExperience",
+      "awards",
+      "projects",
+      "dreamColleges",
+      "collegeGoals",
+      "biggestWeakness",
+      "currentFocus"
+    ];
+
+    const checkboxFields = [
+      "showSchool",
+      "showCity",
+      "showGrade",
+      "allowFriendRequests",
+      "allowNearbyMatching"
+    ];
+
+    function handleProfilePicture(event) {
+      const file = event.target.files[0];
+
+      if (!file) {
         return;
       }
 
-      const recent = activities.slice(-4).reverse();
+      const reader = new FileReader();
 
-      recent.forEach(activity => {
-        const name =
-          activity.activity_name ||
-          activity.activityName ||
-          activity.name ||
-          activity.title ||
-          "Saved Activity";
+      reader.onload = function(e) {
+        profilePictureData = e.target.result;
+        updateAvatar();
+      };
 
-        const type =
-          activity.activity_type ||
-          activity.activityType ||
-          activity.type ||
-          "Activity";
+      reader.readAsDataURL(file);
+    }
 
-        const hours =
-          activity.hours ||
-          activity.serviceHours ||
-          activity.service_hours ||
-          "";
+    function updateAvatar() {
+      const avatar = document.getElementById("profileAvatar");
+      const name = document.getElementById("fullName").value.trim() || "Student";
 
-        const item = document.createElement("div");
-        item.className = "activity-item";
+      if (profilePictureData) {
+        avatar.innerHTML = "<img src='" + profilePictureData + "' alt='Profile picture'>";
+      } else {
+        avatar.innerText = name.charAt(0).toUpperCase();
+      }
+    }
 
-        item.innerHTML = `
-          <div class="dot"></div>
-          <div>
-            <div class="activity-title">${name}</div>
-            <div class="activity-sub">${type}</div>
-          </div>
-          <div class="hours">${hours ? hours + "h" : ""}</div>
+    function getTagsFromInterests(value) {
+      const tags = String(value || "")
+        .split(",")
+        .map(tag => tag.trim())
+        .filter(tag => tag.length > 0);
+
+      return tags.slice(0, 8);
+    }
+
+    function updatePreview() {
+      const name = document.getElementById("fullName").value.trim() || "Your Name";
+      const grade = document.getElementById("grade").value || "Grade";
+      const school = document.getElementById("school").value.trim() || "School";
+      const city = document.getElementById("city").value.trim() || "City";
+      const career = document.getElementById("careerGoal").value || "Career Interest";
+      const major = document.getElementById("intendedMajor").value.trim();
+      const bio = document.getElementById("shortBio").value.trim();
+      const interests = document.getElementById("interests").value;
+
+      document.getElementById("previewName").innerText = name;
+
+      document.getElementById("previewLine").innerText =
+        grade + " • " + school + " • " + city + " • " + career + (major ? " • " + major : "");
+
+      document.getElementById("previewBio").innerText =
+        bio || "Add a short bio and fun fact so other students can understand who you are and what you care about.";
+
+      const previewTags = document.getElementById("previewTags");
+      const tags = getTagsFromInterests(interests);
+
+      if (tags.length === 0) {
+        previewTags.innerHTML = `
+          <div class="tag">Pre-Med</div>
+          <div class="tag">Research</div>
+          <div class="tag">Volunteering</div>
         `;
+      } else {
+        previewTags.innerHTML = tags.map(tag => `<div class="tag">${escapeHtml(tag)}</div>`).join("");
+      }
 
-        log.appendChild(item);
-      });
+      updateAvatar();
     }
 
-    function updateDashboard() {
-      const result = calculateReadiness();
-      const scores = result.scores;
-      const overall = result.overall;
+    function saveProfile() {
+      const profile = {};
 
-      document.getElementById("overallScore").innerText = overall;
-      document.getElementById("readinessStatus").innerText = getStatus(overall);
-      document.getElementById("readinessNote").innerText = getReadinessNote(overall);
-
-      const degrees = Math.round((overall / 100) * 360);
-      document.getElementById("readinessCircle").style.background =
-        "conic-gradient(#22d3ee 0deg, #8b5cf6 " + degrees + "deg, #202536 " + degrees + "deg)";
-
-      updateBar("academics", scores.academics);
-      updateBar("courseRigor", scores.courseRigor);
-      updateBar("leadership", scores.leadership);
-      updateBar("volunteering", scores.volunteering);
-      updateBar("clinical", scores.clinical);
-      updateBar("research", scores.research);
-      updateBar("awards", scores.awards);
-      updateBar("projects", scores.projects);
-      updateBar("collegePlan", scores.collegePlan);
-
-      document.getElementById("nextFocusText").innerText = getNextFocus(scores);
-
-      updateHeader(result.profile);
-      updateActivityLog(result.activities);
-    }
-
-    function renderList(elementId, items) {
-      const element = document.getElementById(elementId);
-
-      if (!items || items.length === 0) {
-        element.innerHTML = "<li>No data yet.</li>";
-        return;
-      }
-
-      element.innerHTML = "";
-
-      items.forEach(item => {
-        const li = document.createElement("li");
-        li.innerText = item;
-        element.appendChild(li);
-      });
-    }
-
-    function getRecommendedTools(data) {
-      const weaknessText = JSON.stringify(data.weakestAreas || []).toLowerCase();
-      const priorityText = JSON.stringify(data.topPriorities || []).toLowerCase();
-      const feedbackText = JSON.stringify(data.categoryFeedback || []).toLowerCase();
-      const allText = weaknessText + " " + priorityText + " " + feedbackText;
-
-      const tools = [];
-
-      function addTool(title, reason, link) {
-        const alreadyExists = tools.some(tool => tool.title === title);
-        if (!alreadyExists) {
-          tools.push({ title, reason, link });
-        }
-      }
-
-      if (allText.includes("clinical") || allText.includes("hospital") || allText.includes("clinic") || allText.includes("shadow")) {
-        addTool(
-          "Clinic Finder",
-          "Use this to find hospitals, clinics, and healthcare exposure opportunities.",
-          "clinic.html"
-        );
-      }
-
-      if (allText.includes("research") || allText.includes("award") || allText.includes("competition") || allText.includes("hosa") || allText.includes("science fair")) {
-        addTool(
-          "Opportunities",
-          "Use this to find research programs, competitions, internships, and student opportunities.",
-          "opportunities.html"
-        );
-      }
-
-      if (allText.includes("leadership") || allText.includes("volunteering") || allText.includes("service") || allText.includes("project")) {
-        addTool(
-          "Extracurriculars Strategy",
-          "Use this to build stronger leadership, service, projects, and impact.",
-          "extracurriculars.html"
-        );
-      }
-
-      if (allText.includes("course") || allText.includes("rigor") || allText.includes("ap") || allText.includes("honors")) {
-        addTool(
-          "Course Planner",
-          "Use this to plan stronger AP, honors, STEM, and pre-med course choices.",
-          "course-planner.html"
-        );
-      }
-
-      if (allText.includes("college") || allText.includes("major") || allText.includes("application")) {
-        addTool(
-          "College Analyzer",
-          "Use this to understand college fit and what to improve for specific schools.",
-          "college-analyzer.html"
-        );
-      }
-
-      if (allText.includes("resume") || allText.includes("impact") || allText.includes("activity")) {
-        addTool(
-          "Resume Builder",
-          "Use this to organize your activities, impact, leadership, and achievements.",
-          "resume-builder.html"
-        );
-      }
-
-      if (allText.includes("academic") || allText.includes("gpa") || allText.includes("sat") || allText.includes("act")) {
-        addTool(
-          "AI Mentor",
-          "Ask for a focused plan to improve academics, testing, and study strategy.",
-          "chat.html"
-        );
-      }
-
-      if (tools.length === 0) {
-        addTool(
-          "My Profile",
-          "Complete your profile first so MedMentor can recommend the right next tools.",
-          "profile.html"
-        );
-
-        addTool(
-          "My Activities",
-          "Add activities, hours, roles, and impact to improve your diagnosis.",
-          "my-activities.html"
-        );
-
-        addTool(
-          "AI Mentor",
-          "Ask the AI mentor what to work on next.",
-          "chat.html"
-        );
-      }
-
-      return tools.slice(0, 3);
-    }
-
-    function renderRecommendedTools(data) {
-      const container = document.getElementById("recommendedTools");
-      const tools = getRecommendedTools(data);
-
-      container.innerHTML = "";
-
-      tools.forEach(tool => {
-        const card = document.createElement("a");
-        card.className = "tool-card";
-        card.href = tool.link;
-
-        card.innerHTML = `
-          <div class="tool-title">${tool.title}</div>
-          <div class="tool-reason">${tool.reason}</div>
-          <div class="tool-link">Open Tool →</div>
-        `;
-
-        container.appendChild(card);
-      });
-    }
-
-    function renderDashboardAI(data) {
-      document.getElementById("aiReadinessSummary").innerText =
-        data.readinessSummary || "No summary returned.";
-
-      renderList("aiStrongestAreas", data.strongestAreas || []);
-      renderList("aiWeakestAreas", data.weakestAreas || []);
-      renderList("aiTopPriorities", data.topPriorities || []);
-      renderList("aiThirtyDayPlan", data.thirtyDayPlan || []);
-      renderList("aiNinetyDayPlan", data.ninetyDayPlan || []);
-
-      document.getElementById("aiMentorAdvice").innerText =
-        data.mentorAdvice || "No mentor advice returned.";
-
-      const feedbackContainer = document.getElementById("aiCategoryFeedback");
-      feedbackContainer.innerHTML = "";
-
-      const feedback = data.categoryFeedback || [];
-
-      feedback.forEach(item => {
-        const card = document.createElement("div");
-        card.className = "feedback-card";
-
-        card.innerHTML = `
-          <div class="feedback-category">${item.category || "Category"}</div>
-          <div class="feedback-status">${item.status || "Developing"}</div>
-          <div class="feedback-reason">${item.reason || "No reason provided."}</div>
-          <div class="feedback-next"><strong>Next:</strong> ${item.nextStep || "No next step provided."}</div>
-        `;
-
-        feedbackContainer.appendChild(card);
+      profileFields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        profile[fieldId] = element ? element.value.trim() : "";
       });
 
-      renderRecommendedTools(data);
+      checkboxFields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        profile[fieldId] = element ? element.checked : false;
+      });
+
+      profile.profilePicture = profilePictureData;
+
+      profile.full_name = profile.fullName;
+      profile.display_name = profile.fullName;
+      profile.grade_level = profile.grade;
+      profile.career_goal = profile.careerGoal;
+      profile.intended_major = profile.intendedMajor;
+      profile.gpa_weighted = profile.gpaWeighted;
+      profile.gpa_unweighted = profile.gpaUnweighted;
+      profile.class_rank = profile.classRank;
+      profile.sat_score = profile.satScore;
+      profile.target_sat_score = profile.targetSatScore;
+      profile.act_score = profile.actScore;
+      profile.ap_classes = profile.apClasses;
+      profile.honors_courses = profile.honorsCourses;
+      profile.dual_enrollment_courses = profile.dualEnrollmentCourses;
+      profile.volunteer_experience = profile.volunteerExperience;
+      profile.leadership_experience = profile.leadershipExperience;
+      profile.clinical_experience = profile.clinicalExperience;
+      profile.research_experience = profile.researchExperience;
+      profile.dream_colleges = profile.dreamColleges;
+      profile.college_goals = profile.collegeGoals;
+
+      profile.publicProfile = {
+        displayName: profile.fullName,
+        grade: profile.grade,
+        school: profile.showSchool ? profile.school : "",
+        city: profile.showCity ? profile.city : "",
+        state: profile.state,
+        careerGoal: profile.careerGoal,
+        intendedMajor: profile.intendedMajor,
+        shortBio: profile.shortBio,
+        funFact: profile.funFact,
+        interests: getTagsFromInterests(profile.interests),
+        lookingFor: profile.lookingFor,
+        connectionType: profile.connectionType,
+        availability: profile.availability,
+        profilePicture: profile.profilePicture,
+        allowFriendRequests: profile.allowFriendRequests,
+        allowNearbyMatching: profile.allowNearbyMatching
+      };
+
+      profile.savedAt = new Date().toISOString();
+
+      localStorage.setItem("medmentorProfile", JSON.stringify(profile));
+
+      const status = document.getElementById("saveStatus");
+      status.innerHTML = "<span class='success'>Saved!</span> Your community profile and dashboard profile were both updated.";
     }
 
-    async function runDashboardAI() {
-      const button = document.getElementById("aiRefreshBtn");
-      button.disabled = true;
-      button.innerText = "THINKING...";
-
-      const result = calculateReadiness();
-
-      const profileText = JSON.stringify(result.profile);
-      const activitiesText = JSON.stringify(result.activities);
-      const scoresText = JSON.stringify(result.scores);
-
-      const url = new URL("https://tejas400.app.n8n.cloud/webhook/dashboard-readiness-ai");
-
-      url.searchParams.set("profile", profileText);
-      url.searchParams.set("activities", activitiesText);
-      url.searchParams.set("scores", scoresText);
-      url.searchParams.set("overall", String(result.overall));
-
-      try {
-        const response = await fetch(url.toString());
-        const data = await response.json();
-
-        renderDashboardAI(data);
-        localStorage.setItem("medmentorDashboardAI", JSON.stringify(data));
-      } catch (error) {
-        document.getElementById("aiReadinessSummary").innerText =
-          "AI feedback could not load. Check that the n8n workflow is active and that the webhook URL is correct.";
-      }
-
-      button.disabled = false;
-      button.innerText = "REFRESH AI FEEDBACK";
-    }
-
-    function loadSavedDashboardAI() {
-      const raw = localStorage.getItem("medmentorDashboardAI");
+    function loadProfile() {
+      const raw = localStorage.getItem("medmentorProfile");
 
       if (!raw) {
+        updatePreview();
         return;
       }
+
+      let profile = {};
 
       try {
-        const data = JSON.parse(raw);
-        renderDashboardAI(data);
+        profile = JSON.parse(raw);
       } catch (error) {
+        updatePreview();
         return;
       }
+
+      profileFields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        if (element && profile[fieldId] !== undefined) {
+          element.value = profile[fieldId];
+        }
+      });
+
+      checkboxFields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        if (element && profile[fieldId] !== undefined) {
+          element.checked = profile[fieldId];
+        }
+      });
+
+      profilePictureData = profile.profilePicture || "";
+
+      const status = document.getElementById("saveStatus");
+      status.innerHTML = "<span class='success'>Loaded saved profile.</span> Edit anything and click Save Profile again.";
+
+      updatePreview();
     }
 
-    window.onload = function() {
-      setActiveSidebarLink();
-      updateDashboard();
-      loadSavedDashboardAI();
-    };
+    function clearProfile() {
+      const confirmClear = confirm("Are you sure you want to clear your saved profile?");
+
+      if (!confirmClear) {
+        return;
+      }
+
+      localStorage.removeItem("medmentorProfile");
+
+      profileFields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        if (element) {
+          element.value = "";
+        }
+      });
+
+      checkboxFields.forEach(fieldId => {
+        const element = document.getElementById(fieldId);
+        if (element) {
+          element.checked = true;
+        }
+      });
+
+      profilePictureData = "";
+
+      document.getElementById("saveStatus").innerText = "Saved profile cleared.";
+      updatePreview();
+    }
+
+    function escapeHtml(value) {
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+  <script>
+  function setActiveSidebarLink() {
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+    const menuItems = document.querySelectorAll(".menu-item");
+
+    menuItems.forEach(item => {
+      const itemPage = item.getAttribute("href");
+
+      item.classList.remove("active");
+
+      if (itemPage === currentPage) {
+        item.classList.add("active");
+      }
+    });
+  }
+
+  window.onload = function() {
+    loadProfile();
+    setActiveSidebarLink();
+  };
+</script>
   </script>
+<script>
+  function setActiveSidebarLink() {
+    const currentPage = window.location.pathname.split("/").pop() || "index.html";
+    const menuItems = document.querySelectorAll(".menu-item");
+
+    menuItems.forEach(item => {
+      const itemPage = item.getAttribute("href");
+
+      item.classList.remove("active");
+
+      if (itemPage === currentPage) {
+        item.classList.add("active");
+      }
+    });
+  }
+
+  setActiveSidebarLink();
+</script>
 </body>
 </html>
